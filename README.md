@@ -7,8 +7,8 @@
 **[Cover](#cover)**<br>
 **[Project Gist](#project-gist)**<br>
 **[Project Breakdown](#project-breakdown)**<br>
-**[Program Non-technical Requirements](#program-nontechnical-requirements)**<br>
-**[Program Technical Requirements](#program-technical-requirements)**<br>
+**[Program Non-technical Requirements](#project-non_technical-requirements)**<br>
+**[Program Technical Requirements](#project-technical-requirements)**<br>
 
 ## Cover
 

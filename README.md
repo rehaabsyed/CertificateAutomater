@@ -2,6 +2,14 @@
 
 # Certificate Maker
 
+## Table of Contents
+
+**[Cover](#cover)**<br>
+**[Project Gist](#project-gist)**<br>
+**[Project Breakdown](#project-breakdown)**<br>
+**[Project Usability Requirements](#project-usability-requirements)**<br>
+**[Project Technical Requirements](#project-technical-requirements)**<br>
+
 ## Cover
 
 Organisation: Curtin IET On Campus</br>
@@ -63,7 +71,7 @@ Will require script that can:
 7. Update Mailchimp contacts with file URIs.
 8. Output results and progress to user.
 
-## Program Non-technical Requirements
+## Project Usability Requirements
 
 ### Minimal Viable Product
 

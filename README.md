@@ -6,10 +6,10 @@ Organisation: Curtin IET On Campus</br>
 Project start: 2021</br>
 Project Lead: Harrison Outram</br>
 Collaborators:</br>
-    Elizabeth Stinton (President)</br>
-    Li Shen (Vice-President)</br>
-    Parakram Vishwakarma (Events coordinator)</br>
-    Ekaterina Grabovskaya (events coordinator)</br>
+* Elizabeth Stinton (President)</br>
+* Li Shen (Vice-President)</br>
+* Parakram Vishwakarma (Events coordinator)</br>
+* Ekaterina Grabovskaya (events coordinator)</br>
 
 ## Project Gist
 

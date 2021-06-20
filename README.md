@@ -2,6 +2,14 @@
 
 # Certificate Maker
 
+## Table of Contents
+
+**[Cover](#cover)**<br>
+**[Project Gist](#project-gist)**<br>
+**[Project Breakdown](#project-breakdown)**<br>
+**[Program Non-technical Requirements](#project-non-technical-requirements)**<br>
+**[Program Technical Requirements](#project-technical-requirements)**<br>
+
 ## Cover
 
 Organisation: Curtin IET On Campus</br>

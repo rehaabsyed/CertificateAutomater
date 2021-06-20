@@ -1,3 +1,5 @@
+[*IET Logo missing*](https://github.com/Harrison-O/CertificateMaker/blob/readme/assets/IET_Logo_Blue_RGB.png)
+
 # Certificate Maker
 
 ## Cover

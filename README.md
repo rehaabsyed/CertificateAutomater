@@ -7,7 +7,7 @@
 **[Cover](#cover)**<br>
 **[Project Gist](#project-gist)**<br>
 **[Project Breakdown](#project-breakdown)**<br>
-**[Program Non-technical Requirements](#project-non_technical-requirements)**<br>
+**[Program Usability Requirements](#project-usability-requirements)**<br>
 **[Program Technical Requirements](#project-technical-requirements)**<br>
 
 ## Cover
@@ -71,7 +71,7 @@ Will require script that can:
 7. Update Mailchimp contacts with file URIs.
 8. Output results and progress to user.
 
-## Program Non-technical Requirements
+## Program Usability Requirements
 
 ### Minimal Viable Product
 

@@ -24,6 +24,12 @@
 
 \input{structure.tex} % Include the file specifying the document structure and custom commands
 
+\usepackage{draftwatermark}
+\SetWatermarkText{\textsf{\textbf{CONFIDENTAL}}}
+\SetWatermarkScale{2.5}
+\SetWatermarkColor[gray]{0.8}
+\SetWatermarkAngle{50}
+
 \pagestyle{fancy}
 \fancyhf{}
 \renewcommand{\headrulewidth}{2pt}

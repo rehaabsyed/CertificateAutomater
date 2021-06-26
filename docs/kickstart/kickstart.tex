@@ -164,17 +164,119 @@ After some research, it has been discovered that stages 2, 3, and 4 of the old s
 
 Realising this goal, however, will require a well organised team and a plan. Due to the various actions this script must perform, a moderately large codebase utilising several libraries and protocols is needed, demanding a significant time investment and expertise. This complexity is compounded by delegating the workload between a team, needing appropriate version control, task management, and enforeable coding standards. Furthermore, such a project could easily suffer from scope creep, especially with the user interface. Hence, the need for subsequent sections in this document to eliminate these issues.
 
+\subsection{Prototype}
+
+For the sake of time, a prototype can be implemented before scope creep becomes an issue. A prototype must include:
+
+\begin{enumerate}
+    \item Command line interface to run program.
+    \item Must start program with certificate template path, attendee record path, and Mailchimp API and server keys as command line arguments
+    \begin{enumerate}
+        \item Strongly recommended to use \mintinline{python}{argparse} library.
+    \end{enumerate}
+    \item Generate a certificate of attendance for each attendee
+    \begin{enumerate}
+        \item Must be saved into a folder called \mintinline{console}{/certificates} in the current working directory.
+        \item Each certificate must be named based on attendee's full name.
+    \end{enumerate}
+    \item Upload certificates to Mailchimp, keeping track of the file URIs.
+    \begin{enumerate}
+        \item Uploading of certificates must be done as a batch, not individually uploaded.
+    \end{enumerate}
+    \item Update the attendee record with the certificate URIs.
+    \item Update the Mailchimp contacts with file URIs.
+    \item Inform the user of what the program is currently doing.
+    \begin{enumerate}
+        \item Can just be a simple sentence, e.g. "Uploading certificates to Mailchimp..."
+    \end{enumerate}
+    \item Be able to process errors without crashing.
+    \item Must be able to continue processing certificates when one fails.
+    \item Must inform user of which step or certificates failed and why.
+    \begin{enumerate}
+        \item Can be done once the program has finished everything else.
+    \end{enumerate}
+    \item Must be able to run on Windows, Linux, and Mac systems capable of running Python 3.
+\end{enumerate}
+
+\noindent
+For the sake of time and simplicity, the following assumptions can be made:
+
+\begin{enumerate}
+    \item The certificate of attendance is known.
+    \begin{enumerate}
+        \item The only field to be changed is the attendee name.
+        \item The exact location of the attendee name field is known and constant.
+        \item The placeholder text of the attendee name field is known and constant.
+        \item The certificate is always valid.
+    \end{enumerate}
+    \item The attendee record contains no errors.
+\end{enumerate}
+
 \subsection{Minimal Viable Product}
 
+Once a prototype is complete, a minimal viable product (MVP) can be written. On top of the criteria for the prototytpe, the MVP also has:
 
+\begin{enumerate}
+    \item Can be run via an executable.
+    \begin{enumerate}
+        \item No command line interfacing should be necessary.
+    \end{enumerate}
+    \item Should have a simple and initiative GUI.
+    \item Can select input files via file explorer.
+    \item Must log at least info, warning, error, and critical messages to a log file.
+    \begin{enumerate}
+        \item Debug messages are optional.
+        \item It must be known where the log file is.
+        \item The GUI should have a button for viewing the log file.
+        \item Strongly recommended to use the \mintinline{python}{logging} library.
+    \end{enumerate}
+    \item Must use OAuth 2 to get Mailchimp authorisation.
+    \begin{enumerate}
+        \item The program should not have the option to use API keys.
+    \end{enumerate}
+    \item Should be able to inform the user of errors that occur in real time without interrupting background tasks.
+    \item Use appropriate colour coding and symbols to inform user of successes, warnings, and errors.
+    \item Must be able to instantly respond to user inputs without stuttering.
+    \item Must be able to check attendee record for errors.
+    \begin{enumerate}
+        \item Repeated email addresses.
+        \item Missing names or emails.
+    \end{enumerate}
+    \item Must be able to edit PDF document in GUI.
+    \begin{enumerate}
+        \item Must be able to view PDF document within GUI.
+        \item Must be able to select the field where the full name goes.
+    \end{enumerate}
+\end{enumerate}
 
 \subsection{Professional Product}
 
+If the MVP is done, a professional, market ready, version can be done. This version should have everything the MVP has, and
 
-
-\subsection{Ideal Product}
-
-
+\begin{enumerate}
+    \item Has ultra-specific error messages.
+    \begin{enumerate}
+        \item Informs the user of what exaclty went wrong.
+        \item Where possible, offers a solution.
+        \item Where possible, offers links to online documentation.
+    \end{enumerate}
+    \item Must include install wizard with a build machine.
+    \begin{enumerate}
+        \item Must be able to choose where to install program.
+    \end{enumerate}
+    \item Allows user to select where log files go.
+    \item Allows user to select what types of messages get logged.
+    \item Must be able to select multiple fields in template as placeholders.
+    \begin{enumerate}
+        \item Must be able to select what each placeholder gets replaced with.
+        \item Must be able to select between attendee attribute, constant value (e.g. event name), or system value (e.g. timestamp).
+    \end{enumerate}
+    \item Must be able to generate PDF report of what happened.
+    \begin{enumerate}
+        \item Can select where report gets saved to.
+        \item Can select what goes on the report.
+    \end{enumerate}
+\end{enumerate}
 
 \newpage
 
@@ -182,9 +284,17 @@ Realising this goal, however, will require a well organised team and a plan. Due
 
 \subsection{Python Language}
 
+While Python was originally designed as a simple scripting language, it has since evolved into one of the most used and popular languages. The simplicity of Python lends itself well to rapid prototyping, so simple that Python's syntax is often considered to be pseudocode. Furthermore, the library support for Python, both first and third-party, makes it extremely easy to make complex tasks simple. The sheer abundance of libaries available creates a compunding effect, as existing libraries makes it easier to wrote other libraries, leading to an exponential growth in library support. Whenever a new protocol or standard becomes prominent, chances are someone has already made a Python library to make it trivial to implement the protocol or standard within other programs. Additionally, the popularity of Python means there is ambundant support online for both known issues and asking online for assistance. For the sake of prototyping, it is difficult to find a better language than Python.
 
+Considering the ambundance of support for Python, learning the language is best done with interactive tutorials foudn online. Such examples include W3 Schools, Codecademny, and Learn Python. Numerous other tutorials exist, such as those on Tutorials Point and the countless YouTube videos; however, these tutorials lack an interactive component, leading to reading or watching without learning. When learning a new language, the source is less important than the interaction between the material and the student.
+
+Where Python's weakness lies is in its performance. Since Python is a weak typed language, datatype checking must be done during runtime, greatly reducing performance. Far worse, the interpreted nature of Python means compiler optimisations cannot be performed, slowing down Python to a crawl. Compared to optimised compiled languages, such as C, Rust, and C++, Python performs dozens of times worse when comparing equivelant programs. This can be greatly mitigated by taking advantage of scientific libraries, such as NumPy and Pandas. These libraries are written in C and C++, allowing for speeds within the ballpark of C, C++, and Rust. However, certain conventions must be followed to take advantage of vectorised data, leading to data needing to be structured in vectors or matrices. Unfortunately, this will only result in a performance increase when doing mathematical operations on numeric data, such as vector dot products or summing an array. Ergo, Python is a poor choice for performance critical applications.
 
 \subsection{HTTP Requests and Responses}
+
+
+
+\subsection{Object Orientation}
 
 
 
@@ -237,10 +347,6 @@ Realising this goal, however, will require a well organised team and a plan. Due
 
 \subsection{Desktop GUI}
 
-
-
-
-\subsection{Web App}
 
 
 

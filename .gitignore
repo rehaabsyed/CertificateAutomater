@@ -127,3 +127,14 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
+
+# LaTeX aux files
+*.aux
+*.fdb_latexmk
+*.log
+*.fls
+*.bcf
+*.dvi
+*.toc
+*.lof
+*/_minted_main/*

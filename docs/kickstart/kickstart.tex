@@ -398,6 +398,49 @@ Critical to software engineering, object orientated programming (OOP) has proven
 
 \subsubsection{Encapsulation}
 
+Consider the logistics in running a store: the stock available, the stock reserved for customers yet to buy them, preorders, cancellations, the stock on its way, the customers who have signed up as members, newsletters, purchases, overhead costs, etc. How does a business maintain such logistics? Who records the data? Who files and organises the data? WHo has access to what data? Who is authorised to fix errors in the data and what process must they go through to make these fixes? Perhaps msot importantly, who or what ensures the data is valid \textit{before} it is placed with exisitng data? Such problems can be at least mitigated using the OOP paradigm.
+
+Since objects contain data as variables, the objects can be made responsible for protecting the data from curroption. Instead of making the variables directly accessible, the object can have getters and setters (also known as mutators) to access the data. Getters should always return a copy of the variable, whereas getters must validate the new value before setting the variable. For example, it is impossible for a jar to have a negative number of marbles, hence if outside code attempts to remove more marbles from a jar object than what is available an error can be raised and the jar's number of marbles remains unchanged. Similarly, the jar will probably also have a capacity, so that if too many marbles are attempted to be inserted a different error should be raised. Some object variable may not even have getters, such as the length of a collection (e.g. an array or a linked list). Instead, the length variable should automatically change as elements are inserted or removed. Even further encapsulated, other variables may not even have getters, as they may be variables that should only be used by the object internally, such as an array inside of a hash table. Protecting data like this greatly mitigates the data from being curropted or otherwise useless.
+
+\begin{figure}[b!]
+    \centering
+    \includegraphics[width=0.6\textwidth]{figures/encapsulation.jpg}
+    \caption{Encapsulation visualisation.}
+    \label{fig:encapsulation}
+\end{figure}
+
+\subsubsection{Abstraction}
+
+As a program become more and more complex, it becomes increasingly difficult to manage the functionality of the program. Trying to track where the functions of a program are organised and located turns inpractical. Even trying to determine if a function has been implemented becomes time consuming and infeasible. This can be partially mitigated by organising functions into thematically narrow and consistent libraries; however, even this approach leads to too many functions to keep track of what has and has not been implemented. For complex programs, especailly those requiring extensive interaction with other programs, a smarter approach is needed.
+
+Abstraction attempts to solve this issue by hiding functionality within objects. Abstraction is simply the process of hiding the implementation by only exposing what the object can do. Hence, outside code only needs to concern itself with what the object can do and not how it does it. Since objects can contain other objects, complex tasks involving several steps using numerous variables can be split accross a tree-like hierarchy of objects. Consider the OSI or TCP/IP model detailed above: with OOP all that is needed is a single \texttt{NetworkManager} that handles how an application sends and receives data without code outside the \texttt{NetworkManager} needing to know about layers below the application layer. Therefore, outside code only needs to call a single method of one object and let it handle how the task is completed.
+
+\subsubsection{Inheritance}
+
+When similar entities need to be modelled, code repitition becomes an issue. Consider a pet tracker for a vetenary that needs to store various types of pets. Obviously, snakes and rabbits are two very different animals that require very different code to model. However, cats and dogs are similar enough that the code modelling these pets would at least somewhat repeat. Repeated code makes it more difficult to maintain, as each repeat must be individually tested, debugged, and modified due to changing environments or requirements, leading to the risk of some repeats not being debugged or changed properly. By extension, this also makes testing more expensive, time-consuming, and error-prone, as each repeat code block being tested will lead to repeat test cases. Clearly, such repitition needs to be eliminated.
+
+\begin{figure}[b!]
+    \centering
+    \includegraphics[width=0.7\textwidth]{figures/inheritance.pdf}
+    \caption{Inheritance UML example.}
+    \label{fig:inheritance-uml}
+\end{figure}
+
+OOP programming provides such a solution in the form of inheritance. Simply put, inheritance is the ability of some classes to inherit the code of other classes. For the pet tracker example, a base class called \texttt{Pet} or \texttt{Animal} can be made that contains code common to all pets. E.g., values like owner, pet ID, and date of birth. Further classes can be written that eliminate code repitition for groups of types of pets, e.g. \texttt{Mammal}, \texttt{Reptilian}, \texttt{Bird}, and \texttt{Amphibian}, each of which should inherit from the \texttt{Pet} base class. Then, more specific pet types can be written that inherit from these broad pet types, such as \texttt{Dog}, \texttt{Cat}, \texttt{Turtle}, \texttt{Snake}, \texttt{Parrot}, and \texttt{Frog}. Such inheritance is known as the \textit{is-a} relationship, as a dog \textit{is a} Mammal, which \textit{is a} animal. Designing a codebase like this completely eliminates repetitive functions, greatly speading up the process of writing the codebase and simplifying test cases.
+
+\noindent
+\begin{minipage}[t]{0.5\textwidth}
+    \vspace{0pt}
+    \, Additionally, inheritance also covers one object being contained within another. This type of relationship is known as the \textit{has-a} relationship or association. For example, a car is \textit{not} a type of steering wheel and vice-versa. However, a car \textit{has a} steering wheel. Consider a car manufacturer that needs to design and manufacture cars. While different car models are not identical, they may share identical steering wheels, gearboxes, transmission systems, fuel tanks, wheels, or seats, among other numerous parts. Hence, these identicial parts can be written, tested, and debugged once, then shared across the different car classes. This type of association is known as composition, as the car fully owns the parts it is made of. If the car object is destroyed, the car parts are also destroyed. This is opposed to aggregation, in which the child object can exist independtly of the parent class, such as the cars and the manufacturer. As with the \textit{is-a} relationship, association greatly reduces code repitition.
+\end{minipage}
+\begin{minipage}[t]{0.5\textwidth}
+    \vspace{0pt}
+    \includegraphics[width=\textwidth]{figures/association.pdf}
+    \captionof{figure}{Assocation UML example.}
+    \label{fig:association-uml}
+\end{minipage}
+
+\subsubsection{Polymorphism}
 
 
 \subsection{Application Programming Interface}

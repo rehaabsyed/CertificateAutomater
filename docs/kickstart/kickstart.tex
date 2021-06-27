@@ -292,19 +292,111 @@ Considering the ambundance of support for Python, learning the language is best 
 Where Python's weakness lies is in its performance. Since Python is a weak typed language, datatype checking must be done during runtime, greatly reducing performance. Far worse, the interpreted nature of Python means compiler optimisations cannot be performed, slowing down Python to a crawl. Compared to optimised compiled languages, such as C, Rust, and C++, Python performs dozens of times worse when comparing equivelant programs. This can be greatly mitigated by taking advantage of scientific libraries, such as NumPy and Pandas. These libraries are written in C and C++, allowing for speeds within the ballpark of C, C++, and Rust. However, certain conventions must be followed to take advantage of vectorised data, leading to data needing to be structured in vectors or matrices. Unfortunately, this will only result in a performance increase when doing mathematical operations on numeric data, such as vector dot products or summing an array. Ergo, Python is a poor choice for performance critical applications.
 
 
-\subsection{OSI Model}
+\subsection{OSI and TCP/IP Models}
 
+To understand how programs interface with each other over the internet, the Open Systems Interconnection (OSI) model must be introduced. Starting in the late 1970s, the OSI model details how computers, or ``nodes'', communicate with each other over a network. The model is split into seven layers, each with their own purpose and protocols, shown in table \ref{table:OSI-model}. Each layer only needs to know about the adjacent layers, decoupling the responsibilities as much as possible. When sending messages over a network, the sender goes through the layers from top-to-bottom, whereas the receiver goes the layers bottom-to-top. Despite the significant learning curve, the OSI model successfully delegates the numerous responsibilities of network communication across seven mostly decoupled layers.
 
+\begin{table}[t!]
+    \begin{threeparttable}[t]
+        \caption{OSI Model for computer networking}
+        \label{table:OSI-model}
+        \begin{tabular}{m{0.1\textwidth}<{\centering} || m{0.3\textwidth} | m{0.3\textwidth} | m{0.3\textwidth}}
+            \toprule
+            \textbf{No.}    &   \textbf{TCP/IP Model} &   \textbf{OSI Model}  &   \textbf{Protocols} \\
+            \midrule
+            7   &   \multirow{3}*{Application}      &   Application     &   HTTP, FTP, WS, RTP \\
+            6   &                                   &   Presentation    &   JPEG, TSL, SSL \\
+            5   &                                   &   Session         &   NFS, SQL, PAP \\
+            \hline
+            4   &   Host-to-Host                    &   Transport       &   TCP, UDP \\
+            \hline
+            3   &   Internet                        &   Network         &   IPv4, IPv6 \\
+            \hline
+            2   &   \multirow{2}*{Network Access}   &   Data Link       &   ARP, CDP, STP \\
+            1   &                                   &   Physical        &   Ethernet, Wi-Fi \\
+            \bottomrule
+        \end{tabular}
+    \end{threeparttable}
+\end{table}
 
-\subsection{TCP/IP Model}
+{\setlength{\parindent}{0cm}
+\vspace{\baselineskip}
+\textbf{1. Physical Layer}
 
+What physical devices are used to connect the nodes within a local area network (LAN). By extension, also dictates the bit rate, what receives data, and what sends data. Does not understand data beyond a sequence of 1s and 0s.
+
+\vspace{\baselineskip}
+\textbf{2. Data Link Layer}
+
+Establishes and terminates a connection between two physically connected nodes. Data is broken into packets and organised into frames. Uses a logical link control (LLC) to identify network protocols, check for errors, and synchronise frames. Also uses Media Access Control (MAC) addresses to uniquely identify nodes and setup connections, including permissions.
+
+\vspace{\baselineskip}
+\textbf{3. Network Layer}
+
+Uses routers to sent segment of data from layer 4 and pair them with an address, typically an IPv4 address. Each segment with sent between routers to the correct LAN, where layer 2 takes control. By extension, also responsible for determining the fastest path to sent the segments through routers. Without layer 3, communication between LANs (e.g. the entire internet) would not be possible. Sometimes known as a ``connectionless'' protocol, as messages are sent without checking they were successfully sent.
+
+\vspace{\baselineskip}
+\textbf{4. Transport Layer}
+
+Takes data being sent from layer 5 and breaks it into segments to be sent over layer 3. Also responsible for reassembling segments back into the full message on the receiving end. Transmission Control Protocol (TCP) prioritises reliability over speed, ensuring that segments (called packets) are received intact. If a segment is curropt or not sent within a time limit, the receiver asks for the segment again. The receiver must also sent back a message. If the response is incorrect, the sender resends the message. Alternatively, User Datagram Protocol (UDP) treats segements as datagrams, sending them without any error checking, prioritising speed over reliability. Just like layer 3, UDP is also known as connectionless. The former is used for internet browsing and uploading to a server, whereas the latter is used for streaming videos, music, and playing games online.
+
+\vspace{\baselineskip}
+\textbf{5. Session Layer}
+
+Manages communication channels, or ``sessions'', between devices. Responsible for opening sessions, ensuring sessions remain open during data transfer, and closing sessions. Can also setup ``checkpoints'', ensuring that if the data flow is interrupted, it can be continued latter without restarting.
+
+\vspace{\baselineskip}
+\textbf{6. Presentation Layer}
+
+Prepares data from layer 7 before being sent via layer 5. Performs compression, encoding on the sending end, decoding on the receiving end, and encryption. The `s' in ``https'' stand for secure and is handled by the Transport Layer Security (TLS) protocol, often mistaken for the outdated and hacked Secure Socket Layer (SSL).
+
+\vspace{\baselineskip}
+\textbf{7. Application Layer}
+
+The programs that are generating the data being sent and received. Examples include web browers, email clients, servers, and streaming services such as Netflix and Twitch. Also responsible for presenting the data in a meaningful way to end users.
+}
+
+\vspace{\baselineskip}
+
+The observant reader would also notice that there is a simplified TCP/IP model, only comprised of four layers. In it, the bottom two layers of OSI are combined into the Network layer, where frames are transmitted between nodes on a LAN via mapping IP addresses and port numbers to MAC addresses. The next layer, called the ``Internet layer'', uses the assigned IP addresses to direct packets to the correct LAN. The internet layer also uses Internet Control Message Protocol (ICMP) to inform hosts about network issues, encapsulated within the IP dataframes. To determine the physical address of a node, layer 2 also uses Address Resolution Protocol (ARP). Layer 3 in the TCP/IP model is identical to the transport layer in the OSI model.\footnote{Despite the name, UDP can be used in the TCP/IP model} Lastly, the top three layers of OSI are combined into the application layer in TCP/IP model. Due to the reduced complexity, the TCP/IP model is often used over the OSI model for internet communications.
 
 
 \subsection{HTTP Requests and Responses}
 
-Of interest to interfacing with internet-based servers is the hypertext transfer protocol (HTTP).
+Of interest to interfacing with internet-based servers is the hypertext transfer protocol (HTTP). Invented circa 1990, HTTP is a request-response protocol, transferring data in simple text documents. As of the time of writing, HTTP 1.1 is the most commonly used version, with 2.0 slowly replacing 1.1. In all versions, the first step is for the client to connect to the server via a TCP handshake. Once a connection has been established, the client can proceed to send a ``request'', which the server processes then replies with a ``response''.
+
+The request is a text document made of three, sometimes four parts. The first line is always the request header, formatted as the method type, followed by the path to the resource, then the HTTP version. Afterwards, each line then comprises the one key-value pair of the header, used to specify metadata, such as the host, accepted languages, authorisation codes, connection type, and expected content type(s). To end the header, an empty line must then follow. For some requests, a body may also be necessary, such as the content being uploaded to the server. Below is an example of such a request.
+
+\vspace{0.5\baselineskip}
+
+\inputminted[linenos=true]{html}{http_examples/post_request.html}
+
+Once the server has finished processing the request, it sends back a response, formatted very similarly to a request. The response's first line is always the status line, formatted as the HTTP version, the status code, then the status message. The status code is a three digit code informing the client of how the server handled the request. The first digit is the broad type of code, then the next two digits specifies the exact type of code. The status message is simply a humanly readable message version of the status code. After the status line, the header fields are then declared line-by-line, ending with an empty line. For some requests, a body will also be included after the empty line. See the example below.
+
+\vspace{0.5\baselineskip}
+
+\inputminted[linenos=true]{html}{http_examples/get_response.html}
+
+\begin{info}[HTTP Status Codes]
+For long messages split into multiple requests, a \texttt{1xx} status code means the server successfully received the segement and the client should send the next. \texttt{2xx} means the message was received, uinderstood, and processed successfully. \texttt{3xx} means the server does not have the resource being requested but does know another server that does.\footnote{Responses with status codes of \texttt{3xx} should always include the server connection details in the body} 4xx means the client did something wrong, such as the classis \texttt{404} file not found error. Lastly, \texttt{5xx} means the server did something wrong.
+\end{info}
+
+As of HTTP 1.1, there are nine accepted methods. Introduced in HTTP 0.9 (the firt public version), the \texttt{GET} request is a simple read only request to retrieve a copy of a resource from the server. As of HTTP 1.0, the \texttt{POST} request allows for clients to upload new resources onto the server. Also as of HTTP 1.0, the \texttt{HEAD} request works identically to a \texttt{GET} request, expect that the body is not returned. When HTTP 1.1 was made available, two important methods were added: A \texttt{PUT} request allows a client to replace an existing resource on a server with the one in the request body, whereas a \texttt{DELETE} request simply tells the server to delete the specified resource. Similar to a \texttt{PUT} request, a \texttt{PATCH} request tells the server to partially update a resource instead of replacing it. While not commonly used, HTTP 1.1 also introduced the \texttt{TRACE} and \texttt{OPTIONS} request types. The former performs a message loop-back test from the path of the specified resource, whereas the latter requests the server to describe all available commincation options for the specified resource. Lastly, the \texttt{CONNECT} request allows clients to connect to a server through another server, useful for setting up proxy servers or websites using TSL (i.e. HTTPS).
+
+While HTTP 1.1 remains the predominant version as of the time of writing, HTTP 2.0 will eventually replace it. HTTP 1.1 introduced vast performance improvements over 1.0, most notably the ability to remain connected to the server after each request-response cycle instead of having to reconnect to the server. However, in 1.1, the server can only process one request from any client at a time, meaning the client must wait until the current request has been responded before sending another. This has changed in 2.0, allowing for mutliple requests to be sent, processed, and responded to after a connection has been established, shown in figure \ref{fig:http-visualised}. For now, this project can ignore HTTP 2.0, but future versions may need to consider the inevitable obsoletion of HTTP 1.1.
+
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=0.8\textwidth]{figures/http1-vs-http2-multiplexing.png}
+    \caption{HTTP 1.1 and HTTP 2.0 visualised, with time being directed downwards.}
+    \label{fig:http-visualised}
+\end{figure}
 
 \subsection{Object Orientation}
+
+Critical to software engineering, object orientated programming (OOP) has proven invaluable to large scale and collaborative code-based projects. This is possible via a sophisticated application of the broad divide and conquer approach, splitting complex programs into simple and decoupled modules and submodules. OOP achieves this through four main principles: encapsulation, abstraction, inheritance, and polymorphism.
+
+\subsubsection{Encapsulation}
 
 
 

@@ -41,10 +41,12 @@
 \usepackage{graphicx}
 \usepackage{float}
 \usepackage{tabularx}
+\usepackage{multirow}
 
 \usepackage{fancyhdr}	% Header and footer control
 
 \usepackage{minted}	% Code formatting and syntax highlighting
+\surroundwithmdframed{minted}
 
 % Referencing manager
 %%\usepackage[
@@ -229,7 +231,7 @@
 % Usage:
 % \begin{info}[optional title, defaults to "Info:"]
 %     contents
-%     \end{info}
+% \end{info}
 
 \mdfdefinestyle{info}{%
     topline=false, bottomline=false,

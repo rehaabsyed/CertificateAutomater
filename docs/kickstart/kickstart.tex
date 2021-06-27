@@ -237,6 +237,7 @@ Once a prototype is complete, a minimal viable product (MVP) can be written. On 
     \item Should be able to inform the user of errors that occur in real time without interrupting background tasks.
     \item Use appropriate colour coding and symbols to inform user of successes, warnings, and errors.
     \item Must be able to instantly respond to user inputs without stuttering.
+    \item Where ever possible, multiprocessing and multithreading must be used.
     \item Must be able to check attendee record for errors.
     \begin{enumerate}
         \item Repeated email addresses.
@@ -290,9 +291,18 @@ Considering the ambundance of support for Python, learning the language is best 
 
 Where Python's weakness lies is in its performance. Since Python is a weak typed language, datatype checking must be done during runtime, greatly reducing performance. Far worse, the interpreted nature of Python means compiler optimisations cannot be performed, slowing down Python to a crawl. Compared to optimised compiled languages, such as C, Rust, and C++, Python performs dozens of times worse when comparing equivelant programs. This can be greatly mitigated by taking advantage of scientific libraries, such as NumPy and Pandas. These libraries are written in C and C++, allowing for speeds within the ballpark of C, C++, and Rust. However, certain conventions must be followed to take advantage of vectorised data, leading to data needing to be structured in vectors or matrices. Unfortunately, this will only result in a performance increase when doing mathematical operations on numeric data, such as vector dot products or summing an array. Ergo, Python is a poor choice for performance critical applications.
 
+
+\subsection{OSI Model}
+
+
+
+\subsection{TCP/IP Model}
+
+
+
 \subsection{HTTP Requests and Responses}
 
-
+Of interest to interfacing with internet-based servers is the hypertext transfer protocol (HTTP).
 
 \subsection{Object Orientation}
 

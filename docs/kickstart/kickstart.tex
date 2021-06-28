@@ -214,7 +214,7 @@ For the sake of time and simplicity, the following assumptions can be made:
 
 \subsection{Minimal Viable Product}
 
-Once a prototype is complete, a minimal viable product (MVP) can be written. On top of the criteria for the prototytpe, the MVP also has:
+Once a prototype is complete, a minimal viable product (MVP) can be written. The MVP has all the criteria of the prototype, excluding 2, and
 
 \begin{enumerate}
     \item Can be run via an executable.
@@ -222,6 +222,9 @@ Once a prototype is complete, a minimal viable product (MVP) can be written. On 
         \item No command line interfacing should be necessary.
     \end{enumerate}
     \item Should have a simple and initiative GUI.
+    \begin{enumerate}
+        \item GUI does not need to be aesthetically pleasing.
+    \end{enumerate}
     \item Can select input files via file explorer.
     \item Must log at least info, warning, error, and critical messages to a log file.
     \begin{enumerate}
@@ -237,11 +240,12 @@ Once a prototype is complete, a minimal viable product (MVP) can be written. On 
     \item Should be able to inform the user of errors that occur in real time without interrupting background tasks.
     \item Use appropriate colour coding and symbols to inform user of successes, warnings, and errors.
     \item Must be able to instantly respond to user inputs without stuttering.
-    \item Where ever possible, multiprocessing and multithreading must be used.
+    \item Multiprocessing and multithreading must be used to prevent the program from locking.
     \item Must be able to check attendee record for errors.
     \begin{enumerate}
         \item Repeated email addresses.
         \item Missing names or emails.
+        \item Missing required fields.
     \end{enumerate}
     \item Must be able to edit PDF document in GUI.
     \begin{enumerate}
@@ -250,9 +254,9 @@ Once a prototype is complete, a minimal viable product (MVP) can be written. On 
     \end{enumerate}
 \end{enumerate}
 
-\subsection{Professional Product}
+\subsection{Competitive Product}
 
-If the MVP is done, a professional, market ready, version can be done. This version should have everything the MVP has, and
+If the MVP is done, a competitive, market ready, version can be done. This version should have everything the MVP has, and
 
 \begin{enumerate}
     \item Has ultra-specific error messages.
@@ -265,11 +269,11 @@ If the MVP is done, a professional, market ready, version can be done. This vers
     \begin{enumerate}
         \item Must be able to choose where to install program.
     \end{enumerate}
-    \item Allows user to select where log files go.
+    \item Allows user to select where log files are saved.
     \item Allows user to select what types of messages get logged.
     \item Must be able to select multiple fields in template as placeholders.
     \begin{enumerate}
-        \item Must be able to select what each placeholder gets replaced with.
+        \item Must be able to select what each placeholder gets replaced with graphically.
         \item Must be able to select between attendee attribute, constant value (e.g. event name), or system value (e.g. timestamp).
     \end{enumerate}
     \item Must be able to generate PDF report of what happened.
@@ -277,6 +281,7 @@ If the MVP is done, a professional, market ready, version can be done. This vers
         \item Can select where report gets saved to.
         \item Can select what goes on the report.
     \end{enumerate}
+    \item Must have an aesthetically pleasing GUI.
 \end{enumerate}
 
 \newpage

@@ -447,6 +447,19 @@ OOP programming provides such a solution in the form of inheritance. Simply put,
 
 \subsubsection{Polymorphism}
 
+When developing a codebase, it occansionally becomes useful to have multiple functions or methods that are named the same but perform differently. In \texttt{C}, the \texttt{math.h} library contains functions for finding the absolute value of a number. There are actually two of these functions: the \mintinline{c}{abs()} function and the \mintinline{c}{fabs()} function. The reasoning being is that \mintinline{c}{abs()} takes in an integer whereas \mintinline{c}{fabs()} takes in a double. Since \texttt{C} is a strong typed language with no polymorphism, this practice of having multiple functions perform essentailly the same task becomes inevitable. Even more complicated, consider the case of calculating the area of a shape. Since the areas of shapes are calculated differently from shape to shape, in \texttt{C} there would be one function per type of shape. E.g. \mintinline{c}{circleArea()}, \mintinline{c}{rectArea()}, \mintinline{c}{triangleArea()}, etc. As program requirements start involving extremely similar functions and datatypes, the number of near-identical functions to keep track of becomes inpractical.
+
+Polymorphism solves this issue by allowing multiple functions to share the same name. One such manner of doing so is called ``method overloading'': allowing for a class or object to have multiple methods with the same name but different parameter lists in terms of their datatypes. In Python, this is actually not possible since the datatypes of variables does not have to be declared. Instead, Python achieves pseudo-overloading by allowing for a parameter to have one of multiple valid datatypes (such as \texttt{num} being either an \mintinline{python}{int} or an \mintinline{python}{float}) or by having parameters with default values. Further still, a function in Python can have an optional list of miscellaneous, unnamed parameters and another optional dictionary of named parameters. For example, the Python function
+
+\begin{minted}{python}
+def formatNumbers(num, *args, precision=2, **kwargs):
+    ...
+\end{minted}
+
+\noindent
+must be called with a number, but can allow multiple arbitrary numbers to be formated via the \mintinline{python}{*args} list, optionally specify the precision to format the numbers to (defaults to 2 decimal places), and also be called with arbitrary named parameters that are stored inside the \mintinline{python}{**kwargs} dictionary (short for ``keyword arguments'').
+
+Using the \textit{is-a} inheritance principle, it is also possible to achieve polymorphism via ``method overriding''. Going back to the area of shapes example, we can calculate the areas of different shapes without needing multiple methods with different names. Instead, a base class \texttt{Shape} can be written, that has the method \texttt{calcArea()}. This method is known as an ``abstract method'' since it has not been implemented, meaning the \texttt{Shape} class is also abstract. Abstract classes cannot be instantiated into objects, making them useless by themselves. Instead, subclasses of the \texttt{Shape} class can be written that implement this abstract method, such as \texttt{Circle}, \texttt{Rectangle}, and \texttt{Triangle}. The significane of which means that outside code does not need to concern itself with what exact type of shape a \texttt{Shape} object is, only that is has a \texttt{calcArea()} method. Hence, functions can be written once for any arbitrary shape object and more shape types can be written latter without having to change any of these functions.
 
 \subsection{Application Programming Interface}
 

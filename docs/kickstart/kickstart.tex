@@ -501,13 +501,39 @@ Once the attendees are known, the certificates can be made. Unfortunately, the c
 
 \section{MailChimp Authorisation}
 
+To prevent malicious parties from accessing Mailchimp accounts, applications must provide authorisation with each HTTP request. The Mailchimp API provides developers two methods of auto-authorisation: an API key and OAuth2, both with their strengths and weaknesses.
+
 \subsection{Using API and Server Keys}
 
+Owners of a Mailchimp account can use their API and server keys to allow applications to access their account. The developer simply needs to log into their Mailchimp account, generate an API key, find the server key in the URL, then input both keys into their application. The power of API keys lies in their simplicity, only needing a few minutes to generate and start using the API key. Once the key has been retrieved, the key just needs to be included into the config of HTTP requests to Mailchimp, only taking a few lines of code. The example below is taken straight from the Mailchimp API:
 
+\inputminted[linenos=true]{python}{mailchimp_examples/mailchimp_ping.py}
 
-\subsection{Using OAuth 2.0}
+\noindent
+If the request succeeds, the response body will contain
 
+\inputminted{json}{mailchimp_examples/ping_response.json}
 
+However, an API key is equivelant to a root admin's login details; giving full permissions to the entire account. With an API key, a developer can change user permissions, modify contacts, and send emails. For security reasons, all API keys can be disabled at any time, preventing comprised keys from being used negligently or maliciously. Regardless, it is extremely rare an app will need full access to a Mailchimp account.
+
+Furthermore, generating then inputting their API is a very user unfriendly task. First off, the average user will have no idea what an API even is, none-the-less an API key. Secondly, the user must ensure to never share or write down their API key outside of the app, which is extremely unlikely, causing a high security risk. Similarly, the app must be secure enough to not expose the API key, which is extremely difficult for a webapp. If an API key is exposed by a service provider, the provider must notify their users ASAP and the users must disable the API key before being hacked. Clearly, API keys present a high risk for applications, especially when accessing accounts not owned by the service provider.
+
+\begin{warn}
+Under no circumstances should an API key ever be disclosed to anyone! This includes any written form, even in source code! Authorised individuals should log into the associated account to get the API key. The API should not be written down, instead it should be copied to the devices clipboard, where it can pasted into an application's input. To input an API key into an application, it should be inputted at run time as a command line argument, an environmental variable on a secure device, or through an input text box. It should never be saved by the application or sent anywhere outside the service requiring the API key.
+\end{warn}
+
+\subsection{Using OAuth2}
+
+\begin{figure}[b!]
+    \centering
+    \includegraphics[width=0.6\textwidth]{figures/oauth_abstract_flow.png}
+    \caption{OAuth2 simplified flowchart.}
+    \label{fig:oauth-flowchart}
+\end{figure}
+
+A far more modern method of gaining access to a user account from another service is to use the OAuth2 protocol. Short for open authorization 2.0, OAuth2 has quickly become the de-facto way for electronic services from different organisations to communicate with each other automatically. The protocol is comprised of several steps: first, the developer must register their app on the service, which will provide an app authorisation code. Next, the app the user is running requests access from the user to another service. If the user agrees, the app makes an authorisation request to the third-party service using the app authorisation code, redirecting the user to login to their account they own. Once logged in, the third-party service will ask the user to confirm that they consent to giving the displayed permissions to the app. If the user agrees, the user is then redirected back to the app, where it uses the access token (a long, computer generated hexadecimal string) given by the service to access the user's resources. Figure \ref{fig:oauth-flowchart} visualises this process.
+
+While more complicated to implement than using an API key, OAuth2 has multiple key advantages. Firstly, the app requesting access never observes the login details for the service, as the service takes control when this happens. Next, the app only has access to what the user authorises, not the entire account. Additionally, tokens provided by the service expire quickly, usually after an hour. Ergo, if the token gets leaked, it will either expire soon or have already expired. Furthermore, if an app becomes comprised, all services which the developers registered their app on can have their app authroisation code disabled, preventing all authorisation requests. Lastly, it is far easier for a user to enter in their login details than provide an API key. Clearly, OAuth2 is a far more powerful and secure way of exchanging data between services or apps than API keys.
 
 \newpage
 

@@ -1,0 +1,23 @@
+{
+    "club_name": "The Book Club",
+    "start_year": 2007,
+    "university": "Curtin University",
+    "bank_balance": 120.92,
+    "oday_enrolled": false,
+    "age_demographic": null,
+    "club_themes": [
+        "books",
+        "literature",
+        "casual"
+    ],
+    "members": {
+        "ordinary": 120,
+        "associate": 12
+    },
+    "committee": {
+        "president_id": 1992350,
+        "vice-president_id": 18988823,
+        "treasurer_id": 2000971,
+        "secretary_id": 1945670
+    }
+}

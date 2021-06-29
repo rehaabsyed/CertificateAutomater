@@ -174,6 +174,7 @@ For the sake of time, a prototype can be implemented before scope creep becomes 
     \begin{enumerate}
         \item Strongly recommended to use \mintinline{python}{argparse} library.
     \end{enumerate}
+    \item Must be able to load attendee records from a CSV file.
     \item Generate a certificate of attendance for each attendee
     \begin{enumerate}
         \item Must be saved into a folder called \mintinline{console}{/certificates} in the current working directory.
@@ -261,6 +262,7 @@ Once a prototype is complete, a minimal viable product (MVP) can be written. The
 If the MVP is done, a competitive, market ready, version can be done. This version should have everything the MVP has, and
 
 \begin{enumerate}
+    \item Must be able to load attendee records from an Excel file.
     \item Has ultra-specific error messages.
     \begin{enumerate}
         \item Informs the user of what exaclty went wrong.
@@ -475,9 +477,19 @@ Solving these concerns introduces the need for Application Programming Interface
 
 \newpage
 
-\section{Internal Representation of Attendees}
+\section{Attendee Management}
 
+\subsection{Internal storage of attendees}
 
+Each attendee will need to be stored as an object, requiring the ability to read and write both required and optional attendee attributes. At a minimum, the attendee objects will need to store the email address, given name, and family name. Furthermore, future upgrades may require other attributes to be stored. Since these optional attributes are not known, the attendee object must have methods for adding, getting, updating, and removing any arbitrary attributes. Fortunately, the attendee objects only need to store data, meaning no methods beyond setters and getters are needed.
+
+Once the interface for an attendee class has been agreed upon, an attendee manager can be written. This attendee manager will store all attendee objects for convenience across all other modules that use the attendee records. Hence, the attendee manager will need methods for adding attendees, iterating over attendees, and removing attendees. Updating attendee records can be done via the attendee objects themselves, as they will already validate the data. Since the attendee objects already validate themselves, the attendee getters in the attendee manager should return a reference to the attendee, not a copy. This is to ensure that updating an attendee record can be done with removing and re-inserting the attendee. To keep track of each attendee within the manager, each attendee will need some unique identifier, which can be the email address.
+
+\subsection{Attendee File IO}
+
+Given that the attendees must be loaded and stored from a CSV file, an attendee file manager will be needed. Since the attendees are stored as tabular data, the Python Pandas library can be used to store the attendee data. It is important to note that this data is raw in nature, meaning it will not be validated beyond any file IO error checking. The purpose of the attendee file IO module is just to load the raw data in tabular form, needing further data validation from the attendee and attendee manager classes. Ergo, an iterator should be implemented to retrieve the raw attendee data one-by-one.
+
+Once the attendee records have been internally finalised, they will then need to be saved to a file. Considering that the data is already in tabulated form, it should be a simple matter of saving the data in a CSV file.
 
 \newpage
 

@@ -413,7 +413,7 @@ Since objects contain data as variables, the objects can be made responsible for
 
 \begin{figure}[b!]
     \centering
-    \includegraphics[width=0.6\textwidth]{figures/encapsulation.jpg}
+    \includegraphics[width=0.5\textwidth]{figures/encapsulation.jpg}
     \caption{Encapsulation visualisation.}
     \label{fig:encapsulation}
 \end{figure}
@@ -553,12 +553,12 @@ Under no circumstances should an API key ever be disclosed to anyone! This inclu
 
 \begin{figure}[b!]
     \centering
-    \includegraphics[width=0.6\textwidth]{figures/oauth_abstract_flow.png}
+    \includegraphics[width=0.7\textwidth]{figures/oauth_abstract_flow.png}
     \caption{OAuth2 simplified flowchart.}
     \label{fig:oauth-flowchart}
 \end{figure}
 
-A far more modern method of gaining access to a user account from another service is to use the OAuth2 protocol. Short for open authorization 2.0, OAuth2 has quickly become the de-facto way for electronic services from different organisations to communicate with each other automatically. The protocol is comprised of several steps: first, the developer must register their app on the service, which will provide an app authorisation code. Next, the app the user is running requests access from the user to another service. If the user agrees, the app makes an authorisation request to the third-party service using the app authorisation code, redirecting the user to login to their account they own. Once logged in, the third-party service will ask the user to confirm that they consent to giving the displayed permissions to the app. If the user agrees, the user is then redirected back to the app, where it uses the access token (a long, computer generated hexadecimal string) given by the service to access the user's resources. Figure \ref{fig:oauth-flowchart} visualises this process.
+A far more modern method of gaining access to a user account from another service is to use the OAuth2 protocol. Short for Open Authorization 2.0, OAuth2 has quickly become the de-facto way for electronic services from different organisations to communicate with each other automatically. The protocol is comprised of several steps: first, the app must be registered on the service, which will provide a \texttt{client\_id} and \texttt{client\_secret}. Next, the app the user is running requests access from the user to another service. If the user agrees, the app makes an authorisation request to the third-party service using the \texttt{client\_secret}, redirecting the user to login to the account they own. Once logged in, the service will ask the user to confirm that they consent to giving the displayed permissions to the app. If the user agrees, the user is then redirected back to the app, where it uses the access token (a long, computer generated hexadecimal string) given by the service to access the user's resources. Figure \ref{fig:oauth-flowchart} visualises this process.
 
 While more complicated to implement than using an API key, OAuth2 has multiple key advantages. Firstly, the app requesting access never observes the login details for the service, as the service takes control when this happens. Next, the app only has access to what the user authorises, not the entire account. Additionally, tokens provided by the service expire quickly, usually after an hour. Ergo, if the token gets leaked, it will either expire soon or have already expired. Furthermore, if an app becomes comprised, all services which the developers registered their app on can have their app authroisation code disabled, preventing all authorisation requests. Lastly, it is far easier for a user to enter in their login details than provide an API key. Clearly, OAuth2 is a far more powerful and secure way of exchanging data between services or apps than API keys.
 
@@ -615,13 +615,32 @@ Once the certificates have been uploaded with the file URIs recorded, the attend
 
 \subsection{Command Line Interface}
 
-For the sake of a prototype, a command line interface can be implemented.
+For the sake of a prototype, a command line interface (CLI) can be implemented. In Python, the simplest and fastest way of implementing a CLI is through \mintinline{python}{print()} function calls. While simple, the \mintinline{python}{print()} function is extremely limited. Most notably, the \mintinline{python}{print()} function does not allow for the text cursor to be moved backwards, meaning the entire screen must be cleared or enough lines must be written to remove old text. Additionally, the lack of colour coding heavily reduces readability, as successes, warnings, and errors are not immediately obvious. Additionally, displaying boxes and other structured displays is extremely tedious and inpractical with \mintinline{python}{print()}. While it is possible to achieve such feats in a terminal, different terminals use different codes for colour and special formatting, all of which are complex and highly difficult to read and understand. This leads to numerous compatibility issues between terminals.
 
+Going back decades, the \texttt{curses} library attempts to partially mitigate the limitations of the humble \mintinline{python}{print()} function. Implemented in C, Python's \texttt{curses} library is simply a set of wrappers calling the C \mintinline{C}{ncurses.h} functions.\footnote{The ``n'' is short for new.} This alone has two advantages: (1) this makes it extremely easy to transition between C and Python when using \texttt{curses}, and (2) the functions are highly optimised. This is on top of the ability to easily colour text, move the cursor around, and draw boxes. While simple in concept, figure \ref{fig:ncurses-example} below is an example of advanced usage of the \texttt{curses} library. Using \texttt{curses}, it is possible to easily create GUI-like user interfaces without the complexity of GUI frameworks.
 
+\vspace{\baselineskip}
 
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=\textwidth]{figures/ncurses_example.png}
+    \caption{Advanced example of \texttt{curses}.}
+    \label{fig:ncurses-example}
+\end{figure}
 
 \subsection{Desktop GUI}
 
+While useful for prototyping and developers, CLI have not been suitable for the average computer user for decades. Instead, graphical user interfaces (GUI) are the norm. Whereas CLIs are sequential, always following some order of IO actions in a linear of tree structure, GUIs are event driven. In GUIs, the structure of the interface remains constant until an event occurs, such as the user selecting a button, saying ``Hay, Siri'', or a message being received over the internet. GUIs achieve their event driven nature via heavy usage of callbacks and OOP: an object is given the callback, then sits and waits until an event or ``trigger'' occurs. Once the trigger activates, the object uses the callback to determine what to do.  Separating the when (the object) from the what (the callback) allows for reusable and small code.
+
+In Python, creating a GUI for a desktop application requires one of several GUI frameworks. These differ from Python wrappers around older frameworks, such as Qt5 and wxWdigets, to pure python, like TKinter and PySimpleGUI, and hybrid framworks, like Kivy. Most frameworks still in use have maintained relevance by finding a niche. The older frameworks implemented in C++ are well-established with online support and documentation going back decades, as well as being highly efficient, running extremely fast with minimal overhead. Newer GUI frameworks made for Python benefit from simpler APIs, encouraging faster development. Choosing a framework is a matter of the product requirements, both for current builds in development and future versions.
+
+By far the most popular, so much so that the option for installing the framework is included when installing Python, is Tkinter. Well known for its simplicity and user friendly GUI builder, Tkinter tends to be a Python programmer's first GUI framework. While excellent for simple Python projects, Tkinter is restricted to Python, meaning the code and assets cannot be reused for other programming languages. This represents a fatal flaw when attempting to redo a codebase in a different language, as the GUI must be completely redone. Additionally, Tkinter being a Pythonic framework suffers from performance issues relative to older frameworks. Hence, Tkinter and similar Pythonic GUI frameworks are inappropriate for this project.
+
+Kevi is a more interesting GUI framework based on its specialty. Kevi is written Cython, making it a Pythonic framework, making it incompatible with other languages. Where Kevi excels is mobile app development, as its widgets are designed with touchscreens in mind and the native assets of desktop applications are ignored. This makes rapid development of mobile apps feasible once the small learning curve has been overcome. Since the certificate maker program is a desktop app with no mobile version planned, Kevi is also inpractical.
+
+These leaves the older GUI frameworks, of which only Qt and wxWdigets have remained competitive. Fortunately, both Qt and wxWdigets have Python wrappers, called PyQt and wxPython. Both are fast and efficient frameworks with multithreading and multiprocessing built-in, with wxWidgets being slightly faster due to its simpler design. Additionally, wxWidgets has a lower learning curve with only just above 20 widgets available. The con, however, means that wxWidgets is not as powerful as Qt. Despite Qt's far higher learning curve, Qt Designer allows developers to quickly design a GUI without writing a single line of code. Even better, Qt Designer exports GUIs to \texttt{.ui} files, compatible with Qt across all languages without modification. From this evidence, a competitive product should use Qt.
+
+\subsection{Webapp}
 
 
 

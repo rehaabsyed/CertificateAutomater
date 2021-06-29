@@ -539,14 +539,48 @@ While more complicated to implement than using an API key, OAuth2 has multiple k
 
 \section{Certificate Uploading}
 
+\subsection{Doing single POST requests}
 
+After gaining Mailchimp authorisation, the certificates can be uploaded to Mailchimp. First of, a folder should be created to store the files within. According to the Mailchimp API, this is possible by making the POST request below:
 
+\inputminted[linenos=true]{python}{mailchimp_examples/create_folder.py}
+
+\noindent
+The response of which will contain the folder ID, an integer that uniquely identifies that folder. Given the folder ID, the certificates can then be uploaded via a POST request
+
+\inputminted[linenos=true]{python}{mailchimp_examples/upload_file.py}
+
+\noindent
+The responses of uploading the files will contain a \texttt{full\_size\_url} field, which is needed for the next section. Hence, a functional Mailchimp manager module will need a function to take in the certificates, the certificate filenames, and the folder name. Given these parameters, the folder must be created first, have its folder ID recorded, then upload the certificates into the folder. As the responses from uploading the certificates are received, the \texttt{full\_size\_url} must be recorded and returned to the caller.
+
+\subsection{Doing multiple async requests with batches}
+
+However, the exact manner in which the requests are made can cause the program to lock up for prolonged periods of time. This is due to the \mintinline{python}{client.fileManager.create_folder()} and \mintinline{python}{client.fileManager.upload()} functions being ``blocking functions''. Such functions halt the program's progress for a long period of time while waiting for a response from the Mailchimp server. Furthermore, to prevent server overloading, the Mailchimp API will only allow 10 concurrent requests per API key. Considering that it takes 120 seconds for the for a request to time out, the worst case scenario is that it will take an hour and 40 minutes to process 50 attendees in a sequential manner. With concurrent requests, this worst case reduces to 10 minutes, still far too long for a user to wait.
+
+The solution is to use Mailchimp's batch feature. Instead of making one POST request per certificate, all the POST requests can be bundled into a batch. Making the batch request given the individual requests is trivial, as the body of the request is simply a JSON object containing one field, \texttt{payload}, whose value is a Python list (or Javascript array) of the individual requests. The code below is Mailchimp's example of adding 1000 contacts at once.
+
+\inputminted[linenos=true]{python}{mailchimp_examples/batch_request.py}
+
+Furthermore, the \mintinline{python}{response = mailchimp.batches.start(payload)} is not a blocking function. Instead, it returns a response that Mailchimp generates and sends as soon as possible, even though the individual requests have not been processed. The body of the initial request includes a batch ID, which can be used to do another request to see the status of the batch via
+
+\mint{python}|response = mailchimp.batches.status(batch_id)|
+
+\noindent
+Once all requests have been processed, a gzipped archive of the responses can be downloaded through the \texttt{response\_body\_url} available in the batch response. 
+
+Since downloading, extracting, and processing the responses would be slow, it is strongly recommended the method that makes the batch request simply return the final batch response. If the responses are desired, then another method should be written to use the \texttt{response\_body\_url} to download the responses. From there, the file can be unzipped, which reveals one JSON file per request. It should be noted that Mailchimp will only store the responses for seven days. Furthermore, the \texttt{response\_body\_url} will only last for 10 minutes for security purposes. If the \texttt{response\_body\_url} expires, another can be retrieved via a batch status request using the batch ID.
+
+\subsection{Using callbacks to retrieve the status}
+
+Since it will take a noticable amount of time to process the requests, the user should be informed of how the request is going. However, when calling the method that does the batch request, control of the program is handed over to this method until the batch is complete. Hence, a callback will be needed to inform the user of the batch's progress. This callback should be called whenever the batch progress changes. Combined with multithreading, this will allow for a program that can simultaneously handle user inputs, output the current status of a batch request, and perform the batch request.
 
 \newpage
 
 \section{Contact Updating}
 
+Once the certificates have been uploaded with the file URIs recorded, the attendee list can finally be updated. This can be accomplished via a method in the attendee manager taking in a mapping between the attendees and their certificate URIs, then updating the attendee objects. Once updated, the attendee objects can be saved as a CSV file, overwriting the original attendee record. Lastly, the attendee CSV file can then be uploaded to Mailchimp via a batch request. However, care must be taken as some attendees may not be contacts on our Mailchimp account or existing contacts using a new email address.\footnote{Mailchimp uses the email address as the unique identifier, so existing members can be added multiple times through different email addresses. This has been an ongoing issue with our members for years.} The Mailchimp API provides a PUT request for adding or (if already exists) updating a contact, shown below. Once all contacts have been updated, the program can finish.
 
+\inputminted[linenos=true]{python}{mailchimp_examples/add_or_update_member.py}
 
 \newpage
 
@@ -554,7 +588,7 @@ While more complicated to implement than using an API key, OAuth2 has multiple k
 
 \subsection{Command Line Interface}
 
-
+For the sake of a prototype, a command line interface can be implemented.
 
 
 

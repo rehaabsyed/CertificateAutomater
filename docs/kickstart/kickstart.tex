@@ -414,6 +414,10 @@ Since objects contain data as variables, the objects can be made responsible for
     \label{fig:encapsulation}
 \end{figure}
 
+In Python, encapsulation is implemented very differently to other OOP languages. Languages like Java, C#, and C++ have the keywords \mintinline{c++}{public}, \mintinline{c++}{protected}, and \mintinline{c++}{private} for deciding how hidden a variable or method is. \mintinline{c++}{public} simply means anything that has access to the class or object can access the member, be it a variable or method. \mintinline{c++}{private}, however, means only the class or object can access the member, completely hiding it from all other code. While useful for data proctection, it was quickly found that \mintinline{c++}{private} is too restrictive for many applications. Instead, \mintinline{c++}{protected} has replaced \mintinline{c++}{private}, as it allows subclasses to access the member, dicussed further in the Inheritance subsection below. Python does not have these keywords, instead opting for using underscores: no underscores delcares the member (or ``attribute'' as it is known in Python) as public, a single underscore means protected, and a double underscore, or ``dunder'', means private. Protected and private variables can then be read using the \mintinline{python}{@property} decorator, and set using the \mintinline{python}{@x.setter} decorator, where \mintinline{python}{x} is the variable being set. Note the example below and the lack of dunders.
+
+\inputminted[linenos=true]{python}{python_examples/encapsulation.py}
+
 \subsubsection{Abstraction}
 
 As a program become more and more complex, it becomes increasingly difficult to manage the functionality of the program. Trying to track where the functions of a program are organised and located turns inpractical. Even trying to determine if a function has been implemented becomes time consuming and infeasible. This can be partially mitigated by organising functions into thematically narrow and consistent libraries; however, even this approach leads to too many functions to keep track of what has and has not been implemented. For complex programs, especailly those requiring extensive interaction with other programs, a smarter approach is needed.
@@ -466,6 +470,12 @@ Using the \textit{is-a} inheritance principle, it is also possible to achieve po
 The world of modern software development is one heavily comprised of using code and services created by third-party organisations or individuals. This is an inevitable consequence of the daunting product requirements that modern software must abide by to remain competitive. However, the pitfalls of using third party services quickly become apparent: \textit{How do we know future changes won't break our code? Will our application still work when this service changes? What security flaws or exploits are exposed allowing others to use our service? What do we do if a third party service does not allow us to access their service via code?} Consider the need for a music editing mobile app that can use music owned by the user from their Spotify, Google Music, Bandcamp, or Apple Music accounts. How does a development team even begin to integrate these services their mobile app?
 
 Solving these concerns introduces the need for Application Programming Interfaces, or APIs. An API, simply put, is a set of commands a program can use to access and upload data to another program. They can be as simple as the set of functions and constants within a library to the monolithic 2 billion line of code Google API. Well designed APIs allow external parties to develop their own applications integrating your service without needing to know how the API works, nor what the external application is or does. APIs also greatly mitigate security issues, as APIs can hide the implementation of the service. External developers using an API can also be sure that future changes to the API will not break their application, as API updates come with a version number, signifying if an API change has occurred. If an API change has occurred, the external developers can simply not use the newer version until they have updated their application to use the newer API. Most relevant to this project, the Mailchimp API is the only way a program can access a user's Mailchimp account without hacking the Mailchimp servers. Without this API, the project would not be possible.
+
+\newpage
+
+\section{Internal Representation of Attendees}
+
+
 
 \newpage
 
@@ -547,8 +557,8 @@ Solving these concerns introduces the need for Application Programming Interface
 
 
 
-\newpage
-
-%%\printbibliography
+%\newpage
+%
+%\printbibliography
 
 \end{document}

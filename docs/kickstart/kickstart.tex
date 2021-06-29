@@ -493,16 +493,15 @@ Once the attendee records have been internally finalised, they will then need to
 
 \newpage
 
-\section{PDF Editing and Creation}
+\section{Certificate Editing and Creation}
 
-
+Once the attendees are known, the certificates can be made. Unfortunately, the certificate template on Canva is useless, as it cannot be downloaded as a editible document. Instead, the certificate template should be recreated in Word with at least one merge field or variable (denoted via double braces) for the attendee name. Word documents can then be loaded into Python with their merge fields or variables identified via the \texttt{docx-mailmerge} or \texttt{docxtpl} Python libraries. Once the attendee's details has been inserted, the certificate can be saved as a Word document then converted to a PDF via the \texttt{docx2pdf} library. With these libraries, all certificates can easily be created from a template.
 
 \newpage
 
 \section{MailChimp Authorisation}
 
 \subsection{Using API and Server Keys}
-
 
 
 

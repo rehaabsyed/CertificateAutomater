@@ -717,7 +717,16 @@ It is \textbf{strongly} that readers research Git cheat sheets online, pick one,
 
 \subsection{Using Github}
 
+With the rapid increase in internet speeds, working off-site, and the willingness for companies to let their developers to work from home, hosting Git repositories locally has largely become a thing of the past. Instead, dedicated online Git repositories take the burden of server management off organisations so they can focus on development. The three most popluar such services are Github, Bitbucket, and Gitlab. Of these three, Github, owned and maintained by Microsoft, is the most popular, especially for small organisations and personal projects. Regardless, all three use Git as their VCS. The main differences between the three is their business models. Fortunately for CIET, the premium services offered by these three are merely nice to have. Hence, Github shall be used for this project as an abritrary choice.
 
+With an online repository setup, the best practice manner of contributing to a project is a somewhat convoluted process. To prevent the project Git repository from becoming populated with unnecessary commits and branches, contributors never actually commit directly into the project. Instead, contributers must ``fork'' the project, creating a copy of the project on their account. With this fork, the contributor can make their commits without affecting the main project repository. Once the desired changes have been made, a ``pull request'' can be made. These pull requests are requests to merge the modified codebase to the set location, typically the main repository the forked one originates from. When the pull request is made, this notifies the moderators or admins of the main repository. The moderator will then review the pull request by inspecting what has changed. If approved, the pull request becomes a merge so that everyone now benefits from the contributor's changes. Usually, a pull request will result in changes being requested, as it is extremely unlikely that the changes in the pull request will satisfy the moderator's or the repository's pull request standards. Sometimes, the pull request is deleted, as the work required to salvage what good exists is more than redoing the pull request. While convoluted, this process ensures all code is reviewed and held to a necessary standard before being made official.
+
+\begin{figure}[t!]
+    \centering
+    \includegraphics[width=1.0\textwidth]{figures/git_using_forks.pdf}
+    \caption{Contributions using Git forks.}
+    \label{fig:git-forks}
+\end{figure}
 
 \subsection{Recording Library Requirements}
 
@@ -732,6 +741,13 @@ It is \textbf{strongly} that readers research Git cheat sheets online, pick one,
 \section{Coding Standards}
 
 \subsection{Readability and Maintainability}
+
+
+\subsection{Test scripts}
+
+
+
+\subsection{Google docstring}
 
 
 

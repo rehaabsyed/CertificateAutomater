@@ -730,7 +730,11 @@ With an online repository setup, the best practice manner of contributing to a p
 
 \subsection{Recording Library Requirements}
 
+As a matter of practicality, modern software is built using code already written. This can range from using libraries built-in to the language of choice, all the way to using complex frameworks built on so many other layers of libraries, it becomes impossible to fully grasp just how deep and expansive the code reliances are. Regardless of the quantity of external code used, all libraries and frameworks used must be declared.
 
+Python provides a simple manner to explicitly declare what libraries and frameworks are being used. This is achieved through a \texttt{requirements.txt} file: a simple text file where each line represents a library or framework, potentially with the accepted versions. Since multiple versions may be compatible with the codebase, there are multiple ways for declaring which versions are acceptable. A double equals (\texttt{==}) means only that specific version is accepted, whereas a greater-than-or-equal-to symbol (\texttt{>=}) means any version at least as new as the version specified. If a range of versions is accepted, then a comma (\texttt{,}) can be used to specify a range. A not equal to symbol (\texttt{!=}) means any version except for the one specified (useful if that version has a known bug). Most confusingly, the tilde-equals (\url{~=}) means a compatible version: so any version matching the same numbers excluding the last number, where the version number must be at least as high as specified. This version is useful for specifying a range without two version numbers. Furthermore, the wildcard \texttt{*} is useful for specifying any version mathcing the start of the specified version. The text below is an example that uses all the version numbering conventions.
+
+\inputminted[linenos=true]{python}{python_examples/requirements_example.txt}
 
 \subsection{Virtual Environments}
 

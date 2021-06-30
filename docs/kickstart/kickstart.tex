@@ -738,7 +738,31 @@ Python provides a simple manner to explicitly declare what libraries and framewo
 
 \subsection{Virtual Environments}
 
+While installing libraries and frameworks is a necessity for modern software, it quickly leads to bloat and conflicts. Whenever a library or applications is installed, the requirements are also installed. Ergo, even with only a few libraries installed, developers will quickly find their language containing dozens of libraries of various versions. This issue becomes especially problematic when different projects require different versions of the same libraries.
 
+The solution is simple to use but odd to consider. Instead of installing the requirements directly into the installed langauge, a virtual environment can be made. A virtual environment can be thought of as an isolated instance of the entire programming language for one project. With this isolated instance, libraries and frameworks can be installed without affecting other projects on the same device.
+
+In Python, using virtual environments is handled via the \texttt{virtualenv} package. Once installed with \texttt{pip} or \texttt{conda}, the virtual environment can be created in the current working directory via
+
+\mint{console}|python -m venv <name>|
+
+\noindent
+where \texttt{<name>} is the name of the virtual environment, typically \texttt{venv}. A file system will be created with an activiate file. To start the virtual environment, simply type
+
+\mint{console}|.\venv\Scripts\activate.bat|
+
+\noindent
+on Windows, or
+
+\mint{console}|source ./bin/activate|
+
+\noindent
+on Unix of MacOS systems. From this point onwards, the virtual environment's Python interpreter will be used, as confirmable by running \mintinline{console}{which python} in the terminal. Since the virtual environment is made for a specific project, the \texttt{requirements.txt} file can be use to install all the required libraries via the command
+
+\mint{console}|pip install -r requirements.txt|
+
+\noindent
+After running the command above, the virtual environment is now ready to run the project files.
 
 \newpage
 

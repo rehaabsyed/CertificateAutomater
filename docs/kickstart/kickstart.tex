@@ -650,9 +650,70 @@ This flexibility, ease of use, and scalability comes at a cost: the constant mai
 
 \section{Version Control}
 
+\subsection{Context}
+
+Pre-2002, the Linux OS was extremely difficult to maintain due to its open-source nature. Changes were passed around as patches and archived files, all of which assumed specific versions of the Linux OS were already installed. As Linux grew into numerous distributions, all of which had their own developers with their own patches, it became completely difficult to keep track of what patches needed to be installed. Even worse, the complexity of the patches grow exponentially as distributions split off into multiple distributions. Sometimes, a user should install a patch as it affected the Linux Kernel or the exact distribution installed, whereas other times installing a patch could break the user's system. This is assuming the user can even find the patches to begin with, a task that can prove frustrating and time consuming in of itself.
+
+To better manage the various Linux distributions and their respective patches, BitMover, a for-profit business, allowed the Linux team to use their version control software (VCS) BitKeeper for free. The condition being that Linux developers were not allowed to develop software that competes with BitMover's products. The relationship was uneasy, as many of the pro-open software Linux developers were not happy with using a commercial service by a for-profit business. In 2005, the relationship between the Linux team and BitMover broke down when a developer added commercial features for free. With no VCS to use, the Linux team needed a replacement.
+
 \subsection{What is Git?}
 
+The replacement came in the form of the open-source software Git. Designed to be lightweight, fast, and simple to use, Git has become the dominant VCS software worldwide. In short, Git allows a team of developers to collaboratively work on a project without the hassles of conflicting code changes, file reserving, nor untracked changes. This is achieved through a tree based version control structure, where each new feature, bug fix, or documentation update is tracked in its own branch of the tree. Within each branch are ``commits'': snapshots of the tracked files with a short description of what changed and why. Once the update is complete, the branch can be ``merged'' back into the master (or main) branch. Figure \ref{fig:git-basic-usage} visualises such a workflow.
 
+\begin{figure}[t!]
+    \centering
+    \includegraphics[width=1.0\textwidth]{figures/git_tree.png}
+    \caption{Simple example of Git workflow.}
+    \label{fig:git-basic-usage}
+\end{figure}
+
+Git itself can take years to master as their are now hundreds of commands to memorise, each with their own hyper-specific purpose. Fortunately, becoming confident and competent in Git only requires memorising a handful of commands. In order of usage, most of these are
+
+\begin{enumerate}
+    \item \mintinline{console}{git clone <url> -b <branch>}, clone branch \texttt{<branch>} from the repository \texttt{<url>}
+    \item \mintinline{console}{git branch <name>}, create a branch with name \texttt{<name>} from the current branch
+    \item \mintinline{console}{git checkout <name>}, switch to the branch \texttt{<name>}
+    \item \mintinline{console}{git add <files>}, command Git to start tracking the files \texttt{<files>}
+    \begin{enumerate}
+        \item Once files have been added, they are referred to as ``staged''
+        \item Wildcards are accepted for \texttt{<files>}, e.g. \mintinline{console}{git add src/*.py} means add all Python source files in the \texttt{src/} directory
+    \end{enumerate}
+    \item \mintinline{console}{git commit}, creates a snapshot of the staged files
+    \begin{enumerate}
+        \item Will open a text file in Vim to write a short message about the commit changes
+        \item Can skip Vim usage via \mintinline{console}{git commit -m "changes made"}
+    \end{enumerate}
+    \item \mintinline{console}{git push}, uploads all new commits in current branch to remote repository
+\end{enumerate}
+
+\noindent
+Other need-to-know commands include
+
+\begin{enumerate}
+    \item \mintinline{console}{git pull}, updates current working branch with new commits from remote repository
+    \item \mintinline{console}{git branch}, displays all branches in the local repository
+    \item \mintinline{console}{git merge <branch>}, combine the history from branch \texttt{<branch>} into current working branch
+    \item \mintinline{console}{git merge}, combines remote repository into current local branch
+    \item \mintinline{console}{git log}, Display version history for the current branch
+    \item \mintinline{console}{git diff <branch1> <branch2>}, compare differences between two branches
+    \item \mintinline{console}{git status}, displays the current working branch, how many commits the branch is from the master branch, what files have been staged, and what modified files have not been staged
+    \item \mintinline{console}{git revert HEAD}, undos the last commit in the current working branch
+    \begin{enumerate}
+        \item Note that \texttt{HEAD} refers to the current working branch
+    \end{enumerate}
+    \item \mintinline{console}{git reset <commit>}, undoes all commits from \texttt{<commit>} onwards
+    \item \mintinline{console}{git rm <files> --cached}, removes added files from the current branch in the tree
+    \begin{enumerate}
+        \item Does not delete the files
+        \item To delete the file(s) and remove it from Git's tree, use \mintinline{console}{git rm <files> -f}
+        \item If a file was deleted without using \mintinline{console}{git rm <files>}, Git will complain about missing files
+        \item To remove a deleted file from Git's tree, use \mintinline{console}{git commit -a}
+    \end{enumerate}
+    \item \mintinline{console}{git blame <file>}, who changed what in \texttt{<file>} and when
+\end{enumerate}
+
+\noindent
+It is \textbf{strongly} that readers research Git cheat sheets online, pick one, then use it as a reference.
 
 \subsection{Using Github}
 

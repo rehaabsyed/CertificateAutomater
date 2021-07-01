@@ -805,17 +805,58 @@ Furthermore, Python specific style guide principles can also be established:
     \item Use four spaces per layer of indentation.
     \item The first parameter of an object method should be \mintinline{python}{self}
     \item The first parameter of a class method should be \mintinline{python}{cls}
-    \item \mintinline{python}{... is not ...} is preferred to \mintinline{python}{not ... is ...}
+    \item \mintinline{python}{... is not ...} is preferred over \mintinline{python}{not ... is ...}
 \end{enumerate}
-
-\subsection{Test scripts}
-
-
 
 \subsection{Google docstring}
 
 
 
+\newpage
+
+\section{Testing Code}
+
+\subsection{Testing tactics}
+
+Testing code has historically gone through several methodologies. At first, code was simply tested by runnning the code and seeing if it works. Such an approach is known as ``exploratory testing'', famous for its ease of use, and notorious for missing bugs. Exploratory testing makes the fundamental mistake in testing: testing is \textit{not} about confirming code works, it is about trying to \textit{break} code. Furthermore, exploratory testing is an extremely repetitive and time-consuming task, leading to testers taking shortcuts and being sloppy. As code must be retested for every update, exploratory testing becomes increasingly inpractical.
+
+To mitigate the issues with exploratory testing, several testing tactics have been developed. First, testing should be planned into test cases: an independent test case that olny checks for one potential failure. With test cases setup, the entire codebase can be thoroughly investigated, diagnosing faults to exact lines of code. Additionally, it is important to note that roughly 80\% of bugs are located in roughly 20\% of the code. With this in mind, writing test cases is a matter of prioritising where bugs typically appear, particularly boundary value analysis (BVA) and equivelance partitioning. Lastly, the error handling of a program must be tested, not just the successful outputs. With these principles in mind, testing can thoroughly investigate the stability of a program with minimal test cases.
+
+\subsection{Historical automated testing using asserts}
+
+Even with the minimisation of test cases, manually testing the code every time it changes is extremely time consuming. Hence, programmers created the \texttt{assert} statement, allowing for code to be checked automatically. The \texttt{assert} statement is a simple function that takes in a Boolean value and checks if it is true or false. If true, nothing happens. If false, the \texttt{assert} function attempts to crash the program with an error messaging stating the assert failed, with a line number and the Boolean expression. In older languages like C, the \mintinline{c}{assert()} function will always crash the program, completely stopping all other subsequent \mintinline{c}{assert()} statements from being checked. Additionally, inserting the \mintinline{c}{assert()} into the source code means they will always be executed every time the program runs, slowing the program down. Python has a slightly more advanced usage form of the \mintinline{python}{assert} statement, allowing for a default error message and, more importantly, throws a catchable \mintinline{python}{AssertionError}, meaning the error can be processed without crashing the entire program, as shown below:
+
+\inputminted[linenos=true]{python}{python_examples/assert_example.py}
+
+While simple, \mintinline{python}{assert} statements are very tedious to work with. This is primarily due to the lack of automated driver code to run the test cases. Instead, the tester must write their own driver code, usually in the form of a \mintinline{python}{main()} function that runs each test case. For each test case, it is possible that the function could raise an error, meaning the driver code must be able to catch errors and process them without crashing the test script, as the subsequent test cases must run. Furthermore, when expecting the same output for different input values, the test cases either become adundant with repetitive code or complex with nested error handling. Lastly, each test case is executed one-by-one, leading to slow test scripts once the test cases become numerous. Fixing this involves complex multiprocessing code, making test scripts difficult to write, maintain, and read.
+
+\subsection{Modern automated testing using \texttt{pytest}}
+
+Multiple frameworks exist for Python to make test scripts smarter, thorough, and easy to use. Of these frameworks, \mintinline{python}{pytest} has proven the simplest and easiest to use without sacrificing test thoroughness. By simply overriding Python's \mintinline{python}{assert} statement, \mintinline{python}{pytest} allows developers to write simple code in the form of functions, at least one per test case. Below is a simple script writtin using \mintinline{python}{pytest} framework:
+
+\inputminted[linenos=true]{python}{python_examples/pytest_simple.py}
+
+\noindent
+Note that every function starts with \mintinline{python}{test_} in their name. This is required for \mintinline{python}{pytest} to recognise the function as a test case that needs to be run. To run the test script, type \mintinline{console}{pytest <filename>} in the console. For the example above, the output will be 
+
+\inputminted[linenos=true]{shell}{python_examples/pytest_simple_output.txt}
+
+Additionally, \mintinline{python}{pytest} also has several advanced features to allow for smarter design of test scripts. If the exact same input data is used for multiple test cases, a fixture can be used.
+
+\inputminted[linenos=true]{python}{python_examples/pytest_fixture.py}
+
+\noindent
+Similarly, if multiple sets of data need to be tested against the same test, a parameterised test can be used:
+
+\inputminted[linenos=true]{python}{python_examples/pytest_parameterize.py}
+
+\noindent
+Lastly, \mintinline{python}{pytest} can run test cases in parallel by installing the \mintinline{console}{pytest-xdist} plugin, then running \mintinline{python}{pytest} with an \texttt{-n} flag, specifying the number of processes to be created. For example,
+
+\mint{shell}{pytest test_script.py -n 6}
+
+\noindent
+will run \texttt{test\_script.py}, splitting the test cases across six processes. \texttt{pytest} also supports third-party plugins that add numerous useful features, the ability to skip failed test cases, and categorising test cases so that only one category of test cases gets executed. Hence, this project should use \texttt{pytest} where ever possible.
 
 %\newpage
 %

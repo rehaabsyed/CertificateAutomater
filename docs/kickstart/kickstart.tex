@@ -808,9 +808,13 @@ Furthermore, Python specific style guide principles can also be established:
     \item \mintinline{python}{... is not ...} is preferred over \mintinline{python}{not ... is ...}
 \end{enumerate}
 
-\subsection{Google docstring}
+\subsection{Documentation comments with docstrings}
 
+Commenting code is a surprisingly controversial subject. On one hand, a lack of comments can lead to vague code that is extremely difficult to understand and maintain. On the other hand, too many comments can lead to code that is annoying to read and maintain, as more text must be read to understand the code and comments may not be updated when the code is changed, leading to misleading documentation. Hence, a balance must be achieved between readability and simplicity.
 
+In Python, docstrings attempt to solve this issue via simple triple quote comments at the start of a class, function, method, or module. A docstring, at a minimum, is comprised of a single line summarises what is being documented. Additionally, all docstrings may also contain a more detailed description, with a blank line inbetween the summary and description. Functions and methods can also have one line per parameter and return value, detailing their names, datatypes, and purpose. Class docstrings should also have the attributes (i.e. the publicly accessible object variables) and public methods detailed. The example below shows a simple example of an incomplete \mintinline{python}{ComplexNumber} class. Once complete, the \mintinline{python}{__doc__} property or the \mintinline{python}{help()} function can be used to display the docstring without finding and reading the source code.
+
+\inputminted[linenos=true]{python}{python_examples/docstring.py}
 
 \newpage
 

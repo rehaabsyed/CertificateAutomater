@@ -46,7 +46,16 @@
 \usepackage{fancyhdr}	% Header and footer control
 
 \usepackage{minted}	% Code formatting and syntax highlighting
-\surroundwithmdframed{minted}
+%\surroundwithmdframed{minted}
+\definecolor{DarkGray}{rgb}{0.9, 0.9, 0.9}
+\setminted{linenos=true,
+    autogobble=true,
+    breaklines=true, breakautoindent=true,
+    bgcolor=DarkGray,
+    python3=true,
+    frame=lines
+}
+\setmintedinline{bgcolor={}}
 
 % Referencing manager
 %%\usepackage[

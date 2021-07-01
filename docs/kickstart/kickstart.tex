@@ -747,22 +747,22 @@ The solution is simple to use but odd to consider. Instead of installing the req
 
 In Python, using virtual environments is handled via the \texttt{virtualenv} package. Once installed with \texttt{pip} or \texttt{conda}, the virtual environment can be created in the current working directory via
 
-\mint{shell}|python -m venv <name>|
+\mint[linenos=false, frame=none]{shell}|python -m venv <name>|
 
 \noindent
 where \texttt{<name>} is the name of the virtual environment, typically \texttt{venv}. A file system will be created with an activiate file. To start the virtual environment, simply type
 
-\mint{shell}|.\venv\Scripts\activate.bat|
+\mint[linenos=false, frame=none]{shell}|.\venv\Scripts\activate.bat|
 
 \noindent
 on Windows, or
 
-\mint{shell}|source ./bin/activate|
+\mint[linenos=false, frame=none]{shell}|source ./bin/activate|
 
 \noindent
 on Unix of MacOS systems. From this point onwards, the virtual environment's Python interpreter will be used, as confirmable by running \mintinline{shell}{which python} in the terminal. Since the virtual environment is made for a specific project, the \texttt{requirements.txt} file can be use to install all the required libraries via the command
 
-\mint{shell}|pip install -r requirements.txt|
+\mint[linenos=false, frame=none]{shell}|pip install -r requirements.txt|
 
 \noindent
 After running the command above, the virtual environment is now ready to run the project files.
@@ -846,7 +846,7 @@ Multiple frameworks exist for Python to make test scripts smarter, thorough, and
 \noindent
 Note that every function starts with \mintinline{python}{test_} in their name. This is required for \mintinline{python}{pytest} to recognise the function as a test case that needs to be run. To run the test script, type \mintinline{shell}{pytest <filename>} in the shell. For the example above, the output will be 
 
-\inputminted[linenos=true]{shell}{python_examples/pytest_simple_output.txt}
+\inputminted[linenos=false]{shell}{python_examples/pytest_simple_output.txt}
 
 Additionally, \mintinline{python}{pytest} also has several advanced features to allow for smarter design of test scripts. If the exact same input data is used for multiple test cases, a fixture can be used.
 
@@ -860,7 +860,7 @@ Similarly, if multiple sets of data need to be tested against the same test, a p
 \noindent
 Lastly, \mintinline{python}{pytest} can run test cases in parallel by installing the \mintinline{shell}{pytest-xdist} plugin, then running \mintinline{python}{pytest} with an \texttt{-n} flag, specifying the number of processes to be created. For example,
 
-\mint{shell}{pytest test_script.py -n 6}
+\mint[linenos=false, frame=none]{shell}{pytest test_script.py -n 6}
 
 \noindent
 will run \texttt{test\_script.py}, splitting the test cases across six processes. \texttt{pytest} also supports third-party plugins that add numerous useful features, the ability to skip failed test cases, and categorising test cases so that only one category of test cases gets executed. Hence, this project should use \texttt{pytest} where ever possible.

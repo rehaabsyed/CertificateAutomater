@@ -1,0 +1,11 @@
+#### Requirements without version specifications ####
+numpy
+pandas
+
+#### Requirements with verions specified ####
+tqdm == 4.3.0                       # Only version 4.3.0 is accepted
+requests >= 2.2.0                   # Only versions from 2.2.0 onwards
+opencv-python >= 3.3.0, < 4.0.0     # Only versions from 3.3.0 to less than 4.0.0
+keyring != 3.5                      # Any version, excluding 3.5
+pytest ~= 6.2.1                     # Any version starting with 6.2 and >= 6.2.1
+django == 3.*                       # Any version of the form 3.x.y

@@ -1,0 +1,22 @@
+$ pytest pytest_simple.py
+============================= test session starts =============================
+platform win32 -- Python 3.8.8, pytest-6.2.4, py-1.10.0, pluggy-0.13.1
+rootdir: $TEST_SCRIPT_PATH
+collected 8 items
+
+pytest_simple.py .......F                                                [100%]
+
+================================== FAILURES ===================================
+_______________________________ test_sqrt_fail ________________________________
+
+    def test_sqrt_fail():
+>       assert math.sqrt(4) == 4, "sqrt(4) must equal 4"
+E       AssertionError: sqrt(4) must equal 4
+E       assert 2.0 == 4
+E        +  where 2.0 = <built-in function sqrt>(4)
+E        +    where <built-in function sqrt> = math.sqrt
+
+pytest_simple.py:31: AssertionError
+=========================== short test summary info ===========================
+FAILED pytest_simple.py::test_sqrt_fail - AssertionError: sqrt(4) must equal 4
+========================= 1 failed, 7 passed in 0.04s =========================

@@ -177,7 +177,7 @@ For the sake of time, a prototype can be implemented before scope creep becomes 
     \item Must be able to load attendee records from a CSV file.
     \item Generate a certificate of attendance for each attendee
     \begin{enumerate}
-        \item Must be saved into a folder called \mintinline{console}{/certificates} in the current working directory.
+        \item Must be saved into a folder called \mintinline{shell}{/certificates} in the current working directory.
         \item Each certificate must be named based on attendee's full name.
     \end{enumerate}
     \item Upload certificates to Mailchimp, keeping track of the file URIs.
@@ -314,7 +314,9 @@ To understand how programs interface with each other over the internet, the Open
             \textbf{No.}    &   \textbf{TCP/IP Model} &   \textbf{OSI Model}  &   \textbf{Protocols} \\
             \midrule
             7   &   \multirow{3}*{Application}      &   Application     &   HTTP, FTP, WS, RTP \\
+            \cline{1-1} \cline{3-4}
             6   &                                   &   Presentation    &   JPEG, TSL, SSL \\
+            \cline{1-1} \cline{3-4}
             5   &                                   &   Session         &   NFS, SQL, PAP \\
             \hline
             4   &   Host-to-Host                    &   Transport       &   TCP, UDP \\
@@ -322,6 +324,7 @@ To understand how programs interface with each other over the internet, the Open
             3   &   Internet                        &   Network         &   IPv4, IPv6 \\
             \hline
             2   &   \multirow{2}*{Network Access}   &   Data Link       &   ARP, CDP, STP \\
+            \cline{1-1} \cline{3-4}
             1   &                                   &   Physical        &   Ethernet, Wi-Fi \\
             \bottomrule
         \end{tabular}
@@ -670,46 +673,46 @@ The replacement came in the form of the open-source software Git. Designed to be
 Git itself can take years to master as their are now hundreds of commands to memorise, each with their own hyper-specific purpose. Fortunately, becoming confident and competent in Git only requires memorising a handful of commands. In order of usage, most of these are
 
 \begin{enumerate}
-    \item \mintinline{console}{git clone <url> -b <branch>}, clone branch \texttt{<branch>} from the repository \texttt{<url>}
-    \item \mintinline{console}{git branch <name>}, create a branch with name \texttt{<name>} from the current branch
-    \item \mintinline{console}{git checkout <name>}, switch to the branch \texttt{<name>}
-    \item \mintinline{console}{git add <files>}, command Git to start tracking the files \texttt{<files>}
+    \item \mintinline{shell}{git clone <url> -b <branch>}, clone branch \texttt{<branch>} from the repository \texttt{<url>}
+    \item \mintinline{shell}{git branch <name>}, create a branch with name \texttt{<name>} from the current branch
+    \item \mintinline{shell}{git checkout <name>}, switch to the branch \texttt{<name>}
+    \item \mintinline{shell}{git add <files>}, command Git to start tracking the files \texttt{<files>}
     \begin{enumerate}
         \item Once files have been added, they are referred to as ``staged''
-        \item Wildcards are accepted for \texttt{<files>}, e.g. \mintinline{console}{git add src/*.py} means add all Python source files in the \texttt{src/} directory
+        \item Wildcards are accepted for \texttt{<files>}, e.g. \mintinline{shell}{git add src/*.py} means add all Python source files in the \texttt{src/} directory
     \end{enumerate}
-    \item \mintinline{console}{git commit}, creates a snapshot of the staged files
+    \item \mintinline{shell}{git commit}, creates a snapshot of the staged files
     \begin{enumerate}
         \item Will open a text file in Vim to write a short message about the commit changes
-        \item Can skip Vim usage via \mintinline{console}{git commit -m "changes made"}
+        \item Can skip Vim usage via \mintinline{shell}{git commit -m "changes made"}
     \end{enumerate}
-    \item \mintinline{console}{git push}, uploads all new commits in current branch to remote repository
+    \item \mintinline{shell}{git push}, uploads all new commits in current branch to remote repository
 \end{enumerate}
 
 \noindent
 Other need-to-know commands include
 
 \begin{enumerate}
-    \item \mintinline{console}{git pull}, updates current working branch with new commits from remote repository
-    \item \mintinline{console}{git branch}, displays all branches in the local repository
-    \item \mintinline{console}{git merge <branch>}, combine the history from branch \texttt{<branch>} into current working branch
-    \item \mintinline{console}{git merge}, combines remote repository into current local branch
-    \item \mintinline{console}{git log}, Display version history for the current branch
-    \item \mintinline{console}{git diff <branch1> <branch2>}, compare differences between two branches
-    \item \mintinline{console}{git status}, displays the current working branch, how many commits the branch is from the master branch, what files have been staged, and what modified files have not been staged
-    \item \mintinline{console}{git revert HEAD}, undos the last commit in the current working branch
+    \item \mintinline{shell}{git pull}, updates current working branch with new commits from remote repository
+    \item \mintinline{shell}{git branch}, displays all branches in the local repository
+    \item \mintinline{shell}{git merge <branch>}, combine the history from branch \texttt{<branch>} into current working branch
+    \item \mintinline{shell}{git merge}, combines remote repository into current local branch
+    \item \mintinline{shell}{git log}, Display version history for the current branch
+    \item \mintinline{shell}{git diff <branch1> <branch2>}, compare differences between two branches
+    \item \mintinline{shell}{git status}, displays the current working branch, how many commits the branch is from the master branch, what files have been staged, and what modified files have not been staged
+    \item \mintinline{shell}{git revert HEAD}, undos the last commit in the current working branch
     \begin{enumerate}
         \item Note that \texttt{HEAD} refers to the current working branch
     \end{enumerate}
-    \item \mintinline{console}{git reset <commit>}, undoes all commits from \texttt{<commit>} onwards
-    \item \mintinline{console}{git rm <files> --cached}, removes added files from the current branch in the tree
+    \item \mintinline{shell}{git reset <commit>}, undoes all commits from \texttt{<commit>} onwards
+    \item \mintinline{shell}{git rm <files> --cached}, removes added files from the current branch in the tree
     \begin{enumerate}
         \item Does not delete the files
-        \item To delete the file(s) and remove it from Git's tree, use \mintinline{console}{git rm <files> -f}
-        \item If a file was deleted without using \mintinline{console}{git rm <files>}, Git will complain about missing files
-        \item To remove a deleted file from Git's tree, use \mintinline{console}{git commit -a}
+        \item To delete the file(s) and remove it from Git's tree, use \mintinline{shell}{git rm <files> -f}
+        \item If a file was deleted without using \mintinline{shell}{git rm <files>}, Git will complain about missing files
+        \item To remove a deleted file from Git's tree, use \mintinline{shell}{git commit -a}
     \end{enumerate}
-    \item \mintinline{console}{git blame <file>}, who changed what in \texttt{<file>} and when
+    \item \mintinline{shell}{git blame <file>}, who changed what in \texttt{<file>} and when
 \end{enumerate}
 
 \noindent
@@ -744,22 +747,22 @@ The solution is simple to use but odd to consider. Instead of installing the req
 
 In Python, using virtual environments is handled via the \texttt{virtualenv} package. Once installed with \texttt{pip} or \texttt{conda}, the virtual environment can be created in the current working directory via
 
-\mint{console}|python -m venv <name>|
+\mint{shell}|python -m venv <name>|
 
 \noindent
 where \texttt{<name>} is the name of the virtual environment, typically \texttt{venv}. A file system will be created with an activiate file. To start the virtual environment, simply type
 
-\mint{console}|.\venv\Scripts\activate.bat|
+\mint{shell}|.\venv\Scripts\activate.bat|
 
 \noindent
 on Windows, or
 
-\mint{console}|source ./bin/activate|
+\mint{shell}|source ./bin/activate|
 
 \noindent
-on Unix of MacOS systems. From this point onwards, the virtual environment's Python interpreter will be used, as confirmable by running \mintinline{console}{which python} in the terminal. Since the virtual environment is made for a specific project, the \texttt{requirements.txt} file can be use to install all the required libraries via the command
+on Unix of MacOS systems. From this point onwards, the virtual environment's Python interpreter will be used, as confirmable by running \mintinline{shell}{which python} in the terminal. Since the virtual environment is made for a specific project, the \texttt{requirements.txt} file can be use to install all the required libraries via the command
 
-\mint{console}|pip install -r requirements.txt|
+\mint{shell}|pip install -r requirements.txt|
 
 \noindent
 After running the command above, the virtual environment is now ready to run the project files.
@@ -841,7 +844,7 @@ Multiple frameworks exist for Python to make test scripts smarter, thorough, and
 \inputminted[linenos=true]{python}{python_examples/pytest_simple.py}
 
 \noindent
-Note that every function starts with \mintinline{python}{test_} in their name. This is required for \mintinline{python}{pytest} to recognise the function as a test case that needs to be run. To run the test script, type \mintinline{console}{pytest <filename>} in the console. For the example above, the output will be 
+Note that every function starts with \mintinline{python}{test_} in their name. This is required for \mintinline{python}{pytest} to recognise the function as a test case that needs to be run. To run the test script, type \mintinline{shell}{pytest <filename>} in the shell. For the example above, the output will be 
 
 \inputminted[linenos=true]{shell}{python_examples/pytest_simple_output.txt}
 
@@ -855,7 +858,7 @@ Similarly, if multiple sets of data need to be tested against the same test, a p
 \inputminted[linenos=true]{python}{python_examples/pytest_parameterize.py}
 
 \noindent
-Lastly, \mintinline{python}{pytest} can run test cases in parallel by installing the \mintinline{console}{pytest-xdist} plugin, then running \mintinline{python}{pytest} with an \texttt{-n} flag, specifying the number of processes to be created. For example,
+Lastly, \mintinline{python}{pytest} can run test cases in parallel by installing the \mintinline{shell}{pytest-xdist} plugin, then running \mintinline{python}{pytest} with an \texttt{-n} flag, specifying the number of processes to be created. For example,
 
 \mint{shell}{pytest test_script.py -n 6}
 

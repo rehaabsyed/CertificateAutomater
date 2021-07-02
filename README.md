@@ -70,7 +70,7 @@ A full list of product requirements for the prototype, MVP, and professional pro
 8. All submodules must come with an exhaustive test script that tests the submodule with both valid and invalid data.
 9. Error objects of the appropriate type must be raised/thrown when appropriate.
 10. All parameter and return datatypes must be declared.
-    * See the !(typing library)[https://docs.python.org/3/library/typing.html]
+    * See the [typing library](https://docs.python.org/3/library/typing.html)
 11. All functions/methods must be as short as possible.
     * More functions are preferred over longer functions.
 

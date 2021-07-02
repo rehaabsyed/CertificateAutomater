@@ -50,8 +50,8 @@ By using the Mailchimp API and various Python libraries, almost all of the manua
 3. Send to other student clubs for feedback.
 4. Refine product.
 5. Get feedback from selected student clubs.
-.. a. If feedback negative, go to step 4.
-.. b. If feedback positive, go to step 6.
+    a. If feedback negative, go to step 4.
+    b. If feedback positive, go to step 6.
 6. Release product to the public.
 
 A full list of product requirements for the prototype, MVP, and professional product are available in the kickstart document.

@@ -7,8 +7,8 @@
 **[Cover](#cover)**<br>
 **[Project Gist](#project-gist)**<br>
 **[Project Breakdown](#project-breakdown)**<br>
-**[Project Usability Requirements](#project-usability-requirements)**<br>
-**[Project Technical Requirements](#project-technical-requirements)**<br>
+**[Project Stages](#project-stages)**<br>
+**[Project Standards](#project-standards)**<br>
 
 ## Cover
 

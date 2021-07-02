@@ -50,6 +50,18 @@ class Attendee:
         """
         raise NotImplementedError
 
+    def has_attribute(self, key: Hashable) -> bool:
+        """
+        Checks if Attendee has a specificed attribute.
+
+        Args:
+            key (Hashable): The key/name of the attribute.
+        
+        Returns:
+            bool: True if Attendee has attribute and vice-versa.
+        """
+        raise NotImplementedError
+
     def set_attribute(self, key: Hashable, value: Any,
                      verifyFunc: VerifyFunc = None):
         """

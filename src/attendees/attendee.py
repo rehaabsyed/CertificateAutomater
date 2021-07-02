@@ -17,7 +17,8 @@ class Attendee:
     """
     """
 
-    def __init__(self, fname: str, lname: str, email: str, **kwargs):
+    def __init__(self, fname: str, lname: str, email: str,
+                 file_path: str = None, file_url: str = None, **kwargs):
         """
         Constructor.
 
@@ -25,13 +26,15 @@ class Attendee:
             fname (str): The first or given name of the attendee.
             lname (str): The last or family name of the attendee.
             email (str): Email address of the attendee.
+            file_path (str): The path to the certificate file, defaults to None.
+            file_url (str): The URL to the certificate file, defaults to None.
             kwargs (dict): All other attributes of the attendee.
         """
         raise NotImplementedError
 
-    # TODO: Write getters for fname, lname, and email
+    # TODO: Write getters for fname, lname, email, file_path, and file_url
 
-    def getAttribute(self, key: Hashable) -> Any:
+    def get_attribute(self, key: Hashable) -> Any:
         """
         Get an arbitrary attribute of the attendee.
 
@@ -47,7 +50,7 @@ class Attendee:
         """
         raise NotImplementedError
 
-    def setAttribute(self, key: Hashable, value: Any,
+    def set_attribute(self, key: Hashable, value: Any,
                      verifyFunc: VerifyFunc = None):
         """
         Set an arbitrary attribute of the attendee.
@@ -66,7 +69,7 @@ class Attendee:
         """
         raise NotImplementedError
 
-    def removeAttribute(self, key: Hashable):
+    def remove_attribute(self, key: Hashable):
         """
         Remove an attribute from the attendee.
 

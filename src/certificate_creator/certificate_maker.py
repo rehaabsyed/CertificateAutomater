@@ -18,8 +18,8 @@ from src.attendees.attendee_manager import Attendee, AttendeeManager
 
 def createCertificate(in_path: str, out_path: str, attendees: AttendeeManager,
                      namingFunc: Callable[[Attendee], str] = None,
-                     statusFunc: Callable[[Attendee, bool], None] = None,
-                     overwrite: bool = True) -> List[Tuple[Attendee, Exception]]:
+                     statusFunc: Callable[[Attendee, Exception], None] = None,
+                     overwrite: bool = True) -> AttendeeManager:
     """
     Creates and saves certificates given template and the attendee record.
 
@@ -34,13 +34,15 @@ def createCertificate(in_path: str, out_path: str, attendees: AttendeeManager,
         and whether it was successfully created (bool). Useful for user
         interfaces. If left as None, does nothing.
         overwrite (bool): Whether to overwrite certificate file that already
-        exist, defaults to True.
-    
+        exist, defaults to True. Should call statusFunc with FileExistsError if
+        False.
+
     Returns:
-        List of attendee-exception tuple of attendees that failed to create a
-        certificate for. Returns an empty list if no errors occur.
-    
+        Updated attendees with "cert_path" field. Should map to None if failed
+        to create certificate.
+
     Raises:
         OSError if template file IO error occurs.
+        TODO: Document exact errors that can be raised.
     """
     raise NotImplementedError

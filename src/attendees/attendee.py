@@ -6,6 +6,7 @@ Designed to be easy to use, not efficient.
 TODO:
     * Implement methods
     * Write getters and setters
+    * Implement datalogging
 """
 
 from typing import *

@@ -6,6 +6,7 @@ Attendees must be Attendee objects for ease of use.
 
 TODO:
     * Implement all methods
+    * Impement datalogging
 """
 
 from typing import *

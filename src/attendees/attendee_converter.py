@@ -5,6 +5,7 @@ Can convert between Pandas DataFrame and proprietary AttendeeManager
 
 TODO
     * Implement functions
+    * Implement datalogging
 """
 
 import pandas as pd

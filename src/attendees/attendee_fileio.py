@@ -6,6 +6,7 @@ Future upgrades should be able to load attendees from an Excel file.
 TODO
     * Implement functions
     * Further detail the OSErrors that can be raised
+    * Impement datalogging
 """
 
 import pandas as pd

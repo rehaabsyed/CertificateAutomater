@@ -6,6 +6,7 @@ Attendees must be Attendee objects for ease of use.
 
 TODO:
     * Implement all methods
+    * Impement datalogging
 """
 
 from typing import *
@@ -67,6 +68,40 @@ class AttendeeManager:
         
         Raises:
             KeyError if attendee does not exist.
+        """
+        raise NotImplementedError
+
+    def add_attribute(self, key: Hashable, values: Dict[Hashable, Any] = {}):
+        """
+        Add an attribute for all attendees.
+
+        Useful for adding attribute for all attendees in one line of code.
+        Will overwrite values if attribute already exists.
+
+        Args:
+            key (Hashable): The key/name of the attribute.
+            values (Dict[Hashable, Any]): A mapping from attendee ID to initial
+            value of the new attribute. Defaults to empty dictionary (no
+            initialision).
+        
+        Raises:
+            TypeError if key is not Hashable.
+            TypeError if values is not a dictionary.
+        """
+        raise NotImplementedError
+
+    def remove_attribute(self, key: Hashable):
+        """
+        Removes an attribute for all attendees.
+
+        Useful for removing attribute for all attendees in one line of code.
+        Does nothing if no attendees has the attribute.
+
+        Args:
+            key (Hashable): The key/name of the attribute.
+
+        Raises:
+            TypeError if key is not Hashable.
         """
         raise NotImplementedError
 

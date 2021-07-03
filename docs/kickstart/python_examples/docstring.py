@@ -24,7 +24,7 @@ class ComplexNumber:
         imag (int): The imaginary part of complex number.
     """
   
-    def __init__(self, real=0.0, imag=0.0):
+    def __init__(self, real: float = 0.0, imag: float = 0.0):
         """
         The constructor for ComplexNumber class.
   
@@ -45,12 +45,12 @@ class ComplexNumber:
         self._imag = imag
     
     @property
-    def real(self): return self._real
+    def real(self) -> float: return self._real
 
     @property
-    def imag(self): return self._imag
+    def imag(self) -> float: return self._imag
 
-    def add(self, num):
+    def add(self, num: ComplexNumber) -> ComplexNumber:
         """
         The function to add two Complex Numbers.
   

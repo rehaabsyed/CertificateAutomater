@@ -34,7 +34,7 @@
 \fancyhf{}
 \renewcommand{\headrulewidth}{2pt}
 \renewcommand{\footrulewidth}{1pt}
-\lhead{\textit{Certificate Maker Kickstart Manual}}
+\lhead{\textit{Certificate Automater Kickstart Manual}}
 \rhead{\leftmark}
 \cfoot{Page \thepage}
 
@@ -42,7 +42,7 @@
 %    ASSIGNMENT INFORMATION
 %----------------------------------------------------------------------------------------
 
-\title{Certificate Maker Kickstart Manual} % Title of the assignment
+\title{Certificate Automater Kickstart Manual} % Title of the assignment
 
 \author{Harrison Outram\\ Membership Officer}
 
@@ -137,7 +137,9 @@ Curtin IET On Campus (or ``CIET'' for short) provides multiple industry talks an
 
 \subsection{Problem}
 
-Despite the necessity of creating and sending certificates, the process for doing so is extremely time consuming and error prone. As shown in Figure \ref{fig:old-solution}, this process is comprised of four stages: (1) the attendee record must be collected from the events team and checked for errors, e.g. multiple registrations from one person or missing but required information. (2) one certificate is made for each attendee via the template on CIET's Canva account. Each certificate is then checked one by one for errors, being recreated if erroneous. (3) the certificates are uploaded to CIET's MailChimp account, where MailChimp auto-generates a URI for each certificate, required later on. Unfortunately, these URIs involve a randomly generated hexadecimal string, meaning each URI must be recorded manually in the attendee record, then checked for errors. Once the attendee record has been updated with certificate URIs, it is uploaded to MailChimp. (4) The certificates are checked one last time by creating a mock campaign on MailChimp, going through each attendee, downloading the certificate, then checking the certificate for errors and fixing where erroneous. All up, this process takes at least two hours per 50 attendees for someone who has gone through it before, and \textbf{far} longer for someone who has not. Worse yet, despite every certificate being checked three times during this process, it is still possible for erroneous certificates to be sent out, which has happened on at least one occasion. Clearly, this process is extremely time consuming and error prone, leading to attendee frustration and a negative impact on CIET's reputation.
+Despite the necessity of creating and sending certificates, the process for doing so is extremely time consuming and error prone. As shown in Figure \ref{fig:old-solution}, this process is comprised of four stages: (1) the attendee record must be collected from the events team and checked for errors, e.g. multiple registrations from one person or missing but required information. (2) one certificate is made for each attendee via the template on CIET's Canva account. Each certificate is then checked one by one for errors, being recreated if erroneous. (3) the certificates are uploaded to CIET's MailChimp account, where MailChimp auto-generates a URI for each certificate, required later on. Unfortunately, these URIs involve a randomly generated hexadecimal string, meaning each URI must be recorded manually in the attendee record, then checked for errors. Once the attendee record has been updated with certificate URIs, it is uploaded to MailChimp. (4) The certificates are checked one last time by creating a mock campaign on MailChimp, going through each attendee, downloading the certificate, then checking the certificate for errors and fixing where erroneous.
+
+All up, this process takes at least two hours per 50 attendees for someone who has gone through it before, and \textbf{far} longer for someone who has not. Worse yet, despite every certificate being checked three times during this process, it is still possible for erroneous certificates to be sent out, which has happened on at least one occasion. Clearly, this process is extremely time consuming and error prone, leading to attendee frustration and a negative impact on CIET's reputation.
 
 \newpage
 
@@ -153,7 +155,7 @@ Despite the necessity of creating and sending certificates, the process for doin
 
 \subsection{Rundown}
 
-After some research, it has been discovered that stages 2, 3, and 4 of the old solution can be automated. For stage 1, instead of creating each certificate manually via Canva, the template can be created once and used to automatically create every certificate. Note that the template must be a Word document with merge tags, not a PDF. The MailChimp API can be used to automate stage 3, where each certificate can be uploaded and have its URI recorded. With the URIs known, the attendee record can be updated and uploaded to MailChimp. Since the certificates were created automatically, stage 4 becomes redundant. This process is summarised in figure \ref{fig:new-solution}. With such a script, CIET can be confident in its ability to deliver the correct certificates to its members on time with minimal effort.
+After some research, it has been discovered that stages 2, 3, and 4 of the old solution can be automated. For stage 1, instead of creating each certificate manually via Canva, the template can be created once and used to automatically create every certificate. Note that the template must be a Word document with merge fields or variables, not a PDF. The MailChimp API can be used to automate stage 3, where each certificate can be uploaded and have its URI recorded. With the URIs known, the attendee record can be updated and uploaded to MailChimp. Since the certificates were created automatically, stage 4 becomes redundant. This process is summarised in figure \ref{fig:new-solution}. With such a script, CIET can be confident in its ability to deliver the correct certificates to its members on time with minimal effort.
 
 \begin{figure}[b!]
     \centering
@@ -208,7 +210,7 @@ For the sake of time and simplicity, the following assumptions can be made:
     \begin{enumerate}
         \item The only field to be changed is the attendee name.
         \item The exact location of the attendee name field is known and constant.
-        \item The placeholder text of the attendee name field is known and constant.
+        \item The merge field or variable of the attendee name field is known and constant.
         \item The certificate is always valid.
     \end{enumerate}
     \item The attendee record contains no errors.
@@ -249,23 +251,23 @@ Once a prototype is complete, a minimal viable product (MVP) can be written. The
         \item Missing names or emails.
         \item Missing required fields.
     \end{enumerate}
-    \item Must be able to edit PDF document in GUI.
+    \item Must be able to display and select merge fields or variables in certificate template.
     \begin{enumerate}
-        \item Must be able to view PDF document within GUI.
-        \item Must be able to select the field where the full name goes.
+        \item Must be able to view template within GUI.
+        \item Must be able to select the merge field or variable where the full name goes.
     \end{enumerate}
     \item All code declared as public must be documented using Sphinx.
 \end{enumerate}
 
 \subsection{Competitive Product}
 
-If the MVP is done, a competitive, market ready, version can be done. This version should have everything the MVP has, and
+If the MVP is done, a competitive, market ready, version can be done. This version should have everything the MVP has and
 
 \begin{enumerate}
     \item Must be able to load attendee records from an Excel file.
     \item Has ultra-specific error messages.
     \begin{enumerate}
-        \item Informs the user of what exaclty went wrong.
+        \item Informs the user of what exactly went wrong.
         \item Where possible, offers a solution.
         \item Where possible, offers links to online documentation.
     \end{enumerate}
@@ -296,14 +298,14 @@ If the MVP is done, a competitive, market ready, version can be done. This versi
 
 While Python was originally designed as a simple scripting language, it has since evolved into one of the most used and popular languages. The simplicity of Python lends itself well to rapid prototyping, so simple that Python's syntax is often considered to be pseudocode. Furthermore, the library support for Python, both first and third-party, makes it extremely easy to make complex tasks simple. The sheer abundance of libaries available creates a compunding effect, as existing libraries makes it easier to wrote other libraries, leading to an exponential growth in library support. Whenever a new protocol or standard becomes prominent, chances are someone has already made a Python library to make it trivial to implement the protocol or standard within other programs. Additionally, the popularity of Python means there is ambundant support online for both known issues and asking online for assistance. For the sake of prototyping, it is difficult to find a better language than Python.
 
-Considering the ambundance of support for Python, learning the language is best done with interactive tutorials foudn online. Such examples include W3 Schools, Codecademny, and Learn Python. Numerous other tutorials exist, such as those on Tutorials Point and the countless YouTube videos; however, these tutorials lack an interactive component, leading to reading or watching without learning. When learning a new language, the source is less important than the interaction between the material and the student.
+Considering the ambundance of support for Python, learning the language is best done with interactive tutorials foudn online. Such examples include W3 Schools, Codecademny, and Learn Python. Numerous other tutorials exist, such as those on Tutorials Point and the countless YouTube videos; however, these tutorials lack an interactive component, leading to reading or watching without learning. When learning a new language, the resource is less important than the interaction between the material and the student.
 
 Where Python's weakness lies is in its performance. Since Python is a weak typed language, datatype checking must be done during runtime, greatly reducing performance. Far worse, the interpreted nature of Python means compiler optimisations cannot be performed, slowing down Python to a crawl. Compared to optimised compiled languages, such as C, Rust, and C++, Python performs dozens of times worse when comparing equivelant programs. This can be greatly mitigated by taking advantage of scientific libraries, such as NumPy and Pandas. These libraries are written in C and C++, allowing for speeds within the ballpark of C, C++, and Rust. However, certain conventions must be followed to take advantage of vectorised data, leading to data needing to be structured in vectors or matrices. Unfortunately, this will only result in a performance increase when doing mathematical operations on numeric data, such as vector dot products or summing an array. Ergo, Python is a poor choice for performance critical applications.
 
 
 \subsection{OSI and TCP/IP Models}
 
-To understand how programs interface with each other over the internet, the Open Systems Interconnection (OSI) model must be introduced. Starting in the late 1970s, the OSI model details how computers, or ``nodes'', communicate with each other over a network. The model is split into seven layers, each with their own purpose and protocols, shown in table \ref{table:OSI-model}. Each layer only needs to know about the adjacent layers, decoupling the responsibilities as much as possible. When sending messages over a network, the sender goes through the layers from top-to-bottom, whereas the receiver goes the layers bottom-to-top. Despite the significant learning curve, the OSI model successfully delegates the numerous responsibilities of network communication across seven mostly decoupled layers.
+To understand how programs interface with each other over the internet, the Open Systems Interconnection (OSI) model must be introduced. Starting in the late 1970s, the OSI model details how computers, or ``nodes'', communicate with each other over a network. The model is split into seven layers, each with their own purpose and protocols, shown in table \ref{table:OSI-model}. Each layer only needs to know about the adjacent layers, decoupling the responsibilities as much as possible. When sending messages over a network, the sender goes through the layers from top-to-bottom, whereas the receiver goes through the layers bottom-to-top. Despite the significant learning curve, the OSI model successfully delegates the numerous responsibilities of network communication across seven mostly decoupled layers.
 
 \begin{table}[t!]
     \begin{threeparttable}[t]
@@ -340,7 +342,7 @@ What physical devices are used to connect the nodes within a local area network 
 \vspace{\baselineskip}
 \textbf{2. Data Link Layer}
 
-Establishes and terminates a connection between two physically connected nodes. Data is broken into packets and organised into frames. Uses a logical link control (LLC) to identify network protocols, check for errors, and synchronise frames. Also uses Media Access Control (MAC) addresses to uniquely identify nodes and setup connections, including permissions.
+Establishes and terminates a connection between two physically connected nodes. Data from layer 3 is broken into packets and organised into frames. Uses a logical link control (LLC) to identify network protocols, check for errors, and synchronise frames. Also uses Media Access Control (MAC) addresses to uniquely identify nodes and setup connections, including permissions.
 
 \vspace{\baselineskip}
 \textbf{3. Network Layer}
@@ -350,7 +352,7 @@ Uses routers to sent segment of data from layer 4 and pair them with an address,
 \vspace{\baselineskip}
 \textbf{4. Transport Layer}
 
-Takes data being sent from layer 5 and breaks it into segments to be sent over layer 3. Also responsible for reassembling segments back into the full message on the receiving end. Transmission Control Protocol (TCP) prioritises reliability over speed, ensuring that segments (called packets) are received intact. If a segment is curropt or not sent within a time limit, the receiver asks for the segment again. The receiver must also sent back a message. If the response is incorrect, the sender resends the message. Alternatively, User Datagram Protocol (UDP) treats segements as datagrams, sending them without any error checking, prioritising speed over reliability. Just like layer 3, UDP is also known as connectionless. The former is used for internet browsing and uploading to a server, whereas the latter is used for streaming videos, music, and playing games online.
+Takes data being sent from layer 5 and breaks it into segments to be sent over layer 3. Also responsible for reassembling segments back into the full message on the receiving end. Transmission Control Protocol (TCP) prioritises reliability over speed, ensuring that segments (called packets) are received intact. If a segment is curropt or not sent within a time limit, the receiver asks for the segment again. The receiver must also sends back a message which, if incorrect, the sender resends the message. Alternatively, User Datagram Protocol (UDP) treats segements as datagrams, sending them without any error checking, prioritising speed over reliability. Just like layer 3, UDP is also known as connectionless. The former is used for internet browsing and uploading to a server, whereas the latter is used for streaming videos, music, and playing games online.
 
 \vspace{\baselineskip}
 \textbf{5. Session Layer}
@@ -370,7 +372,7 @@ The programs that are generating the data being sent and received. Examples incl
 
 \vspace{\baselineskip}
 
-The observant reader would also notice that there is a simplified TCP/IP model, only comprised of four layers. In it, the bottom two layers of OSI are combined into the Network layer, where frames are transmitted between nodes on a LAN via mapping IP addresses and port numbers to MAC addresses. The next layer, called the ``Internet layer'', uses the assigned IP addresses to direct packets to the correct LAN. The internet layer also uses Internet Control Message Protocol (ICMP) to inform hosts about network issues, encapsulated within the IP dataframes. To determine the physical address of a node, layer 2 also uses Address Resolution Protocol (ARP). Layer 3 in the TCP/IP model is identical to the transport layer in the OSI model.\footnote{Despite the name, UDP can be used in the TCP/IP model} Lastly, the top three layers of OSI are combined into the application layer in TCP/IP model. Due to the reduced complexity, the TCP/IP model is often used over the OSI model for internet communications.
+The observant reader would also notice that there is a simplified TCP/IP model, only comprised of four layers. In it, the bottom two layers of OSI are combined into the ``Network Access layer'', where frames are transmitted between nodes on a LAN via mapping IP addresses and port numbers to MAC addresses. The next layer, called the ``Internet layer'', uses the assigned IP addresses to direct packets to the correct LAN. The internet layer also uses Internet Control Message Protocol (ICMP) to inform hosts about network issues, encapsulated within the IP dataframes. To determine the physical address of a node, layer 2 also uses Address Resolution Protocol (ARP). Layer 3 in the TCP/IP model is identical to the transport layer in the OSI model.\footnote{Despite the name, UDP can be used in the TCP/IP model} Lastly, the top three layers of OSI are combined into the application layer in TCP/IP model. Due to the reduced complexity, the TCP/IP model is often used over the OSI model for internet communications.
 
 
 \subsection{HTTP Requests and Responses}
@@ -390,10 +392,10 @@ Once the server has finished processing the request, it sends back a response, f
 \inputminted[linenos=true]{html}{http_examples/get_response.html}
 
 \begin{info}[HTTP Status Codes]
-For long messages split into multiple requests, a \texttt{1xx} status code means the server successfully received the segement and the client should send the next. \texttt{2xx} means the message was received, understood, and processed successfully. \texttt{3xx} means the server does not have the resource being requested but does know another server that does.\footnote{Responses with status codes of \texttt{3xx} should always include the server connection details in the body} 4xx means the client did something wrong, such as the classic \texttt{404} file not found error. Lastly, \texttt{5xx} means the server did something wrong.
+For long messages split into multiple requests, a \texttt{1xx} status code means the server successfully received the segment and the client should send the next. \texttt{2xx} means the message was received, understood, and processed successfully. \texttt{3xx} means the server does not have the resource being requested but does know another server that does.\footnote{Responses with status codes of \texttt{3xx} should always include the server connection details in the body} 4xx means the client did something wrong, such as the classic \texttt{404} page not found error. Lastly, \texttt{5xx} means the server did something wrong.
 \end{info}
 
-As of HTTP 1.1, there are nine accepted methods. Introduced in HTTP 0.9 (the first public version), the \texttt{GET} request is a simple read only request to retrieve a copy of a resource from the server. As of HTTP 1.0, the \texttt{POST} request allows for clients to upload new resources onto the server. Also as of HTTP 1.0, the \texttt{HEAD} request works identically to a \texttt{GET} request, expect that the body is not returned. When HTTP 1.1 was made available, two important methods were added: A \texttt{PUT} request allows a client to replace an existing resource on a server with the one in the request body, whereas a \texttt{DELETE} request simply tells the server to delete the specified resource. Similar to a \texttt{PUT} request, a \texttt{PATCH} request tells the server to partially update a resource instead of replacing it. While not commonly used, HTTP 1.1 also introduced the \texttt{TRACE} and \texttt{OPTIONS} request types. The former performs a message loop-back test from the path of the specified resource, whereas the latter requests the server to describe all available commincation options for the specified resource. Lastly, the \texttt{CONNECT} request allows clients to connect to a server through another server, useful for setting up proxy servers or websites using TSL (i.e. HTTPS).
+As of HTTP 1.1, there are nine accepted methods. Introduced in HTTP 0.9 (the first public version), the \texttt{GET} request is a simple read only request to retrieve a copy of a resource from the server. As of HTTP 1.0, the \texttt{POST} request allows for clients to upload new resources onto the server. Also as of HTTP 1.0, the \texttt{HEAD} request works identically to a \texttt{GET} request, expect that the body is not included. In HTTP 1.1, two important methods were added: A \texttt{PUT} request allows a client to replace an existing resource on a server with the one in the request body, whereas a \texttt{DELETE} request simply tells the server to delete the specified resource. Similar to a \texttt{PUT} request, a \texttt{PATCH} request tells the server to partially update a resource instead of replacing it. While not commonly used, HTTP 1.1 also introduced the \texttt{TRACE} and \texttt{OPTIONS} request types. The former performs a message loop-back test from the path of the specified resource, whereas the latter requests the server to describe all available commincation options for the specified resource. Lastly, the \texttt{CONNECT} request allows clients to connect to a server through another server, useful for setting up proxy servers or websites using TSL (i.e. HTTPS).
 
 While HTTP 1.1 remains the predominant version as of the time of writing, HTTP 2.0 will eventually replace it. HTTP 1.1 introduced vast performance improvements over 1.0, most notably the ability to remain connected to the server after each request-response cycle instead of having to reconnect to the server. However, in 1.1, the server can only process one request from any client at a time, meaning the client must wait until the current request has been responded before sending another. This has changed in 2.0, allowing for mutliple requests to be sent, processed, and responded to after a connection has been established, shown in figure \ref{fig:http-visualised}. For now, this project can ignore HTTP 2.0, but future versions may need to consider the inevitable obsoletion of HTTP 1.1.
 
@@ -410,9 +412,9 @@ Critical to software engineering, object orientated programming (OOP) has proven
 
 \subsubsection{Encapsulation}
 
-Consider the logistics in running a store: the stock available, the stock reserved for customers yet to buy them, preorders, cancellations, the stock on its way, the customers who have signed up as members, newsletters, purchases, overhead costs, etc. How does a business maintain such logistics? Who records the data? Who files and organises the data? WHo has access to what data? Who is authorised to fix errors in the data and what process must they go through to make these fixes? Perhaps most importantly, who or what ensures the data is valid \textit{before} it is placed with exisitng data? Such problems can be at least mitigated using the OOP paradigm.
+Consider the logistics in running a store: the stock available, the stock reserved for customers yet to buy them, preorders, cancellations, the stock on its way, the customers who have signed up as members, newsletters, purchases, overhead costs, etc. How does a business maintain such logistics? Who records the data? Who files and organises the data? Who has access to what data? Who is authorised to fix errors in the data and what process must they go through to make these fixes? Perhaps most importantly, who or what ensures the data is valid \textit{before} it is placed with existing data? Such problems can be at least mitigated using the OOP paradigm.
 
-Since objects contain data as variables, the objects can be made responsible for protecting the data from curroption. Instead of making the variables directly accessible, the object can have getters and setters (also known as mutators) to access the data. Getters should always return a copy of the variable, whereas getters must validate the new value before setting the variable. For example, it is impossible for a jar to have a negative number of marbles, hence if outside code attempts to remove more marbles from a jar object than what is available an error can be raised and the jar's number of marbles remains unchanged. Similarly, the jar will probably also have a capacity, so that if too many marbles are attempted to be inserted a different error should be raised. Some object variable may not even have getters, such as the length of a collection (e.g. an array or a linked list). Instead, the length variable should automatically change as elements are inserted or removed. Even further encapsulated, other variables may not even have getters, as they may be variables that should only be used by the object internally, such as an array inside of a hash table. Protecting data like this greatly mitigates the data from being curropted or otherwise useless.
+Since objects contain data as variables, the objects can be made responsible for protecting the data from curroption. Instead of making the variables directly accessible, the object can have getters and setters (also known as mutators) to access the data. Getters should always return a copy of the variable, whereas setters must validate the new value before setting the variable. For example, it is impossible for a jar to have a negative number of marbles, hence if outside code attempts to remove more marbles from a jar object than what is available an error can be raised and the jar's number of marbles remains unchanged. Similarly, the jar will probably also have a capacity, so that if too many marbles are attempted to be inserted a different error should be raised. Some object variable may not even have getters, such as the length of a collection (e.g. an array or a linked list). Instead, the length variable should automatically change as elements are inserted or removed. Even further encapsulated, other variables may not even have getters, as they may be variables that should only be used by the object internally, such as an array inside of a hash table. Protecting data like this greatly mitigates the data from being curropted or otherwise useless.
 
 \begin{figure}[b!]
     \centering
@@ -421,7 +423,7 @@ Since objects contain data as variables, the objects can be made responsible for
     \label{fig:encapsulation}
 \end{figure}
 
-In Python, encapsulation is implemented very differently to other OOP languages. Languages like Java, C\#, and C++ have the keywords \mintinline{c++}{public}, \mintinline{c++}{protected}, and \mintinline{c++}{private} for deciding how hidden a variable or method is. \mintinline{c++}{public} simply means anything that has access to the class or object can access the member, be it a variable or method. \mintinline{c++}{private}, however, means only the class or object can access the member, completely hiding it from all other code. While useful for data proctection, it was quickly found that \mintinline{c++}{private} is too restrictive for many applications. Instead, \mintinline{c++}{protected} has replaced \mintinline{c++}{private}, as it allows subclasses to access the member, dicussed further in the Inheritance subsection below. Python does not have these keywords, instead opting for using underscores: no underscores delcares the member (or ``attribute'' as it is known in Python) as public, a single underscore means protected, and a double underscore, or ``dunder'', means private. Protected and private variables can then be read using the \mintinline{python}{@property} decorator, and set using the \mintinline{python}{@x.setter} decorator, where \mintinline{python}{x} is the variable being set. Note the example below and the lack of dunders.
+In Python, encapsulation is implemented very differently to other OOP languages. Languages like Java, C\#, and C++ have the keywords \mintinline{c++}{public}, \mintinline{c++}{protected}, and \mintinline{c++}{private} for deciding how hidden a variable or method is. \mintinline{c++}{public} simply means anything that has access to the class or object can access the member, be it a variable or method. \mintinline{c++}{private}, however, means only the class or object can access the member, completely hiding it from all other code. While useful for data proctection, it was quickly found that \mintinline{c++}{private} is too restrictive for many applications. Instead, \mintinline{c++}{protected} has replaced \mintinline{c++}{private}, as it allows subclasses to access the member, dicussed further in the Inheritance subsection below. Python does not have these keywords, instead opting for using underscores: no underscores delcares the member (or ``attribute'' as it is known in Python) as public, a single underscore means protected, and a double underscore, or ``dunder'', means private. Protected and private variables can then be read using the \mintinline{python}{@property} decorator and set using the \mintinline{python}{@x.setter} decorator, where \mintinline{python}{x} is the variable being set. Note the example below and the lack of dunders.
 
 \inputminted[linenos=true]{python}{python_examples/encapsulation.py}
 
@@ -429,7 +431,7 @@ In Python, encapsulation is implemented very differently to other OOP languages.
 
 As a program become more and more complex, it becomes increasingly difficult to manage the functionality of the program. Trying to track where the functions of a program are organised and located turns inpractical. Even trying to determine if a function has been implemented becomes time consuming and infeasible. This can be partially mitigated by organising functions into thematically narrow and consistent libraries; however, even this approach leads to too many functions to keep track of what has and has not been implemented. For complex programs, especailly those requiring extensive interaction with other programs, a smarter approach is needed.
 
-Abstraction attempts to solve this issue by hiding functionality within objects. Abstraction is simply the process of hiding the implementation by only exposing what the object can do. Hence, outside code only needs to concern itself with what the object can do and not how it does it. Since objects can contain other objects, complex tasks involving several steps using numerous variables can be split accross a tree-like hierarchy of objects. Consider the OSI or TCP/IP model detailed above: with OOP all that is needed is a single \texttt{NetworkManager} that handles how an application sends and receives data without code outside the \texttt{NetworkManager} needing to know about layers below the application layer. Therefore, outside code only needs to call a single method of one object and let it handle how the task is completed.
+Abstraction attempts to solve this issue by hiding functionality within objects. Abstraction is simply the process of hiding the implementation by only exposing what the object can do. Hence, outside code only needs to concern itself with what the object can do and not how it does it. Since objects can contain other objects, complex tasks involving several steps using numerous variables can be split accross a tree-like hierarchy of objects. Consider the OSI or TCP/IP model detailed in section 3.2: with OOP all that is needed is a single \texttt{NetworkManager} that handles how an application sends and receives data without code outside the \texttt{NetworkManager} needing to know about layers below the application layer. Therefore, outside code only needs to call a single method of one object and let it handle how the task is completed.
 
 \subsubsection{Inheritance}
 
@@ -447,7 +449,7 @@ OOP programming provides such a solution in the form of inheritance. Simply put,
 \noindent
 \begin{minipage}[t]{0.5\textwidth}
     \vspace{0pt}
-    \, Additionally, inheritance also covers one object being contained within another. This type of relationship is known as the \textit{has-a} relationship or association. For example, a car is \textit{not} a type of steering wheel and vice-versa. However, a car \textit{has a} steering wheel. Consider a car manufacturer that needs to design and manufacture cars. While different car models are not identical, they may share identical steering wheels, gearboxes, transmission systems, fuel tanks, wheels, or seats, among other numerous parts. Hence, these identicial parts can be written, tested, and debugged once, then shared across the different car classes. This type of association is known as composition, as the car fully owns the parts it is made of. If the car object is destroyed, the car parts are also destroyed. This is opposed to aggregation, in which the child object can exist independtly of the parent class, such as the cars and the manufacturer. As with the \textit{is-a} relationship, association greatly reduces code repitition.
+    \, Additionally, inheritance also covers one object being contained within another. This type of relationship is known as the \textit{has-a} relationship or association. For example, a car is \textit{not} a type of steering wheel and vice-versa. However, a car \textit{has a} steering wheel. Consider a car manufacturer that needs to design and manufacture cars. While different car models are not identical, they may share identical parts, such as a steering wheel. Hence, these identicial parts can be written, tested, and debugged once, then shared across the different car classes. This type of association is known as composition, as the car fully owns the parts it is made of. If the car object is destroyed, the car parts are also destroyed. This is opposed to aggregation, in which the child object can exist independently of the parent class, such as the cars and the manufacturer. As with the \textit{is-a} relationship, association greatly reduces code repitition.
 \end{minipage}
 \begin{minipage}[t]{0.5\textwidth}
     \vspace{0pt}
@@ -476,7 +478,7 @@ Using the \textit{is-a} inheritance principle, it is also possible to achieve po
 
 The world of modern software development is one heavily comprised of using code and services created by third-party organisations or individuals. This is an inevitable consequence of the daunting product requirements that modern software must abide by to remain competitive. However, the pitfalls of using third party services quickly become apparent: \textit{How do we know future changes won't break our code? Will our application still work when this service changes? What security flaws or exploits are exposed allowing others to use our service? What do we do if a third party service does not allow us to access their service via code?} Consider the need for a music editing mobile app that can use music owned by the user from their Spotify, Google Music, Bandcamp, or Apple Music accounts. How does a development team even begin to integrate these services their mobile app?
 
-Solving these concerns introduces the need for Application Programming Interfaces, or APIs. An API, simply put, is a set of commands a program can use to access and upload data to another program. They can be as simple as the set of functions and constants within a library to the monolithic 2 billion line of code Google API. Well designed APIs allow external parties to develop their own applications integrating your service without needing to know how the API works, nor what the external application is or does. APIs also greatly mitigate security issues, as APIs can hide the implementation of the service. External developers using an API can also be sure that future changes to the API will not break their application, as API updates come with a version number, signifying if an API change has occurred. If an API change has occurred, the external developers can simply not use the newer version until they have updated their application to use the newer API. Most relevant to this project, the Mailchimp API is the only way a program can access a user's Mailchimp account without hacking the Mailchimp servers. Without this API, the project would not be possible.
+Solving these concerns introduces the need for Application Programming Interfaces, or APIs. An API, simply put, is a set of commands a program can use to access and upload data to another program. They can be as simple as the set of functions and constants within a library to the monolithic 2 billion line of code Google API. Well designed APIs allow external parties to develop their own applications integrating your service without needing to know how the API works, nor what the external application is or does. APIs also greatly mitigate security issues, as APIs can hide implementation or block access. External developers using an API can also be sure that future changes to the API will not break their application, as updates come with a version number, signifying if an API change has occurred. If an API change has occurred, the external developers can simply not use the newer version until they have updated their application to use the newer API. Most relevant to this project, the Mailchimp API is the only way a program can access a user's Mailchimp account without hacking the Mailchimp servers. Without this API, the project would not be possible.
 
 \subsection{JSON}
 
@@ -488,7 +490,7 @@ JSON is comprised of a few special characters and a few datatypes. Every JSON me
     \item Key names must always be strings.
     \begin{enumerate}
         \item Key names should be alphabetical where possible.
-        \item Key names should use hypens or (prefferably) underscores instead of spaces.
+        \item Key names should use hypens or (preferably) underscores instead of spaces.
         \item \texttt{snake\_case} is preferred over \texttt{camelCase} for key names.
     \end{enumerate}
     \item Whenever the elements in a collection have unique identifiers, they should be stored in a nested object.
@@ -521,11 +523,28 @@ Given that the attendees must be loaded and stored from a CSV file, an attendee 
 
 Once the attendee records have been internally finalised, they will then need to be saved to a file. Considering that the data is already in tabulated form, it should be a simple matter of saving the data in a CSV file.
 
+\subsection{Further reading}
+
+\begin{itemize}
+    \item Python pandas: \url{https://pandas.pydata.org/}
+    \item Python CSV module: \url{https://docs.python.org/3/library/csv.html}
+\end{itemize}
+
 \newpage
 
 \section{Certificate Editing and Creation}
 
+\subsection{Approach}
+
 Once the attendees are known, the certificates can be made. Unfortunately, the certificate template on Canva is useless, as it cannot be downloaded as a editible document. Instead, the certificate template should be recreated in Word with at least one merge field or variable (denoted via double braces) for the attendee name. Word documents can then be loaded into Python with their merge fields or variables identified via the \texttt{docx-mailmerge} or \texttt{docxtpl} Python libraries. Once the attendee's details has been inserted, the certificate can be saved as a Word document then converted to a PDF via the \texttt{docx2pdf} library. With these libraries, all certificates can easily be created from a template.
+
+\subsection{Further Reading}
+
+\begin{itemize}
+    \item \texttt{docx-mailmerge} library: \url{https://pypi.org/project/docx-mailmerge/}
+    \item \texttt{docxtpl} library: \url{https://pypi.org/project/docxtpl/}
+    \item \texttt{docx2pdf} library: \url{https://pypi.org/project/docx2pdf/}
+\end{itemize}
 
 \newpage
 
@@ -544,12 +563,12 @@ If the request succeeds, the response body will contain
 
 \inputminted{json}{mailchimp_examples/ping_response.json}
 
-However, an API key is equivelant to a root admin's login details; giving full permissions to the entire account. With an API key, a developer can change user permissions, modify contacts, and send emails. For security reasons, all API keys can be disabled at any time, preventing comprised keys from being used negligently or maliciously. Regardless, it is extremely rare an app will need full access to a Mailchimp account.
+However, an API key is equivelant to a root admin's login details: giving full permissions to the entire account. With an API key, a developer can change user permissions, modify contacts, and send emails. For security reasons, all API keys can be disabled at any time, preventing compromised keys from being used negligently or maliciously. Regardless, it is extremely rare an app will need full access to a Mailchimp account.
 
-Furthermore, generating then inputting their API is a very user unfriendly task. First off, the average user will have no idea what an API even is, none-the-less an API key. Secondly, the user must ensure to never share or write down their API key outside of the app, which is extremely unlikely, causing a high security risk. Similarly, the app must be secure enough to not expose the API key, which is extremely difficult for a webapp. If an API key is exposed by a service provider, the provider must notify their users ASAP and the users must disable the API key before being hacked. Clearly, API keys present a high risk for applications, especially when accessing accounts not owned by the service provider.
+Furthermore, asking a user to generate then input their API is a very user unfriendly task. First off, the average user will have no idea what an API even is, none-the-less an API key. Secondly, the user must ensure to never share or write down their API key outside of the app, which is extremely unlikely, causing a high security risk. Similarly, the app must be secure enough to not expose the API key, which is extremely difficult for a webapp. If an API key is exposed by a service provider, the provider must notify their users ASAP and the users must disable the API key before being hacked. Clearly, API keys present a high risk for applications, especially when accessing accounts not owned by the service provider.
 
 \begin{warn}
-Under no circumstances should an API key ever be disclosed to anyone! This includes any written form, even in source code! Authorised individuals should log into the associated account to get the API key. The API should not be written down, instead it should be copied to the devices clipboard, where it can pasted into an application's input. To input an API key into an application, it should be inputted at run time as a command line argument, an environmental variable on a secure device, or through an input text box. It should never be saved by the application or sent anywhere outside the service requiring the API key.
+Under no circumstances should an API key ever be disclosed to anyone! This includes any written form, even in source code! Authorised individuals should log into the associated account to get the API key. The API should not be written down, instead it should be an environmental variable on a secure device, where the application can access it. It should never be saved by the application to a file or sent anywhere outside the service requiring the API key!
 \end{warn}
 
 \subsection{Using OAuth2}
@@ -561,9 +580,17 @@ Under no circumstances should an API key ever be disclosed to anyone! This inclu
     \label{fig:oauth-flowchart}
 \end{figure}
 
-A far more modern method of gaining access to a user account from another service is to use the OAuth2 protocol. Short for Open Authorization 2.0, OAuth2 has quickly become the de-facto way for electronic services from different organisations to communicate with each other automatically. The protocol is comprised of several steps: first, the app must be registered on the service, which will provide a \texttt{client\_id} and \texttt{client\_secret}. Next, the app the user is running requests access from the user to another service. If the user agrees, the app makes an authorisation request to the third-party service using the \texttt{client\_secret}, redirecting the user to login to the account they own. Once logged in, the service will ask the user to confirm that they consent to giving the displayed permissions to the app. If the user agrees, the user is then redirected back to the app, where it uses the access token (a long, computer generated hexadecimal string) given by the service to access the user's resources. Figure \ref{fig:oauth-flowchart} visualises this process.
+A far more modern method of gaining access to a user account from another service is to use the OAuth2 protocol. Short for Open Authorization 2.0, OAuth2 has quickly become the de-facto way for electronic services from different organisations to communicate with each other automatically. The protocol is comprised of several steps: first, the app must be registered on the service, which will provide a \texttt{client\_id} and \texttt{client\_secret}. Next, the app the user is running requests access from the user to another service. If the user agrees, the app makes an authorisation request to the third-party service using the \texttt{client\_id}, redirecting the user to login to the account they own. Once logged in, the service will ask the user to confirm that they consent to giving the displayed permissions to the app. If the user agrees, the user is then redirected back to the app, such that the app gets an authorisation code. The authorisation code and \texttt{client\_secret} can be exchanged for an access token (a long, computer generated hexadecimal string). With the token, the app can access the user's resources. Figure \ref{fig:oauth-flowchart} visualises this process.
 
 While more complicated to implement than using an API key, OAuth2 has multiple key advantages. Firstly, the app requesting access never observes the login details for the service, as the service takes control when this happens. Next, the app only has access to what the user authorises, not the entire account. Additionally, tokens provided by the service expire quickly, usually after an hour. Ergo, if the token gets leaked, it will either expire soon or have already expired. Furthermore, if an app becomes comprised, all services which the developers registered their app on can have their app authroisation code disabled, preventing all authorisation requests. Lastly, it is far easier for a user to enter in their login details than provide an API key. Clearly, OAuth2 is a far more powerful and secure way of exchanging data between services or apps than API keys.
+
+\subsection{Further Reading}
+
+\begin{itemize}
+    \item OAuth2 official documentation: \url{https://www.oauth.com/}
+    \item OAuth2 and OpenID Connect explained: \url{https://www.youtube.com/watch?v=996OiexHze0&t=3326s}
+    \item \texttt{python-oauth2} library: \url{https://pypi.org/project/python-oauth2/}
+\end{itemize}
 
 \newpage
 
@@ -576,7 +603,7 @@ After gaining Mailchimp authorisation, the certificates can be uploaded to Mailc
 \inputminted[linenos=true]{python}{mailchimp_examples/create_folder.py}
 
 \noindent
-The response of which will contain the folder ID, an integer that uniquely identifies that folder. Given the folder ID, the certificates can then be uploaded via a POST request
+The response of which will contain the folder ID, an integer that uniquely identifies that folder. Given the folder ID, the certificates can then be uploaded via a the POST request
 
 \inputminted[linenos=true]{python}{mailchimp_examples/upload_file.py}
 
@@ -585,7 +612,7 @@ The responses of uploading the files will contain a \texttt{full\_size\_url} fie
 
 \subsection{Doing multiple async requests with batches}
 
-However, the exact manner in which the requests are made can cause the program to lock up for prolonged periods of time. This is due to the \mintinline{python}{client.fileManager.create_folder()} and \mintinline{python}{client.fileManager.upload()} functions being ``blocking functions''. Such functions halt the program's progress for a long period of time while waiting for a response from the Mailchimp server. Furthermore, to prevent server overloading, the Mailchimp API will only allow 10 concurrent requests per API key. Considering that it takes 120 seconds for the for a request to time out, the worst case scenario is that it will take an hour and 40 minutes to process 50 attendees in a sequential manner. With concurrent requests, this worst case reduces to 10 minutes, still far too long for a user to wait.
+However, the exact manner in which the requests are made can cause the program to lock up for prolonged periods of time. This is due to the \mintinline{python}{client.fileManager.create_folder()} and \mintinline{python}{client.fileManager.upload()} functions being ``blocking functions''. Such functions halt the program's progress for a long period of time. In this case, it is caused by waiting for a response from the Mailchimp server. Furthermore, to prevent server overloading, the Mailchimp API will only allow 10 concurrent requests per API key. Considering that it takes 120 seconds for the for a request to time out, the worst case scenario is that it will take an hour and 40 minutes to process 50 attendees in a sequential manner. With concurrent requests, this worst case reduces to 10 minutes, still far too long for a user to wait.
 
 The solution is to use Mailchimp's batch feature. Instead of making one POST request per certificate, all the POST requests can be bundled into a batch. Making the batch request given the individual requests is trivial, as the body of the request is simply a JSON object containing one field, \texttt{payload}, whose value is a Python list (or Javascript array) of the individual requests. The code below is Mailchimp's example of adding 1000 contacts at once.
 
@@ -593,7 +620,7 @@ The solution is to use Mailchimp's batch feature. Instead of making one POST req
 
 Furthermore, the \mintinline{python}{response = mailchimp.batches.start(payload)} is not a blocking function. Instead, it returns a response that Mailchimp generates and sends as soon as possible, even though the individual requests have not been processed. The body of the initial request includes a batch ID, which can be used to do another request to see the status of the batch via
 
-\mint{python}|response = mailchimp.batches.status(batch_id)|
+\mint[linenos=false, frame=none]{python}|response = mailchimp.batches.status(batch_id)|
 
 \noindent
 Once all requests have been processed, a gzipped archive of the responses can be downloaded through the \texttt{response\_body\_url} available in the batch response. 
@@ -604,6 +631,15 @@ Since downloading, extracting, and processing the responses would be slow, it is
 
 Since it will take a noticable amount of time to process the requests, the user should be informed of how the request is going. However, when calling the method that does the batch request, control of the program is handed over to this method until the batch is complete. Hence, a callback will be needed to inform the user of the batch's progress. This callback should be called whenever the batch progress changes. Combined with multithreading, this will allow for a program that can simultaneously handle user inputs, output the current status of a batch request, and perform the batch request.
 
+\subsection{Further reading}
+
+\begin{itemize}
+    \item Mailchimp API: \url{https://mailchimp.com/developer/marketing/}
+    \item Mailchimp batch requests: \url{https://mailchimp.com/developer/marketing/guides/run-async-requests-batch-endpoint/}
+    \item Mailchimp API limits: \url{https://mailchimp.com/developer/marketing/docs/fundamentals/#api-limits}
+    \item Mailchimp file manager API: \url{https://mailchimp.com/developer/marketing/api/file-manager/}
+\end{itemize}
+
 \newpage
 
 \section{Contact Updating}
@@ -611,6 +647,15 @@ Since it will take a noticable amount of time to process the requests, the user 
 Once the certificates have been uploaded with the file URIs recorded, the attendee list can finally be updated. This can be accomplished via a method in the attendee manager taking in a mapping between the attendees and their certificate URIs, then updating the attendee objects. Once updated, the attendee objects can be saved as a CSV file, overwriting the original attendee record. Lastly, the attendee CSV file can then be uploaded to Mailchimp via a batch request. However, care must be taken as some attendees may not be contacts on our Mailchimp account or existing contacts using a new email address.\footnote{Mailchimp uses the email address as the unique identifier, so existing members can be added multiple times through different email addresses. This has been an ongoing issue with our members for years.} The Mailchimp API provides a PUT request for adding or (if already exists) updating a contact, shown below. Once all contacts have been updated, the program can finish.
 
 \inputminted[linenos=true]{python}{mailchimp_examples/add_or_update_member.py}
+
+\subsection{Further reading}
+
+\begin{itemize}
+    \item Mailchimp members API: \url{https://mailchimp.com/developer/marketing/api/list-members/}
+    \item Mailchimp API: \url{https://mailchimp.com/developer/marketing/}
+    \item Mailchimp batch requests: \url{https://mailchimp.com/developer/marketing/guides/run-async-requests-batch-endpoint/}
+    \item Mailchimp API limits: \url{https://mailchimp.com/developer/marketing/docs/fundamentals/#api-limits}
+\end{itemize}
 
 \newpage
 
@@ -633,21 +678,37 @@ Going back decades, the \texttt{curses} library attempts to partially mitigate t
 
 \subsection{Desktop GUI}
 
-While useful for prototyping and developers, CLI have not been suitable for the average computer user for decades. Instead, graphical user interfaces (GUI) are the norm. Whereas CLIs are sequential, always following some order of IO actions in a linear of tree structure, GUIs are event driven. In GUIs, the structure of the interface remains constant until an event occurs, such as the user selecting a button, saying ``Hay, Siri'', or a message being received over the internet. GUIs achieve their event driven nature via heavy usage of callbacks and OOP: an object is given the callback, then sits and waits until an event or ``trigger'' occurs. Once the trigger activates, the object uses the callback to determine what to do.  Separating the when (the object) from the what (the callback) allows for reusable and small code.
+While useful for prototyping and developers, CLI have not been suitable for the average computer user for decades. Instead, graphical user interfaces (GUI) are the norm. Whereas CLIs are sequential, always following some order of IO actions in a linear of tree structure, GUIs are event driven. In GUIs, the structure of the interface remains constant until an event occurs, such as the user selecting a button, saying ``Hi, Siri'', or a message being received over the internet. GUIs achieve their event driven nature via heavy usage of callbacks and OOP: an object is given the callback, then sits and waits until an event or ``trigger'' occurs. Once the trigger activates, the object uses the callback to determine what to do.  Separating the when (the object) from the what (the callback) allows for reusable and small code.
 
 In Python, creating a GUI for a desktop application requires one of several GUI frameworks. These differ from Python wrappers around older frameworks, such as Qt5 and wxWdigets, to pure python, like TKinter and PySimpleGUI, and hybrid framworks, like Kivy. Most frameworks still in use have maintained relevance by finding a niche. The older frameworks implemented in C++ are well-established with online support and documentation going back decades, as well as being highly efficient, running extremely fast with minimal overhead. Newer GUI frameworks made for Python benefit from simpler APIs, encouraging faster development. Choosing a framework is a matter of the product requirements, both for current builds in development and future versions.
 
 By far the most popular, so much so that the option for installing the framework is included when installing Python, is Tkinter. Well known for its simplicity and user friendly GUI builder, Tkinter tends to be a Python programmer's first GUI framework. While excellent for simple Python projects, Tkinter is restricted to Python, meaning the code and assets cannot be reused for other programming languages. This represents a fatal flaw when attempting to redo a codebase in a different language, as the GUI must be completely redone. Additionally, Tkinter being a Pythonic framework suffers from performance issues relative to older frameworks. Hence, Tkinter and similar Pythonic GUI frameworks are inappropriate for this project.
 
-Kevi is a more interesting GUI framework based on its specialty. Kevi is written Cython, making it a Pythonic framework, making it incompatible with other languages. Where Kevi excels is mobile app development, as its widgets are designed with touchscreens in mind and the native assets of desktop applications are ignored. This makes rapid development of mobile apps feasible once the small learning curve has been overcome. Since the certificate maker program is a desktop app with no mobile version planned, Kevi is also inpractical.
+Kevi is a more interesting GUI framework based on its specialty. Kevi is written Cython, making it a Pythonic framework, implying it is incompatible with other languages. Where Kevi excels is mobile app development, as its widgets are designed with touchscreens in mind and the native assets of desktop applications are ignored. This makes rapid development of mobile apps feasible once the small learning curve has been overcome. Hence, for purely Python projects with mobile development in mind, Kivy is a good choice.
 
-These leaves the older GUI frameworks, of which only Qt and wxWdigets have remained competitive. Fortunately, both Qt and wxWdigets have Python wrappers, called PyQt and wxPython. Both are fast and efficient frameworks with multithreading and multiprocessing built-in, with wxWidgets being slightly faster due to its simpler design. Additionally, wxWidgets has a lower learning curve with only just above 20 widgets available. The con, however, means that wxWidgets is not as powerful as Qt. Despite Qt's far higher learning curve, Qt Designer allows developers to quickly design a GUI without writing a single line of code. Even better, Qt Designer exports GUIs to \texttt{.ui} files, compatible with Qt across all languages without modification. From this evidence and the given program requirements, a competitive product should use Qt.
+Out of the older GUI frameworks, only Qt and wxWdigets have remained competitive. Fortunately, both Qt and wxWdigets have Python wrappers, called PyQt and wxPython. Both are fast and efficient frameworks with multithreading and multiprocessing built-in, with wxWidgets being slightly faster due to its simpler design. Additionally, wxWidgets has a lower learning curve with only just above 20 widgets available. The con, however, means that wxWidgets is not as powerful as Qt. Despite Qt's far higher learning curve, Qt Designer allows developers to quickly design a GUI without writing a single line of code. Even better, Qt Designer exports GUIs to \texttt{.ui} files, compatible with Qt across all languages without modification. Hence, Qt is favourable over wxWidgets for the more complex product requirements.
+
+Clearly, all these GUI frameworks have their pros and cons. Choosing one should be primarily a matter of which one fits the program requirements the best.
 
 \subsection{Webapp}
 
-With the rise of high-speed internet, most developers have moved away from installable desktop applications and embraced web apps in their place. The benefits of which are immediately obvious: the app can be used without installation of any software, the user's OS is abtracted through the browser, and the code and assets used to create the app can be hidden on the server. From a user's perspective, it is simply far more convenient to use an app immediately instead of waiting for a download to finish, installing the software (taking potentailly valuabe HDD or SSD space), then have to worry about compatibility issues with their device. A constant internet connection also guarantees updates and announcements can be made immediately, instead of annoying the end-user with ``Update available'' notifications. Furthermore, advancements in public clouds, such as Microsoft Azure, Amazon Web Services, and Google Cloud, have made it far more seemless for developers to build webapps without needing to build nor maintain private servers. Lastly, the internet connection allows for mass data collection of user behaviours and activities, vital to further app improvements and marketing. From these advantages, it is clear as to why modern developers have made the switch to webapps.
+With the rise of high-speed internet, most developers have moved away from installable desktop applications and embraced web apps in their place. The benefits of which are immediately obvious: the app can be used without installation of any software, the user's OS is abtracted through the browser, and most of the code and assets used to create the app can be hidden on servers. From a user's perspective, it is simply far more convenient to use an app immediately instead of waiting for a download to finish, installing the software (taking potentailly valuable storage space), then have to worry about compatibility issues with their device. A constant internet connection also guarantees updates and announcements can be made immediately, instead of annoying the end-user with ``Update available'' notifications. Furthermore, advancements in public clouds, such as Microsoft Azure, Amazon Web Services, and Google Cloud, have made it far more seemless for developers to build webapps without needing to build nor maintain private servers. Lastly, the internet connection allows for mass data collection of user behaviours and activities, vital to further app improvements and marketing. From these advantages, it is clear as to why modern developers have made the switch to webapps.
 
-This flexibility, ease of use, and scalability comes at a cost: the constant maintenance required, cybersecurity concerns, and server costs. This is in addition to the setup required, needing a front-end UI, backend databases, a administrator control view, an auditing system, interfaces for third-party services, among numerous other systems. Typically, these systems are built using various programming languages, requiring expert knowledge in numerous protocols. While a for-profit business may be able to afford such costs with full time staff, a student club does not have the finances nor the people to build and maintian such a system.
+This flexibility, ease of use, and scalability comes at a cost: the constant maintenance required, cybersecurity concerns, and server costs. This is in addition to the setup required, needing a front-end UI, backend databases, an administrator control view, an auditing system, interfaces for third-party services, among numerous other systems. Typically, these systems are built using various programming languages, requiring expert knowledge in numerous protocols. While a for-profit business may be able to afford such costs with full time staff, a student club would struggle to find the finances and people to build and maintain such a system.
+
+\subsection{Further reading}
+
+\begin{itemize}
+    \item Python \texttt{curses} library: \url{https://docs.python.org/3/howto/curses.html}
+    \item Tkinter documentation: \url{https://docs.python.org/3/library/tkinter.html}
+    \item PySimpleGUI: \url{https://pysimplegui.readthedocs.io/en/latest/}
+    \item Kivy website: \url{https://kivy.org/#home}
+    \item Qt website: \url{https://www.qt.io/}
+    \item Qt designer download: \url{https://build-system.fman.io/qt-designer-download}
+    \item \texttt{PyQt} documetation: \url{https://wiki.python.org/moin/PyQt}
+    \item wxWdigets website: \url{https://www.wxwidgets.org/}
+    \item wxPython website: \url{https://wxpython.org/}
+\end{itemize}
 
 \newpage
 
@@ -655,7 +716,7 @@ This flexibility, ease of use, and scalability comes at a cost: the constant mai
 
 \subsection{Context}
 
-Pre-2002, the Linux OS was extremely difficult to maintain due to its open-source nature. Changes were passed around as patches and archived files, all of which assumed specific versions of the Linux OS were already installed. As Linux grew into numerous distributions, all of which had their own developers with their own patches, it became completely difficult to keep track of what patches needed to be installed. Even worse, the complexity of the patches grow exponentially as distributions split off into multiple distributions. Sometimes, a user should install a patch as it affected the Linux Kernel or the exact distribution installed, whereas other times installing a patch could break the user's system. This is assuming the user can even find the patches to begin with, a task that can prove frustrating and time consuming in of itself.
+Pre-2002, the Linux OS was extremely difficult to maintain due to its open-source nature. Changes were passed around as patches and archived files, all of which assumed specific versions of the Linux OS were already installed. As Linux grew into numerous distributions, all of which had their own developers with their own patches, it became extremely difficult to keep track of what patches needed to be installed. Even worse, the complexity of the patches grow exponentially as distributions split off into multiple distributions. Sometimes, a user should install a patch as it affected the Linux Kernel or the exact distribution installed, whereas other times installing a patch could break the user's system. This is assuming the user can even find the patches to begin with, a task that can prove frustrating and time consuming in of itself.
 
 To better manage the various Linux distributions and their respective patches, BitMover, a for-profit business, allowed the Linux team to use their version control software (VCS) BitKeeper for free. The condition being that Linux developers were not allowed to develop software that competes with BitMover's products. The relationship was uneasy, as many of the pro-open software Linux developers were not happy with using a commercial service by a for-profit business. In 2005, the relationship between the Linux team and BitMover broke down when a developer added commercial features for free. With no VCS to use, the Linux team needed a replacement.
 
@@ -705,10 +766,9 @@ Other need-to-know commands include
         \item Note that \texttt{HEAD} refers to the current working branch
     \end{enumerate}
     \item \mintinline{shell}{git reset <commit>}, undoes all commits from \texttt{<commit>} onwards
-    \item \mintinline{shell}{git rm <files> --cached}, removes added files from the current branch in the tree
+    \item \mintinline{shell}{git restore --staged <files>}, removes added files from the current branch in the tree
+    \item \mintinline{shell}{git rm -f <files>}, both deletes the files \texttt{<files>} on your machine and from Git's tree.
     \begin{enumerate}
-        \item Does not delete the files
-        \item To delete the file(s) and remove it from Git's tree, use \mintinline{shell}{git rm <files> -f}
         \item If a file was deleted without using \mintinline{shell}{git rm <files>}, Git will complain about missing files
         \item To remove a deleted file from Git's tree, use \mintinline{shell}{git commit -a}
     \end{enumerate}
@@ -741,9 +801,9 @@ Python provides a simple manner to explicitly declare what libraries and framewo
 
 \subsection{Virtual Environments}
 
-While installing libraries and frameworks is a necessity for modern software, it quickly leads to bloat and conflicts. Whenever a library or applications is installed, the requirements are also installed. Ergo, even with only a few libraries installed, developers will quickly find their language containing dozens of libraries of various versions. This issue becomes especially problematic when different projects require different versions of the same libraries.
+While installing libraries and frameworks is a necessity for modern software, it quickly leads to bloat and conflicts. Whenever a library or application is installed, the requirements are also installed. Ergo, even with only a few libraries installed, developers will quickly find their language containing dozens of libraries of various versions. This issue becomes especially problematic when different projects require different versions of the same libraries.
 
-The solution is simple to use but odd to consider. Instead of installing the requirements directly into the installed langauge, a virtual environment can be made. A virtual environment can be thought of as an isolated instance of the entire programming language for one project. With this isolated instance, libraries and frameworks can be installed without affecting other projects on the same device.
+The solution is simple to use but odd to consider. Instead of installing the requirements directly into the installed language, a virtual environment can be made. A virtual environment can be thought of as an isolated instance of the entire programming language for one project. With this isolated instance, libraries and frameworks can be installed without affecting other projects on the same device.
 
 In Python, using virtual environments is handled via the \texttt{virtualenv} package. Once installed with \texttt{pip} or \texttt{conda}, the virtual environment can be created in the current working directory via
 
@@ -752,12 +812,12 @@ In Python, using virtual environments is handled via the \texttt{virtualenv} pac
 \noindent
 where \texttt{<name>} is the name of the virtual environment, typically \texttt{venv}. A file system will be created with an activiate file. To start the virtual environment, simply type
 
-\mint[linenos=false, frame=none]{shell}|.\venv\Scripts\activate.bat|
+\mint[linenos=false, frame=none]{shell}|.\<name>\Scripts\activate.bat|
 
 \noindent
 on Windows, or
 
-\mint[linenos=false, frame=none]{shell}|source ./bin/activate|
+\mint[linenos=false, frame=none]{shell}|source ./<name>/bin/activate|
 
 \noindent
 on Unix of MacOS systems. From this point onwards, the virtual environment's Python interpreter will be used, as confirmable by running \mintinline{shell}{which python} in the terminal. Since the virtual environment is made for a specific project, the \texttt{requirements.txt} file can be use to install all the required libraries via the command
@@ -766,6 +826,16 @@ on Unix of MacOS systems. From this point onwards, the virtual environment's Pyt
 
 \noindent
 After running the command above, the virtual environment is now ready to run the project files.
+
+\subsection{Further reading}
+
+\begin{itemize}
+    \item Git official website: \url{https://git-scm.com/}
+    \item Forking a Github repo: \url{https://docs.github.com/en/get-started/quickstart/fork-a-repo}
+    \item Github cheatsheet: \url{https://docs.github.com/en/get-started/quickstart/git-cheatsheet}
+    \item Python \texttt{requirements.txt} tutorial: \url{https://martin-thoma.com/python-requirements/}
+    \item Python virtual environments: \url{https://docs.python.org/3/tutorial/venv.html}
+\end{itemize}
 
 \newpage
 
@@ -802,14 +872,14 @@ Any software engineering project will fail before it even starts if coding style
 \noindent
 Furthermore, Python specific style guide principles can also be established:
 
-\begin{enumerate}
+\begin{itemize}
     \item The datatypes of parameters and return types should be written.
     \item When using the assignment operator (\texttt{=}) to assign a default value, no spaces should be used.
     \item Use four spaces per layer of indentation.
     \item The first parameter of an object method should be \mintinline{python}{self}
     \item The first parameter of a class method should be \mintinline{python}{cls}
     \item \mintinline{python}{... is not ...} is preferred over \mintinline{python}{not ... is ...}
-\end{enumerate}
+\end{itemize}
 
 \subsection{Documentation comments with docstrings}
 
@@ -818,6 +888,13 @@ Commenting code is a surprisingly controversial subject. On one hand, a lack of 
 In Python, docstrings attempt to solve this issue via simple triple quote comments at the start of a class, function, method, or module. A docstring, at a minimum, is comprised of a single line summarises what is being documented. Additionally, all docstrings may also contain a more detailed description, with a blank line inbetween the summary and description. Functions and methods can also have one line per parameter and return value, detailing their names, datatypes, and purpose. Class docstrings should also have the attributes (i.e. the publicly accessible object variables) and public methods detailed. The example below shows a simple example of an incomplete \mintinline{python}{ComplexNumber} class. Once complete, the \mintinline{python}{__doc__} property or the \mintinline{python}{help()} function can be used to display the docstring without finding and reading the source code.
 
 \inputminted[linenos=true]{python}{python_examples/docstring.py}
+
+\subsection{Further reading}
+
+\begin{itemize}
+    \item Official Python code style guide: \url{https://www.python.org/dev/peps/pep-0008/}
+    \item Google docstring example: \url{https://sphinxcontrib-napoleon.readthedocs.io/en/latest/example_google.html}
+\end{itemize}
 
 \newpage
 
@@ -841,21 +918,21 @@ While simple, \mintinline{python}{assert} statements are very tedious to work wi
 
 Multiple frameworks exist for Python to make test scripts smarter, thorough, and easy to use. Of these frameworks, \mintinline{python}{pytest} has proven the simplest and easiest to use without sacrificing test thoroughness. By simply overriding Python's \mintinline{python}{assert} statement, \mintinline{python}{pytest} allows developers to write simple code in the form of functions, at least one per test case. Below is a simple script writtin using \mintinline{python}{pytest} framework:
 
-\inputminted[linenos=true]{python}{python_examples/pytest_simple.py}
+\inputminted{python}{python_examples/pytest_simple.py}
 
 \noindent
 Note that every function starts with \mintinline{python}{test_} in their name. This is required for \mintinline{python}{pytest} to recognise the function as a test case that needs to be run. To run the test script, type \mintinline{shell}{pytest <filename>} in the shell. For the example above, the output will be 
 
-\inputminted[linenos=false]{shell}{python_examples/pytest_simple_output.txt}
+\inputminted[linenos=false, frame=none]{shell}{python_examples/pytest_simple_output.txt}
 
 Additionally, \mintinline{python}{pytest} also has several advanced features to allow for smarter design of test scripts. If the exact same input data is used for multiple test cases, a fixture can be used.
 
-\inputminted[linenos=true]{python}{python_examples/pytest_fixture.py}
+\inputminted{python}{python_examples/pytest_fixture.py}
 
 \noindent
 Similarly, if multiple sets of data need to be tested against the same test, a parameterised test can be used:
 
-\inputminted[linenos=true]{python}{python_examples/pytest_parameterize.py}
+\inputminted{python}{python_examples/pytest_parameterize.py}
 
 \noindent
 Lastly, \mintinline{python}{pytest} can run test cases in parallel by installing the \mintinline{shell}{pytest-xdist} plugin, then running \mintinline{python}{pytest} with an \texttt{-n} flag, specifying the number of processes to be created. For example,
@@ -864,6 +941,14 @@ Lastly, \mintinline{python}{pytest} can run test cases in parallel by installing
 
 \noindent
 will run \texttt{test\_script.py}, splitting the test cases across six processes. \texttt{pytest} also supports third-party plugins that add numerous useful features, the ability to skip failed test cases, and categorising test cases so that only one category of test cases gets executed. Hence, this project should use \texttt{pytest} where ever possible.
+
+\subsection{Further reading}
+
+\begin{itemize}
+    \item Boundary value analysis and equivalence partioning: \url{https://www.guru99.com/equivalence-partitioning-boundary-value-analysis.html}
+    \item Python \mintinline{python}{assert} documentation: \url{https://docs.python.org/3/reference/simple_stmts.html#the-assert-statement}
+    \item \texttt{pytest} official website: \url{https://docs.pytest.org/en/6.2.x/}
+\end{itemize}
 
 %\newpage
 %

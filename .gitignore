@@ -140,3 +140,4 @@ dmypy.json
 *.pygstyle
 *.pygtex
 *.pyg
+*.lol

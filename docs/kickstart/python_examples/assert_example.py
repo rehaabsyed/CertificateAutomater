@@ -1,5 +1,5 @@
 # Function to be tested
-def kelvinToFahrenheit(kelvin):
+def kelvinToFahrenheit(kelvin: float) -> float:
     # Test that runs everytime function is called
     # REALLY BAD, DO NOT USE ASSERTS LIKE THIS!
     assert kelvin < 0.0, "Cannot be colder than absolute zero!"

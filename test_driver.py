@@ -7,6 +7,7 @@ this project.
 """
 
 import sys
+import os
 import argparse
 from typing import Dict
 
@@ -15,7 +16,8 @@ import pytest
 def main():
     argv = process_argv()
     test_path = argv["path"]
-    sys.exit(pytest([test_path]))
+    core_count = os.cpu_count()
+    sys.exit(pytest([test_path, "-n", str(core_count)]))
 
 def process_argv() -> Dict[str, str]:
     if len(sys.argv) == 1:

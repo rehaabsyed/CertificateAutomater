@@ -19,7 +19,7 @@
 * Elizabeth Stinton (2021 President)</br>
 * Li Shen (2021 Vice-President)</br>
 * Parakram Vishwakarma (2021 Events coordinator)</br>
-* Ekaterina Grabovskaya (2021 Events coordinator)</br>
+* Rehaab Syed (2021 Marketing coordinator)</br>
 
 ## Project Gist
 

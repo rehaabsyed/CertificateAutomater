@@ -3,14 +3,14 @@ Module that converts attendee records between formats.
 
 Can convert between Pandas DataFrame and proprietary AttendeeManager
 
-TODO
+TODO:
     * Implement functions
     * Implement datalogging
 """
 
 import pandas as pd
 
-from .attendee_manager import Attendee, AttendeeManager
+from src.attendees.attendee_manager import Attendee, AttendeeManager
 
 def pandas2manager(attendees: pd.DataFrame, ignore: set = None
                   ) -> AttendeeManager:

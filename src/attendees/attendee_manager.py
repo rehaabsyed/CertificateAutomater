@@ -11,7 +11,7 @@ TODO:
 
 from typing import *
 
-from .attendee import Attendee
+from src.attendees.attendee import Attendee
 
 class AttendeeManager:
     """

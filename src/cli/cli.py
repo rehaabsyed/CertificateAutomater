@@ -8,6 +8,7 @@ TODO:
 """
 
 import curses
+from typing import Dict, Any
 
 from src.attendees.attendee_manager import Attendee, AttendeeManager
 from src.attendees.attendee_fileio import *

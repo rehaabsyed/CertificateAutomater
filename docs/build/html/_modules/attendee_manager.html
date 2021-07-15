@@ -60,7 +60,7 @@
 
           
             
-            <img src="../_static/../assets/IET_logo_blue_small.png" class="logo" alt="Logo"/>
+            <img src="../_static/IET_logo_blue_small.png" class="logo" alt="Logo"/>
           
           </a>
 
@@ -91,7 +91,13 @@
             
               <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../modules.html">attendees</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../attendees/attendees.html">Attendees</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../certificate_maker.html">Certificate Maker module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../cli.html">CLI module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../mailchimp_manager.html">Mailchimp Manager module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../test_driver.html">Test Driver module</a></li>
 </ul>
 
             
@@ -173,7 +179,7 @@
 
 <span class="kn">from</span> <span class="nn">src.attendees.attendee</span> <span class="kn">import</span> <span class="n">Attendee</span>
 
-<div class="viewcode-block" id="AttendeeManager"><a class="viewcode-back" href="../attendee_manager.html#attendee_manager.AttendeeManager">[docs]</a><span class="k">class</span> <span class="nc">AttendeeManager</span><span class="p">:</span>
+<div class="viewcode-block" id="AttendeeManager"><a class="viewcode-back" href="../attendees/attendee_manager.html#attendee_manager.AttendeeManager">[docs]</a><span class="k">class</span> <span class="nc">AttendeeManager</span><span class="p">:</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Managers all attendee objects in a convenient fashion.</span>
 
@@ -187,7 +193,7 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">raise</span> <span class="ne">NotImplementedError</span>
 
-<div class="viewcode-block" id="AttendeeManager.add_attendee"><a class="viewcode-back" href="../attendee_manager.html#attendee_manager.AttendeeManager.add_attendee">[docs]</a>    <span class="k">def</span> <span class="nf">add_attendee</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">attendee</span><span class="p">:</span> <span class="n">Attendee</span><span class="p">,</span> <span class="n">attendee_id</span><span class="p">:</span> <span class="n">Hashable</span><span class="p">):</span>
+<div class="viewcode-block" id="AttendeeManager.add_attendee"><a class="viewcode-back" href="../attendees/attendee_manager.html#attendee_manager.AttendeeManager.add_attendee">[docs]</a>    <span class="k">def</span> <span class="nf">add_attendee</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">attendee</span><span class="p">:</span> <span class="n">Attendee</span><span class="p">,</span> <span class="n">attendee_id</span><span class="p">:</span> <span class="n">Hashable</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Add an attendee.</span>
 
@@ -202,7 +208,7 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">raise</span> <span class="ne">NotImplementedError</span></div>
     
-<div class="viewcode-block" id="AttendeeManager.get_attendee"><a class="viewcode-back" href="../attendee_manager.html#attendee_manager.AttendeeManager.get_attendee">[docs]</a>    <span class="k">def</span> <span class="nf">get_attendee</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">attendee_id</span><span class="p">:</span> <span class="n">Hashable</span><span class="p">):</span>
+<div class="viewcode-block" id="AttendeeManager.get_attendee"><a class="viewcode-back" href="../attendees/attendee_manager.html#attendee_manager.AttendeeManager.get_attendee">[docs]</a>    <span class="k">def</span> <span class="nf">get_attendee</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">attendee_id</span><span class="p">:</span> <span class="n">Hashable</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Get an attendee object from the manager.</span>
 
@@ -219,7 +225,7 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">raise</span> <span class="ne">NotImplementedError</span></div>
 
-<div class="viewcode-block" id="AttendeeManager.remove_attendee"><a class="viewcode-back" href="../attendee_manager.html#attendee_manager.AttendeeManager.remove_attendee">[docs]</a>    <span class="k">def</span> <span class="nf">remove_attendee</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">attendee_id</span><span class="p">:</span> <span class="n">Hashable</span><span class="p">):</span>
+<div class="viewcode-block" id="AttendeeManager.remove_attendee"><a class="viewcode-back" href="../attendees/attendee_manager.html#attendee_manager.AttendeeManager.remove_attendee">[docs]</a>    <span class="k">def</span> <span class="nf">remove_attendee</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">attendee_id</span><span class="p">:</span> <span class="n">Hashable</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Remove an attendee from the manager.</span>
 
@@ -231,7 +237,7 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">raise</span> <span class="ne">NotImplementedError</span></div>
 
-<div class="viewcode-block" id="AttendeeManager.add_attribute"><a class="viewcode-back" href="../attendee_manager.html#attendee_manager.AttendeeManager.add_attribute">[docs]</a>    <span class="k">def</span> <span class="nf">add_attribute</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">:</span> <span class="n">Hashable</span><span class="p">,</span> <span class="n">values</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="n">Hashable</span><span class="p">,</span> <span class="n">Any</span><span class="p">]</span> <span class="o">=</span> <span class="p">{}):</span>
+<div class="viewcode-block" id="AttendeeManager.add_attribute"><a class="viewcode-back" href="../attendees/attendee_manager.html#attendee_manager.AttendeeManager.add_attribute">[docs]</a>    <span class="k">def</span> <span class="nf">add_attribute</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">:</span> <span class="n">Hashable</span><span class="p">,</span> <span class="n">values</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="n">Hashable</span><span class="p">,</span> <span class="n">Any</span><span class="p">]</span> <span class="o">=</span> <span class="p">{}):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Add an attribute for all attendees.</span>
 
@@ -250,7 +256,7 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">raise</span> <span class="ne">NotImplementedError</span></div>
 
-<div class="viewcode-block" id="AttendeeManager.remove_attribute"><a class="viewcode-back" href="../attendee_manager.html#attendee_manager.AttendeeManager.remove_attribute">[docs]</a>    <span class="k">def</span> <span class="nf">remove_attribute</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">:</span> <span class="n">Hashable</span><span class="p">):</span>
+<div class="viewcode-block" id="AttendeeManager.remove_attribute"><a class="viewcode-back" href="../attendees/attendee_manager.html#attendee_manager.AttendeeManager.remove_attribute">[docs]</a>    <span class="k">def</span> <span class="nf">remove_attribute</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">:</span> <span class="n">Hashable</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Removes an attribute for all attendees.</span>
 

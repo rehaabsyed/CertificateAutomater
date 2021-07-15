@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>cli &mdash; Certificate Automater  documentation</title>
+  <title>attendee_converter &mdash; Certificate Automater  documentation</title>
   
 
   
@@ -15,6 +15,7 @@
   <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
   <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
   <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/graphviz.css" type="text/css" />
 
   
   
@@ -59,7 +60,7 @@
 
           
             
-            <img src="../_static/../assets/IET_Logo_Blue_RGB.png" class="logo" alt="Logo"/>
+            <img src="../_static/IET_logo_blue_small.png" class="logo" alt="Logo"/>
           
           </a>
 
@@ -90,7 +91,13 @@
             
               <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../modules.html">attendees</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../attendees/attendees.html">Attendees</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../certificate_maker.html">Certificate Maker module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../cli.html">CLI module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../mailchimp_manager.html">Mailchimp Manager module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../test_driver.html">Test Driver module</a></li>
 </ul>
 
             
@@ -141,7 +148,7 @@
         
           <li><a href="index.html">Module code</a> &raquo;</li>
         
-      <li>cli</li>
+      <li>attendee_converter</li>
     
     
       <li class="wy-breadcrumbs-aside">
@@ -156,42 +163,42 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <h1>Source code for cli</h1><div class="highlight"><pre>
+  <h1>Source code for attendee_converter</h1><div class="highlight"><pre>
 <span></span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">Module for handling command line interface.</span>
+<span class="sd">Module that converts attendee records between formats.</span>
+
+<span class="sd">Can convert between Pandas DataFrame and proprietary AttendeeManager</span>
 
 <span class="sd">TODO:</span>
-<span class="sd">    1. Plan CLI as series of screens</span>
-<span class="sd">    2. Plan CLI screens as functions</span>
-<span class="sd">    3. Implement CLI</span>
+<span class="sd">    * Implement functions</span>
+<span class="sd">    * Implement datalogging</span>
 <span class="sd">&quot;&quot;&quot;</span>
 
-<span class="kn">import</span> <span class="nn">curses</span>
-<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Dict</span><span class="p">,</span> <span class="n">Any</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
 
 <span class="kn">from</span> <span class="nn">src.attendees.attendee_manager</span> <span class="kn">import</span> <span class="n">Attendee</span><span class="p">,</span> <span class="n">AttendeeManager</span>
-<span class="kn">from</span> <span class="nn">src.attendees.attendee_fileio</span> <span class="kn">import</span> <span class="o">*</span>
-<span class="kn">from</span> <span class="nn">src.attendees.attendee_converter</span> <span class="kn">import</span> <span class="o">*</span>
-<span class="kn">from</span> <span class="nn">src.certificate_creator.certificate_maker</span> <span class="kn">import</span> <span class="n">createCertificate</span>
-<span class="kn">from</span> <span class="nn">src.mailchimp.mailchimp_manager</span> <span class="kn">import</span> <span class="n">MailchimpManager</span>
 
-<div class="viewcode-block" id="run_cli"><a class="viewcode-back" href="../cli.html#cli.run_cli">[docs]</a><span class="k">def</span> <span class="nf">run_cli</span><span class="p">(</span><span class="n">argv</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]):</span>
+<div class="viewcode-block" id="pandas2manager"><a class="viewcode-back" href="../attendees/attendee_converter.html#attendee_converter.pandas2manager">[docs]</a><span class="k">def</span> <span class="nf">pandas2manager</span><span class="p">(</span><span class="n">attendees</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">,</span> <span class="n">ignore</span><span class="p">:</span> <span class="nb">set</span> <span class="o">=</span> <span class="kc">None</span>
+                  <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">AttendeeManager</span><span class="p">:</span>
     <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Runs the CLI.</span>
+<span class="sd">    Convert Pandas DataFrame attendee record to AttendeeManager.</span>
 
 <span class="sd">    Args:</span>
-<span class="sd">        argv (Dict[str, Any]): The processed command line arguments.</span>
+<span class="sd">        attendees (pd.DataFrame): The attendees as a Pandas DataFrame.</span>
+<span class="sd">        ignore (set): Collection of attributes to ignore, if left as None</span>
+<span class="sd">        will not ignore any fields.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        AttendeeManager: The attendees as a AttendeeManager.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">raise</span> <span class="ne">NotImplementedError</span></div>
 
-<span class="c1"># TODO: Decide on needed CLI public functions</span>
-
-
-
-
-<span class="c1"># Hidden functions go here</span>
-
-
+<div class="viewcode-block" id="manager2pandas"><a class="viewcode-back" href="../attendees/attendee_converter.html#attendee_converter.manager2pandas">[docs]</a><span class="k">def</span> <span class="nf">manager2pandas</span><span class="p">(</span><span class="n">attendees</span><span class="p">:</span> <span class="n">AttendeeManager</span><span class="p">,</span> <span class="n">ignore</span><span class="p">:</span> <span class="nb">set</span> <span class="o">=</span> <span class="kc">None</span>
+                  <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    TODO: Write docstring</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">raise</span> <span class="ne">NotImplementedError</span></div>
 </pre></div>
 
            </div>

@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>attendee_converter &mdash; Certificate Automater  documentation</title>
+  <title>attendee_fileio &mdash; Certificate Automater  documentation</title>
   
 
   
@@ -60,7 +60,7 @@
 
           
             
-            <img src="../_static/../assets/IET_logo_blue_small.png" class="logo" alt="Logo"/>
+            <img src="../_static/IET_logo_blue_small.png" class="logo" alt="Logo"/>
           
           </a>
 
@@ -91,7 +91,13 @@
             
               <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../modules.html">attendees</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../attendees/attendees.html">Attendees</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../certificate_maker.html">Certificate Maker module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../cli.html">CLI module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../mailchimp_manager.html">Mailchimp Manager module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../test_driver.html">Test Driver module</a></li>
 </ul>
 
             
@@ -142,7 +148,7 @@
         
           <li><a href="index.html">Module code</a> &raquo;</li>
         
-      <li>attendee_converter</li>
+      <li>attendee_fileio</li>
     
     
       <li class="wy-breadcrumbs-aside">
@@ -157,40 +163,45 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <h1>Source code for attendee_converter</h1><div class="highlight"><pre>
+  <h1>Source code for attendee_fileio</h1><div class="highlight"><pre>
 <span></span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">Module that converts attendee records between formats.</span>
+<span class="sd">Module with functionality to save and load attendees from a CSV file.</span>
 
-<span class="sd">Can convert between Pandas DataFrame and proprietary AttendeeManager</span>
+<span class="sd">Future upgrades should be able to load attendees from an Excel file.</span>
 
 <span class="sd">TODO:</span>
 <span class="sd">    * Implement functions</span>
-<span class="sd">    * Implement datalogging</span>
+<span class="sd">    * Further detail the OSErrors that can be raised</span>
+<span class="sd">    * Impement datalogging</span>
 <span class="sd">&quot;&quot;&quot;</span>
 
 <span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
 
-<span class="kn">from</span> <span class="nn">src.attendees.attendee_manager</span> <span class="kn">import</span> <span class="n">Attendee</span><span class="p">,</span> <span class="n">AttendeeManager</span>
-
-<div class="viewcode-block" id="pandas2manager"><a class="viewcode-back" href="../attendee_converter.html#attendee_converter.pandas2manager">[docs]</a><span class="k">def</span> <span class="nf">pandas2manager</span><span class="p">(</span><span class="n">attendees</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">,</span> <span class="n">ignore</span><span class="p">:</span> <span class="nb">set</span> <span class="o">=</span> <span class="kc">None</span>
-                  <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">AttendeeManager</span><span class="p">:</span>
+<div class="viewcode-block" id="load_attendee_record"><a class="viewcode-back" href="../attendees/attendee_fileio.html#attendee_fileio.load_attendee_record">[docs]</a><span class="k">def</span> <span class="nf">load_attendee_record</span><span class="p">(</span><span class="n">path</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">:</span>
     <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Convert Pandas DataFrame attendee record to AttendeeManager.</span>
+<span class="sd">    Loads attendees from a file.</span>
+
+<span class="sd">    File must be a CSV file.</span>
 
 <span class="sd">    Args:</span>
-<span class="sd">        attendees (pd.DataFrame): The attendees as a Pandas DataFrame.</span>
-<span class="sd">        ignore (set): Collection of attributes to ignore, if left as None</span>
-<span class="sd">        will not ignore any fields.</span>
-
-<span class="sd">    Returns:</span>
-<span class="sd">        AttendeeManager: The attendees as a AttendeeManager.</span>
+<span class="sd">        path (str): The absolute or relative path to the file.</span>
+<span class="sd">    </span>
+<span class="sd">    Raises:</span>
+<span class="sd">        OSError if file IO error occurs.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">raise</span> <span class="ne">NotImplementedError</span></div>
 
-<div class="viewcode-block" id="manager2pandas"><a class="viewcode-back" href="../attendee_converter.html#attendee_converter.manager2pandas">[docs]</a><span class="k">def</span> <span class="nf">manager2pandas</span><span class="p">(</span><span class="n">attendees</span><span class="p">:</span> <span class="n">AttendeeManager</span><span class="p">,</span> <span class="n">ignore</span><span class="p">:</span> <span class="nb">set</span> <span class="o">=</span> <span class="kc">None</span>
-                  <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">:</span>
+<div class="viewcode-block" id="save_attendee_record"><a class="viewcode-back" href="../attendees/attendee_fileio.html#attendee_fileio.save_attendee_record">[docs]</a><span class="k">def</span> <span class="nf">save_attendee_record</span><span class="p">(</span><span class="n">path</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">attendees</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    TODO: Write docstring</span>
+<span class="sd">    Save attendee record to a file.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        path (str): Where to save to file, including the filename.</span>
+<span class="sd">        attendees (pd.DataFrame): The attendee record.</span>
+<span class="sd">    </span>
+<span class="sd">    Raises:</span>
+<span class="sd">        TypeError if attendees is not a Pandas DataFrame</span>
+<span class="sd">        OSError if file IO error occurs</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">raise</span> <span class="ne">NotImplementedError</span></div>
 </pre></div>

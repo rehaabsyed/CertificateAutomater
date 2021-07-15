@@ -15,6 +15,7 @@
   <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
   <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
   <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/graphviz.css" type="text/css" />
 
   
   
@@ -59,7 +60,7 @@
 
           
             
-            <img src="../_static/../assets/IET_Logo_Blue_RGB.png" class="logo" alt="Logo"/>
+            <img src="../_static/IET_logo_blue_small.png" class="logo" alt="Logo"/>
           
           </a>
 
@@ -90,7 +91,13 @@
             
               <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../modules.html">attendees</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../attendees/attendees.html">Attendees</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../certificate_maker.html">Certificate Maker module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../cli.html">CLI module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../mailchimp_manager.html">Mailchimp Manager module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../test_driver.html">Test Driver module</a></li>
 </ul>
 
             
@@ -172,7 +179,7 @@
 
 <span class="n">VerifyFunc</span> <span class="o">=</span> <span class="n">Callable</span><span class="p">[[</span><span class="n">Hashable</span><span class="p">,</span> <span class="n">Any</span><span class="p">],</span> <span class="nb">bool</span><span class="p">]</span>
 
-<div class="viewcode-block" id="Attendee"><a class="viewcode-back" href="../attendee.html#attendee.Attendee">[docs]</a><span class="k">class</span> <span class="nc">Attendee</span><span class="p">:</span>
+<div class="viewcode-block" id="Attendee"><a class="viewcode-back" href="../attendees/attendee.html#attendee.Attendee">[docs]</a><span class="k">class</span> <span class="nc">Attendee</span><span class="p">:</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
@@ -193,7 +200,7 @@
 
     <span class="c1"># TODO: Write getters for fname, lname, email, file_path, and file_url</span>
 
-<div class="viewcode-block" id="Attendee.get_attribute"><a class="viewcode-back" href="../attendee.html#attendee.Attendee.get_attribute">[docs]</a>    <span class="k">def</span> <span class="nf">get_attribute</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">:</span> <span class="n">Hashable</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Any</span><span class="p">:</span>
+<div class="viewcode-block" id="Attendee.get_attribute"><a class="viewcode-back" href="../attendees/attendee.html#attendee.Attendee.get_attribute">[docs]</a>    <span class="k">def</span> <span class="nf">get_attribute</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">:</span> <span class="n">Hashable</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Any</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Get an arbitrary attribute of the attendee.</span>
 
@@ -209,7 +216,7 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">raise</span> <span class="ne">NotImplementedError</span></div>
 
-<div class="viewcode-block" id="Attendee.has_attribute"><a class="viewcode-back" href="../attendee.html#attendee.Attendee.has_attribute">[docs]</a>    <span class="k">def</span> <span class="nf">has_attribute</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">:</span> <span class="n">Hashable</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+<div class="viewcode-block" id="Attendee.has_attribute"><a class="viewcode-back" href="../attendees/attendee.html#attendee.Attendee.has_attribute">[docs]</a>    <span class="k">def</span> <span class="nf">has_attribute</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">:</span> <span class="n">Hashable</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Checks if Attendee has a specificed attribute.</span>
 
@@ -221,7 +228,7 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">raise</span> <span class="ne">NotImplementedError</span></div>
 
-<div class="viewcode-block" id="Attendee.set_attribute"><a class="viewcode-back" href="../attendee.html#attendee.Attendee.set_attribute">[docs]</a>    <span class="k">def</span> <span class="nf">set_attribute</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">:</span> <span class="n">Hashable</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="n">Any</span><span class="p">,</span>
+<div class="viewcode-block" id="Attendee.set_attribute"><a class="viewcode-back" href="../attendees/attendee.html#attendee.Attendee.set_attribute">[docs]</a>    <span class="k">def</span> <span class="nf">set_attribute</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">:</span> <span class="n">Hashable</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="n">Any</span><span class="p">,</span>
                      <span class="n">verifyFunc</span><span class="p">:</span> <span class="n">VerifyFunc</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Set an arbitrary attribute of the attendee.</span>
@@ -240,7 +247,7 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">raise</span> <span class="ne">NotImplementedError</span></div>
 
-<div class="viewcode-block" id="Attendee.remove_attribute"><a class="viewcode-back" href="../attendee.html#attendee.Attendee.remove_attribute">[docs]</a>    <span class="k">def</span> <span class="nf">remove_attribute</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">:</span> <span class="n">Hashable</span><span class="p">):</span>
+<div class="viewcode-block" id="Attendee.remove_attribute"><a class="viewcode-back" href="../attendees/attendee.html#attendee.Attendee.remove_attribute">[docs]</a>    <span class="k">def</span> <span class="nf">remove_attribute</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">:</span> <span class="n">Hashable</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Remove an attribute from the attendee.</span>
 

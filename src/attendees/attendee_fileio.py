@@ -3,7 +3,7 @@ Module with functionality to save and load attendees from a CSV file.
 
 Future upgrades should be able to load attendees from an Excel file.
 
-TODO
+TODO:
     * Implement functions
     * Further detail the OSErrors that can be raised
     * Impement datalogging

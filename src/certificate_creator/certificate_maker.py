@@ -4,7 +4,7 @@ Module for creating certificates given a template and the attendees.
 Currently only accepts .docx files as templates. Templates must have merge
 fields or variables to substitute into. Certificates will be saved as PDF files.
 
-TODO
+TODO:
     * Implement functions
     * Use multiprocessing to speed up certificate creation.
     * Impement datalogging
@@ -42,7 +42,7 @@ def createCertificate(in_path: str, out_path: str, attendees: AttendeeManager,
         to create certificate.
 
     Raises:
-        OSError if template file IO error occurs.
+        OSError: if template file IO error occurs.
         TODO: Document exact errors that can be raised.
     """
     raise NotImplementedError

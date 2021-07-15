@@ -4,7 +4,7 @@ Module that handles the Mailchimp functionality.
 Can connect to Mailchimp account, upload certificates, and update attendees.
 However, does not have ability to authorise itself. Must get keys elsewhere.
 
-TODO
+TODO:
     * Implement methods
     * Implement datalogging
 """

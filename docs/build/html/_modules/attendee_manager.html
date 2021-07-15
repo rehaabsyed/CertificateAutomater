@@ -202,9 +202,9 @@
 <span class="sd">            attendee_id (Hashable): How to uniquely identify the attendee.</span>
 <span class="sd">        </span>
 <span class="sd">        Raises:</span>
-<span class="sd">            TypeError if attendee is not an Attendee object.</span>
-<span class="sd">            TypeError if attendee_id is not hashable.</span>
-<span class="sd">            ValueError if an attendee with attendee_id already exists.</span>
+<span class="sd">            TypeError: if attendee is not an Attendee object.</span>
+<span class="sd">            TypeError: if attendee_id is not hashable.</span>
+<span class="sd">            ValueError: if an attendee with attendee_id already exists.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">raise</span> <span class="ne">NotImplementedError</span></div>
     
@@ -221,7 +221,7 @@
 <span class="sd">            Attendee: The attendee object.</span>
 <span class="sd">        </span>
 <span class="sd">        Raises:</span>
-<span class="sd">            KeyError if attendee does not exist</span>
+<span class="sd">            KeyError: if attendee does not exist</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">raise</span> <span class="ne">NotImplementedError</span></div>
 
@@ -233,7 +233,7 @@
 <span class="sd">            attendee_id (Hashable): The unique identifier for the attendee.</span>
 <span class="sd">        </span>
 <span class="sd">        Raises:</span>
-<span class="sd">            KeyError if attendee does not exist.</span>
+<span class="sd">            KeyError: if attendee does not exist.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">raise</span> <span class="ne">NotImplementedError</span></div>
 
@@ -246,13 +246,11 @@
 
 <span class="sd">        Args:</span>
 <span class="sd">            key (Hashable): The key/name of the attribute.</span>
-<span class="sd">            values (Dict[Hashable, Any]): A mapping from attendee ID to initial</span>
-<span class="sd">            value of the new attribute. Defaults to empty dictionary (no</span>
-<span class="sd">            initialision).</span>
+<span class="sd">            values (Dict[Hashable, Any]): A mapping from attendee ID to initial value of the new attribute. Defaults to empty dictionary (no initialision).</span>
 <span class="sd">        </span>
 <span class="sd">        Raises:</span>
-<span class="sd">            TypeError if key is not Hashable.</span>
-<span class="sd">            TypeError if values is not a dictionary.</span>
+<span class="sd">            TypeError: if key is not Hashable.</span>
+<span class="sd">            TypeError: if values is not a dictionary.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">raise</span> <span class="ne">NotImplementedError</span></div>
 
@@ -267,7 +265,7 @@
 <span class="sd">            key (Hashable): The key/name of the attribute.</span>
 
 <span class="sd">        Raises:</span>
-<span class="sd">            TypeError if key is not Hashable.</span>
+<span class="sd">            TypeError: if key is not Hashable.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">raise</span> <span class="ne">NotImplementedError</span></div>
 

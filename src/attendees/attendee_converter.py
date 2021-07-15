@@ -19,11 +19,10 @@ def pandas2manager(attendees: pd.DataFrame, ignore: set = None
 
     Args:
         attendees (pd.DataFrame): The attendees as a Pandas DataFrame.
-        ignore (set): Collection of attributes to ignore, if left as None
-        will not ignore any fields.
+        ignore (set): Collection of attributes to ignore, if left as ``None`` will not ignore any fields.
 
     Returns:
-        AttendeeManager: The attendees as a AttendeeManager.
+        AttendeeManager: The attendees as a ``AttendeeManager``.
     """
     raise NotImplementedError
 

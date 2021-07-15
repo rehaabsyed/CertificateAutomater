@@ -192,8 +192,8 @@
 <span class="sd">            fname (str): The first or given name of the attendee.</span>
 <span class="sd">            lname (str): The last or family name of the attendee.</span>
 <span class="sd">            email (str): Email address of the attendee.</span>
-<span class="sd">            file_path (str): The path to the certificate file, defaults to None.</span>
-<span class="sd">            file_url (str): The URL to the certificate file, defaults to None.</span>
+<span class="sd">            file_path (str): The path to the certificate file, defaults to ``None``.</span>
+<span class="sd">            file_url (str): The URL to the certificate file, defaults to ``None``.</span>
 <span class="sd">            kwargs (dict): All other attributes of the attendee.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">raise</span> <span class="ne">NotImplementedError</span>
@@ -211,20 +211,20 @@
 <span class="sd">            Any: The attribute value.</span>
 <span class="sd">        </span>
 <span class="sd">        Raises:</span>
-<span class="sd">            TypeError if key is not hashable.</span>
-<span class="sd">            KeyError if attendee does not have attribute with name key.</span>
+<span class="sd">            TypeError: if key is not hashable.</span>
+<span class="sd">            KeyError: if attendee does not have attribute with name key.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">raise</span> <span class="ne">NotImplementedError</span></div>
 
 <div class="viewcode-block" id="Attendee.has_attribute"><a class="viewcode-back" href="../attendees/attendee.html#attendee.Attendee.has_attribute">[docs]</a>    <span class="k">def</span> <span class="nf">has_attribute</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">:</span> <span class="n">Hashable</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Checks if Attendee has a specificed attribute.</span>
+<span class="sd">        Checks if ``Attendee`` object has a specificed attribute.</span>
 
 <span class="sd">        Args:</span>
 <span class="sd">            key (Hashable): The key/name of the attribute.</span>
 <span class="sd">        </span>
 <span class="sd">        Returns:</span>
-<span class="sd">            bool: True if Attendee has attribute and vice-versa.</span>
+<span class="sd">            bool: ``True`` if ``Attendee`` object has attribute and vice-versa.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">raise</span> <span class="ne">NotImplementedError</span></div>
 
@@ -238,12 +238,11 @@
 <span class="sd">        Args:</span>
 <span class="sd">            key (Hashable): The name of the attribute.</span>
 <span class="sd">            value (Any): The attribute value.</span>
-<span class="sd">            verifyFunc (Callable[[Hashable, Any], bool]): A function to verify</span>
-<span class="sd">            the value being set, if let as None, will not verify value.</span>
+<span class="sd">            verifyFunc (Callable[[Hashable, Any], bool]): A function to verify the value being set, if let as ``None``, will not verify value.</span>
 <span class="sd">        </span>
 <span class="sd">        Raises:</span>
-<span class="sd">            TypeError if key is not hashable.</span>
-<span class="sd">            ValueError if key is &quot;fname&quot;, &quot;lname&quot;, or &quot;email&quot;</span>
+<span class="sd">            TypeError: if key is not hashable.</span>
+<span class="sd">            ValueError if key is &quot;fname&quot;, &quot;lname&quot;, or &quot;email&quot;.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">raise</span> <span class="ne">NotImplementedError</span></div>
 
@@ -255,7 +254,7 @@
 <span class="sd">            key (Hashable): The name of the attendee.</span>
 <span class="sd">        </span>
 <span class="sd">        Raises:</span>
-<span class="sd">            TypeError if key is not hashable.</span>
+<span class="sd">            TypeError: if key is not hashable.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">raise</span> <span class="ne">NotImplementedError</span></div></div>
 </pre></div>

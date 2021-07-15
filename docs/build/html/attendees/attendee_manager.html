@@ -211,9 +211,9 @@ Attendees must be Attendee objects for ease of use.</p>
 </dd>
 <dt class="field-even">Raises</dt>
 <dd class="field-even"><ul class="simple">
-<li><p><strong>TypeError if attendee is not an Attendee object.</strong> – </p></li>
-<li><p><strong>TypeError if attendee_id is not hashable.</strong> – </p></li>
-<li><p><strong>ValueError if an attendee with attendee_id already exists.</strong> – </p></li>
+<li><p><strong>TypeError</strong> – if attendee is not an Attendee object.</p></li>
+<li><p><strong>TypeError</strong> – if attendee_id is not hashable.</p></li>
+<li><p><strong>ValueError</strong> – if an attendee with attendee_id already exists.</p></li>
 </ul>
 </dd>
 </dl>
@@ -229,15 +229,13 @@ Will overwrite values if attribute already exists.</p>
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>key</strong> (<em>Hashable</em>) – The key/name of the attribute.</p></li>
-<li><p><strong>values</strong> (<em>Dict</em><em>[</em><em>Hashable</em><em>, </em><em>Any</em><em>]</em>) – A mapping from attendee ID to initial</p></li>
-<li><p><strong>(</strong><strong>no</strong> (<em>value of the new attribute. Defaults to empty dictionary</em>) – </p></li>
-<li><p><strong>initialision</strong><strong>)</strong><strong></strong> – </p></li>
+<li><p><strong>values</strong> (<em>Dict</em><em>[</em><em>Hashable</em><em>, </em><em>Any</em><em>]</em>) – A mapping from attendee ID to initial value of the new attribute. Defaults to empty dictionary (no initialision).</p></li>
 </ul>
 </dd>
 <dt class="field-even">Raises</dt>
 <dd class="field-even"><ul class="simple">
-<li><p><strong>TypeError if key is not Hashable.</strong> – </p></li>
-<li><p><strong>TypeError if values is not a dictionary.</strong> – </p></li>
+<li><p><strong>TypeError</strong> – if key is not Hashable.</p></li>
+<li><p><strong>TypeError</strong> – if values is not a dictionary.</p></li>
 </ul>
 </dd>
 </dl>
@@ -259,7 +257,7 @@ Will overwrite values if attribute already exists.</p>
 <dd class="field-odd"><p><a class="reference internal" href="attendee.html#attendee.Attendee" title="attendee.Attendee">Attendee</a></p>
 </dd>
 <dt class="field-even">Raises</dt>
-<dd class="field-even"><p><strong>KeyError if attendee does not exist</strong> – </p>
+<dd class="field-even"><p><strong>KeyError</strong> – if attendee does not exist</p>
 </dd>
 </dl>
 </dd></dl>
@@ -273,7 +271,7 @@ Will overwrite values if attribute already exists.</p>
 <dd class="field-odd"><p><strong>attendee_id</strong> (<em>Hashable</em>) – The unique identifier for the attendee.</p>
 </dd>
 <dt class="field-even">Raises</dt>
-<dd class="field-even"><p><strong>KeyError if attendee does not exist.</strong> – </p>
+<dd class="field-even"><p><strong>KeyError</strong> – if attendee does not exist.</p>
 </dd>
 </dl>
 </dd></dl>
@@ -289,7 +287,7 @@ Does nothing if no attendees has the attribute.</p>
 <dd class="field-odd"><p><strong>key</strong> (<em>Hashable</em>) – The key/name of the attribute.</p>
 </dd>
 <dt class="field-even">Raises</dt>
-<dd class="field-even"><p><strong>TypeError if key is not Hashable.</strong> – </p>
+<dd class="field-even"><p><strong>TypeError</strong> – if key is not Hashable.</p>
 </dd>
 </dl>
 </dd></dl>

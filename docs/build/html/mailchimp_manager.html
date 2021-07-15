@@ -221,9 +221,7 @@ then processed.</p>
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>response_body_url</strong> (<em>str</em>) – The URL to download the responses.</p></li>
-<li><p><strong>keep_files</strong> (<em>bool</em>) – Whether to keep the responses on file or delete</p></li>
-<li><p><strong>them</strong> – </p></li>
-<li><p><strong>True.</strong> (<em>defaults to</em>) – </p></li>
+<li><p><strong>keep_files</strong> (<em>bool</em>) – Whether to keep the responses on file or delete them, defaults to <code class="docutils literal notranslate"><span class="pre">True</span></code>.</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns</dt>
@@ -261,13 +259,10 @@ then processed.</p>
 API documentation for more details.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>keys</strong> (<em>Dict</em><em>[</em><em>str</em><em>, </em><em>str</em><em>]</em>) – Collection of named keys used to authorise</p></li>
-<li><p><strong>self.</strong> – </p></li>
-</ul>
+<dd class="field-odd"><p><strong>keys</strong> (<em>Dict</em><em>[</em><em>str</em><em>, </em><em>str</em><em>]</em>) – Collection of named keys used to authorise self.</p>
 </dd>
 <dt class="field-even">Returns</dt>
-<dd class="field-even"><p>True if authorisation passed and vice-versa.</p>
+<dd class="field-even"><p><code class="docutils literal notranslate"><span class="pre">True</span></code> if authorisation passed and vice-versa.</p>
 </dd>
 <dt class="field-odd">Return type</dt>
 <dd class="field-odd"><p>bool</p>
@@ -286,8 +281,8 @@ API documentation for more details.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>attendees</strong> (<a class="reference internal" href="attendees/attendee_manager.html#attendee_manager.AttendeeManager" title="attendee_manager.AttendeeManager"><em>AttendeeManager</em></a>) – The collection of attendees with</p></li>
-<li><p><strong>URLs.</strong> (<em>file</em>) – </p></li>
+<li><p><strong>attendees</strong> (<a class="reference internal" href="attendees/attendee_manager.html#attendee_manager.AttendeeManager" title="attendee_manager.AttendeeManager"><em>AttendeeManager</em></a>) – The collection of attendees with file URLs.</p></li>
+<li><p><strong>status_func</strong> (<em>StatusFunc</em>) – Callback to inform caller of progress, must pass in <code class="docutils literal notranslate"><span class="pre">Attendee</span></code> object then the <code class="docutils literal notranslate"><span class="pre">Exception</span></code> (<code class="docutils literal notranslate"><span class="pre">None</span></code> if no error occured), then return nothing.</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns</dt>
@@ -310,16 +305,9 @@ API documentation for more details.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>attendees</strong> (<a class="reference internal" href="attendees/attendee_manager.html#attendee_manager.AttendeeManager" title="attendee_manager.AttendeeManager"><em>AttendeeManager</em></a>) – The collection of attendees. Will be</p></li>
-<li><p><strong>URLs.</strong> (<em>updated to include file</em>) – </p></li>
-<li><p><strong>folder_id</strong> (<em>int</em>) – The ID of the folder to upload certificates to.</p></li>
-<li><p><strong>None</strong> (<em>be None if successful. If left as</em>) – </p></li>
-<li><p><strong>folder.</strong> (<em>will not put in a</em>) – </p></li>
-<li><p><strong>status_func</strong> (<em>Callable</em><em>[</em><em>[</em><a class="reference internal" href="attendees/attendee.html#attendee.Attendee" title="attendee.Attendee"><em>Attendee</em></a><em>, </em><em>Exception</em><em>]</em><em>, </em><em>None</em><em>]</em>) – Status update</p></li>
-<li><p><strong>processed.</strong> (<em>callback to inform caller of whatr certificates have been</em>) – </p></li>
-<li><p><strong>should</strong> (<em>Must take in Attendee object then the Exception. Exception</em>) – </p></li>
-<li><p><strong>None</strong> – </p></li>
-<li><p><strong>nothing.</strong> (<em>does</em>) – </p></li>
+<li><p><strong>attendees</strong> (<a class="reference internal" href="attendees/attendee_manager.html#attendee_manager.AttendeeManager" title="attendee_manager.AttendeeManager"><em>AttendeeManager</em></a>) – The collection of attendees. Will be updated to include file URLs.</p></li>
+<li><p><strong>folder_id</strong> (<em>int</em>) – The ID of the folder to upload certificates to. If left as <code class="docutils literal notranslate"><span class="pre">None</span></code>, will not put in a folder.</p></li>
+<li><p><strong>status_func</strong> (<em>Callable</em><em>[</em><em>[</em><a class="reference internal" href="attendees/attendee.html#attendee.Attendee" title="attendee.Attendee"><em>Attendee</em></a><em>, </em><em>Exception</em><em>]</em><em>, </em><em>None</em><em>]</em>) – Status update callback to inform caller of what certificates have been processed. Must take in <code class="docutils literal notranslate"><span class="pre">Attendee</span></code> object then the <code class="docutils literal notranslate"><span class="pre">Exception</span></code>. <code class="docutils literal notranslate"><span class="pre">Exception</span></code> should be <code class="docutils literal notranslate"><span class="pre">None</span></code> if successful. If left as <code class="docutils literal notranslate"><span class="pre">None</span></code>, does nothing.</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns</dt>

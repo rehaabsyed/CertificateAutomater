@@ -21,7 +21,7 @@ def load_attendee_record(path: str) -> pd.DataFrame:
         path (str): The absolute or relative path to the file.
     
     Raises:
-        OSError if file IO error occurs.
+        OSError: if file IO error occurs.
     """
     raise NotImplementedError
 
@@ -34,7 +34,7 @@ def save_attendee_record(path: str, attendees: pd.DataFrame):
         attendees (pd.DataFrame): The attendee record.
     
     Raises:
-        TypeError if attendees is not a Pandas DataFrame
-        OSError if file IO error occurs
+        TypeError: if attendees is not a Pandas DataFrame
+        OSError: if file IO error occurs
     """
     raise NotImplementedError

@@ -207,8 +207,8 @@
 </dd>
 <dt class="field-even">Raises</dt>
 <dd class="field-even"><ul class="simple">
-<li><p><strong>TypeError if key is not hashable.</strong> – </p></li>
-<li><p><strong>KeyError if attendee does not have attribute with name key.</strong> – </p></li>
+<li><p><strong>TypeError</strong> – if key is not hashable.</p></li>
+<li><p><strong>KeyError</strong> – if attendee does not have attribute with name key.</p></li>
 </ul>
 </dd>
 </dl>
@@ -217,13 +217,13 @@
 <dl class="py method">
 <dt class="sig sig-object py" id="attendee.Attendee.has_attribute">
 <span class="sig-name descname"><span class="pre">has_attribute</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">key</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Hashable</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="reference internal" href="../_modules/attendee.html#Attendee.has_attribute"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#attendee.Attendee.has_attribute" title="Permalink to this definition">¶</a></dt>
-<dd><p>Checks if Attendee has a specificed attribute.</p>
+<dd><p>Checks if <code class="docutils literal notranslate"><span class="pre">Attendee</span></code> object has a specificed attribute.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><p><strong>key</strong> (<em>Hashable</em>) – The key/name of the attribute.</p>
 </dd>
 <dt class="field-even">Returns</dt>
-<dd class="field-even"><p>True if Attendee has attribute and vice-versa.</p>
+<dd class="field-even"><p><code class="docutils literal notranslate"><span class="pre">True</span></code> if <code class="docutils literal notranslate"><span class="pre">Attendee</span></code> object has attribute and vice-versa.</p>
 </dd>
 <dt class="field-odd">Return type</dt>
 <dd class="field-odd"><p>bool</p>
@@ -240,7 +240,7 @@
 <dd class="field-odd"><p><strong>key</strong> (<em>Hashable</em>) – The name of the attendee.</p>
 </dd>
 <dt class="field-even">Raises</dt>
-<dd class="field-even"><p><strong>TypeError if key is not hashable.</strong> – </p>
+<dd class="field-even"><p><strong>TypeError</strong> – if key is not hashable.</p>
 </dd>
 </dl>
 </dd></dl>
@@ -255,16 +255,13 @@
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>key</strong> (<em>Hashable</em>) – The name of the attribute.</p></li>
 <li><p><strong>value</strong> (<em>Any</em>) – The attribute value.</p></li>
-<li><p><strong>verifyFunc</strong> (<em>Callable</em><em>[</em><em>[</em><em>Hashable</em><em>, </em><em>Any</em><em>]</em><em>, </em><em>bool</em><em>]</em>) – A function to verify</p></li>
-<li><p><strong>set</strong> (<em>the value being</em>) – </p></li>
-<li><p><strong>None</strong> (<em>if let as</em>) – </p></li>
-<li><p><strong>value.</strong> (<em>will not verify</em>) – </p></li>
+<li><p><strong>verifyFunc</strong> (<em>Callable</em><em>[</em><em>[</em><em>Hashable</em><em>, </em><em>Any</em><em>]</em><em>, </em><em>bool</em><em>]</em>) – A function to verify the value being set, if let as <code class="docutils literal notranslate"><span class="pre">None</span></code>, will not verify value.</p></li>
 </ul>
 </dd>
 <dt class="field-even">Raises</dt>
 <dd class="field-even"><ul class="simple">
-<li><p><strong>TypeError if key is not hashable.</strong> – </p></li>
-<li><p><strong>ValueError if key is &quot;fname&quot;</strong><strong>, </strong><strong>&quot;lname&quot;</strong><strong>, or </strong><strong>&quot;email&quot;</strong> – </p></li>
+<li><p><strong>TypeError</strong> – if key is not hashable.</p></li>
+<li><p><strong>ValueError if key is &quot;fname&quot;</strong><strong>, </strong><strong>&quot;lname&quot;</strong><strong>, or </strong><strong>&quot;email&quot;.</strong> – </p></li>
 </ul>
 </dd>
 </dl>

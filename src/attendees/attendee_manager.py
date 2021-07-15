@@ -36,9 +36,9 @@ class AttendeeManager:
             attendee_id (Hashable): How to uniquely identify the attendee.
         
         Raises:
-            TypeError if attendee is not an Attendee object.
-            TypeError if attendee_id is not hashable.
-            ValueError if an attendee with attendee_id already exists.
+            TypeError: if attendee is not an Attendee object.
+            TypeError: if attendee_id is not hashable.
+            ValueError: if an attendee with attendee_id already exists.
         """
         raise NotImplementedError
     
@@ -55,7 +55,7 @@ class AttendeeManager:
             Attendee: The attendee object.
         
         Raises:
-            KeyError if attendee does not exist
+            KeyError: if attendee does not exist
         """
         raise NotImplementedError
 
@@ -67,7 +67,7 @@ class AttendeeManager:
             attendee_id (Hashable): The unique identifier for the attendee.
         
         Raises:
-            KeyError if attendee does not exist.
+            KeyError: if attendee does not exist.
         """
         raise NotImplementedError
 
@@ -80,13 +80,11 @@ class AttendeeManager:
 
         Args:
             key (Hashable): The key/name of the attribute.
-            values (Dict[Hashable, Any]): A mapping from attendee ID to initial
-            value of the new attribute. Defaults to empty dictionary (no
-            initialision).
+            values (Dict[Hashable, Any]): A mapping from attendee ID to initial value of the new attribute. Defaults to empty dictionary (no initialision).
         
         Raises:
-            TypeError if key is not Hashable.
-            TypeError if values is not a dictionary.
+            TypeError: if key is not Hashable.
+            TypeError: if values is not a dictionary.
         """
         raise NotImplementedError
 
@@ -101,7 +99,7 @@ class AttendeeManager:
             key (Hashable): The key/name of the attribute.
 
         Raises:
-            TypeError if key is not Hashable.
+            TypeError: if key is not Hashable.
         """
         raise NotImplementedError
 

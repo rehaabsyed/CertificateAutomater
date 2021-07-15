@@ -2,7 +2,7 @@
 
 # Certificate Maker
 
-[![Documentation](https://readthedocs.org/projects/sphinx/badge/?version=master)](https://github.com/curtin-iet-on-campus/CertificateAutomater/blob/main/docs/_build/html/index.html)
+[![Documentation](https://readthedocs.org/projects/sphinx/badge/?version=master)](https://curtin-iet-on-campus.github.io/CertificateAutomater/build/html/index.html)
 
 ## Table of Contents
 

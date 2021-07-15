@@ -26,8 +26,8 @@ class Attendee:
             fname (str): The first or given name of the attendee.
             lname (str): The last or family name of the attendee.
             email (str): Email address of the attendee.
-            file_path (str): The path to the certificate file, defaults to None.
-            file_url (str): The URL to the certificate file, defaults to None.
+            file_path (str): The path to the certificate file, defaults to ``None``.
+            file_url (str): The URL to the certificate file, defaults to ``None``.
             kwargs (dict): All other attributes of the attendee.
         """
         raise NotImplementedError
@@ -45,20 +45,20 @@ class Attendee:
             Any: The attribute value.
         
         Raises:
-            TypeError if key is not hashable.
-            KeyError if attendee does not have attribute with name key.
+            TypeError: if key is not hashable.
+            KeyError: if attendee does not have attribute with name key.
         """
         raise NotImplementedError
 
     def has_attribute(self, key: Hashable) -> bool:
         """
-        Checks if Attendee has a specificed attribute.
+        Checks if ``Attendee`` object has a specificed attribute.
 
         Args:
             key (Hashable): The key/name of the attribute.
         
         Returns:
-            bool: True if Attendee has attribute and vice-versa.
+            bool: ``True`` if ``Attendee`` object has attribute and vice-versa.
         """
         raise NotImplementedError
 
@@ -72,12 +72,11 @@ class Attendee:
         Args:
             key (Hashable): The name of the attribute.
             value (Any): The attribute value.
-            verifyFunc (Callable[[Hashable, Any], bool]): A function to verify
-            the value being set, if let as None, will not verify value.
+            verifyFunc (Callable[[Hashable, Any], bool]): A function to verify the value being set, if let as ``None``, will not verify value.
         
         Raises:
-            TypeError if key is not hashable.
-            ValueError if key is "fname", "lname", or "email"
+            TypeError: if key is not hashable.
+            ValueError if key is "fname", "lname", or "email".
         """
         raise NotImplementedError
 
@@ -89,6 +88,6 @@ class Attendee:
             key (Hashable): The name of the attendee.
         
         Raises:
-            TypeError if key is not hashable.
+            TypeError: if key is not hashable.
         """
         raise NotImplementedError

@@ -40,11 +40,10 @@ class MailchimpManager:
         API documentation for more details.
 
         Args:
-            keys (Dict[str, str]): Collection of named keys used to authorise
-            self.
+            keys (Dict[str, str]): Collection of named keys used to authorise self.
         
         Returns:
-            bool: True if authorisation passed and vice-versa.
+            bool: ``True`` if authorisation passed and vice-versa.
         
         Raises:
             TODO: Document all possible errors
@@ -90,14 +89,9 @@ class MailchimpManager:
         Blocking function that waits until the batch request completes.
 
         Args:
-            attendees (AttendeeManager): The collection of attendees. Will be
-            updated to include file URLs.
-            folder_id (int): The ID of the folder to upload certificates to.
-            If left as None, will not put in a folder.
-            status_func (Callable[[Attendee, Exception], None]): Status update
-            callback to inform caller of whatr certificates have been processed.
-            Must take in Attendee object then the Exception. Exception should
-            be None if successful. If left as None, does nothing.
+            attendees (AttendeeManager): The collection of attendees. Will be updated to include file URLs.
+            folder_id (int): The ID of the folder to upload certificates to. If left as ``None``, will not put in a folder.
+            status_func (Callable[[Attendee, Exception], None]): Status update callback to inform caller of what certificates have been processed. Must take in ``Attendee`` object then the ``Exception``. ``Exception`` should be ``None`` if successful. If left as ``None``, does nothing.
         
         Returns:
             str: The response_body_url to download the responses.
@@ -115,8 +109,8 @@ class MailchimpManager:
         Blocking function that waits for batch request to complete.
 
         Args:
-            attendees (AttendeeManager): The collection of attendees with
-            file URLs.
+            attendees (AttendeeManager): The collection of attendees with file URLs.
+            status_func (StatusFunc): Callback to inform caller of progress, must pass in ``Attendee`` object then the ``Exception`` (``None`` if no error occured), then return nothing.
 
         Returns:
             str: The response_body_url to download the responses.
@@ -136,8 +130,7 @@ class MailchimpManager:
 
         Args:
             response_body_url (str): The URL to download the responses.
-            keep_files (bool): Whether to keep the responses on file or delete
-            them, defaults to True.
+            keep_files (bool): Whether to keep the responses on file or delete them, defaults to ``True``.
         
         Returns:
             List[str]: The list of responses as JSON strings.

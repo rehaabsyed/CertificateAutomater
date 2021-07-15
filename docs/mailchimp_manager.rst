@@ -1,4 +1,4 @@
-mailchimp\_manager module
+Mailchimp Manager module
 =========================
 
 .. automodule:: mailchimp_manager

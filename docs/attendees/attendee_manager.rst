@@ -1,4 +1,4 @@
-attendee\_manager module
+Attendee Manager module
 ========================
 
 .. automodule:: attendee_manager

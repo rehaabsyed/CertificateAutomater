@@ -1,4 +1,4 @@
-attendee module
+Attendee module
 ===============
 
 .. automodule:: attendee

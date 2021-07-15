@@ -2,6 +2,8 @@
 
 # Certificate Maker
 
+[![Documentation](https://readthedocs.org/projects/sphinx/badge/?version=master)](https://github.com/curtin-iet-on-campus/CertificateAutomater/docs/_build/html/index.html)
+
 ## Table of Contents
 
 **[Cover](#cover)**<br>

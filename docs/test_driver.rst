@@ -1,5 +1,5 @@
-test\_driver module
-===================
+Test Driver module
+==================
 
 .. automodule:: test_driver
    :members:

@@ -1,4 +1,4 @@
-certificate\_maker module
+Certificate Maker module
 =========================
 
 .. automodule:: certificate_maker

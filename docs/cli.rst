@@ -1,4 +1,4 @@
-cli module
+CLI module
 ==========
 
 .. automodule:: cli

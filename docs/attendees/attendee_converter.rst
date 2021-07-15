@@ -1,4 +1,4 @@
-attendee\_converter module
+Attendee Converter module
 ==========================
 
 .. automodule:: attendee_converter

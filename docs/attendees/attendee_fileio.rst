@@ -1,4 +1,4 @@
-attendee\_fileio module
+Attendee File IO module
 =======================
 
 .. automodule:: attendee_fileio

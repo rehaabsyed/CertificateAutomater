@@ -62,7 +62,7 @@ todo_include_todos = True
 #
 html_theme = 'sphinx_rtd_theme'
 
-html_logo = "logos/IET_logo_blue_small.png"
+html_logo = "IET_logo_blue_small.png"
 
 html_use_smartypants = True
 

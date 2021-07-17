@@ -944,12 +944,39 @@ Lastly, \mintinline{python}{pytest} can run test cases in parallel by installing
 \noindent
 will run \texttt{test\_script.py}, splitting the test cases across six processes. \texttt{pytest} also supports third-party plugins that add numerous useful features, the ability to skip failed test cases, and categorising test cases so that only one category of test cases gets executed. Hence, this project should use \texttt{pytest} where ever possible.
 
+\subsection{Mocking functions and classes}
+
+When testing code as independent modules, a problem arises: the modules often rely on each other. Hence, testing one module often requires that other modules are bug free and fully implemented. Obviously, these assumptions are not always valid, needing a manner of testing modules in isolation of each other. Such testing is known as ``unit testing'' or ``component testing'' as code is tested in ``units''.
+
+Fortunately, Python already has a mocking library for this exact purpose. Mocking allows test cases to create mock versions of functions and classes. Furthermore, the \mintinline{python}{pytest-mock} extension for \mintinline{python}{pytest} provides simple wrappers for the mocking library. Most importantly, functions are mocked by simply using
+
+\vspace{\baselineskip}
+\mintinline{python}{mocker.patch(target, return_value=val)}
+
+\vspace{\baselineskip}
+
+\noindent
+In it, the \textit{target} function must be specified as a string of the form \mintinline{python}{package.module.function}. Additionally, the return value of the mock can be specified as \mintinline{python}{return_value=val}, in case the code being tested relies on the function returning a specific value. Similarly, objects can be mocked using
+
+\vspace{\baselineskip}
+\noindent
+\mintinline{python}{mocker.object(target, attribute, return_value=val)}
+\vspace{\baselineskip}
+
+\noindent
+where \textit{attribute} is the method being mocked. More mock methods can be added by simply using the \mintinline{python}{mocker.object()} multiple times. Extra rigorous test scripts can also use the \mintinline{python}{assert_called()} functions to ensure the mock functions were called the correct number of times with the correct arguments. Lastly, if the code being mocked should raise an exception, the \mintinline{python}{side_effect} attribute can be used. The code below demonstrates the \mintinline{python}{pytest-mock} extension.
+
+\inputminted[]{python}{python_examples/pytest-mock_example.py}
+
 \subsection{Further reading}
 
 \begin{itemize}
     \item Boundary value analysis and equivalence partioning: \url{https://www.guru99.com/equivalence-partitioning-boundary-value-analysis.html}
     \item Python \mintinline{python}{assert} documentation: \url{https://docs.python.org/3/reference/simple_stmts.html#the-assert-statement}
     \item \texttt{pytest} official website: \url{https://docs.pytest.org/en/6.2.x/}
+    \item Mocking official docs: \url{https://docs.python.org/3/library/unittest.mock.html#the-patchers}
+    \item \texttt{pytest-mock} PyPI page: \url{https://pypi.org/project/pytest-mock/}
+    \item Excellent \texttt{pytest-mock} tutorial: \url{https://changhsinlee.com/pytest-mock/}
 \end{itemize}
 
 %\newpage

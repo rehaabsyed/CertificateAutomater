@@ -35,8 +35,11 @@
 
 \usepackage[
     colorlinks=true,
-    linkcolor=black
+    linkcolor=black,
+    breaklinks=true
 ]{hyperref}
+\def\UrlBreaks{\do\/\do-}
+
 \usepackage{bookmark}   % bookmarks for PDF viewing
 
 \numberwithin{equation}{section}
@@ -61,10 +64,7 @@
     python3=true,
     frame=lines
 }
-\setmintedinline{bgcolor={}}
-
-\usepackage{chngcntr}
-\counterwithin{figure}{section}
+\setmintedinline{bgcolor=DarkGray}
 
 % Referencing manager
 %%\usepackage[

@@ -484,7 +484,7 @@ Solving these concerns introduces the need for Application Programming Interface
 
 While developers can use whatever common or obscure data format they want for their APIs, JavaScript Object Notation (JSON) has dominated API usage in recent years. Originally designed for the Javascript programming language as a way of creating objects without a class or constructor function, JSON has since evolved into a text format for storing and transporting data in a lightweight manner. While confusing for new comers, it quickly becomes evident as to why JSON is so popular: its ability to scale for various types of data easily in a humanly readable format.
 
-JSON is comprised of a few special characters and a few datatypes. Every JSON message always starts and ends with curly brackets, denoting the message as an object. The properties of the object are then writtin in key-value pairs, where the key is always a string. The value can either be a string (within quotations), a number, an array (denoted using square brackets), a boolean (either \mintinline{json}{true} or \mintinline{json}{false}), \mintinline{json}{null}, or a nested object (denoted with curly brackets). The following JSON conventions are either required or strongly recommended:
+JSON is comprised of a few special characters and a few datatypes. Most JSON message always starts and ends with curly brackets, denoting the message as an object. The properties of the object are then writtin in key-value pairs, where the key is always a string. The value can either be a string (within quotations), a number, an array (denoted using square brackets), a boolean (either \mintinline{json}{true} or \mintinline{json}{false}), \mintinline{json}{null}, or a nested object (denoted with curly brackets). The following JSON conventions are either required or strongly recommended:
 
 \begin{enumerate}
     \item Key names must always be strings.
@@ -667,14 +667,16 @@ For the sake of a prototype, a command line interface (CLI) can be implemented. 
 
 Going back decades, the \texttt{curses} library attempts to partially mitigate the limitations of the humble \mintinline{python}{print()} function. Implemented in C, Python's \texttt{curses} library is simply a set of wrappers calling the C \mintinline{C}{ncurses.h} functions.\footnote{The ``n'' is short for new.} This alone has two advantages: (1) this makes it extremely easy to transition between C and Python when using \texttt{curses}, and (2) the functions are highly optimised. This is on top of the ability to easily colour text, move the cursor around, and draw boxes. While simple in concept, figure \ref{fig:ncurses-example} below is an example of advanced usage of the \texttt{curses} library. Using \texttt{curses}, it is possible to easily create GUI-like user interfaces without the complexity of GUI frameworks.
 
-\vspace{\baselineskip}
-
-\begin{figure}[h!]
+\begin{figure}[b!]
     \centering
     \includegraphics[width=\textwidth]{figures/ncurses_example.png}
     \caption{Advanced example of \texttt{curses}.}
     \label{fig:ncurses-example}
 \end{figure}
+
+At a minimum, a CLI must meet certain criteria. For each stage the program is in (see figure \ref{fig:new-solution}), at least one line of text must be printed. For stages that involve processing a collection of items, the program should \textbf{not} print one line per item processed; it should update the line with a progress bar\footnote{See the \href{https://pypi.org/project/tqdm/}{tqdm} library} or a fraction \textit{without} clearing the screen. For any error that occur, the error should either be printed at the end of the program's life or printed immediately then force to the to confirm before continuing. Any inputs required from the user can either be done as command line arguments or the \mintinline{python}{input()} function. A example of such a CLI is shown below.
+
+\inputminted[]{shell}{cli_examples/simple_cli.txt}
 
 \subsection{Desktop GUI}
 
@@ -942,12 +944,39 @@ Lastly, \mintinline{python}{pytest} can run test cases in parallel by installing
 \noindent
 will run \texttt{test\_script.py}, splitting the test cases across six processes. \texttt{pytest} also supports third-party plugins that add numerous useful features, the ability to skip failed test cases, and categorising test cases so that only one category of test cases gets executed. Hence, this project should use \texttt{pytest} where ever possible.
 
+\subsection{Mocking functions and classes}
+
+When testing code as independent modules, a problem arises: the modules often rely on each other. Hence, testing one module often requires that other modules are bug free and fully implemented. Obviously, these assumptions are not always valid, needing a manner of testing modules in isolation of each other. Such testing is known as ``unit testing'' or ``component testing'' as code is tested in ``units''.
+
+Fortunately, Python already has a mocking library for this exact purpose. Mocking allows test cases to create mock versions of functions and classes. Furthermore, the \mintinline{python}{pytest-mock} extension for \mintinline{python}{pytest} provides simple wrappers for the mocking library. Most importantly, functions are mocked by simply using
+
+\vspace{\baselineskip}
+\mintinline{python}{mocker.patch(target, return_value=val)}
+
+\vspace{\baselineskip}
+
+\noindent
+In it, the \textit{target} function must be specified as a string of the form \mintinline{python}{package.module.function}. Additionally, the return value of the mock can be specified as \mintinline{python}{return_value=val}, in case the code being tested relies on the function returning a specific value. Similarly, objects can be mocked using
+
+\vspace{\baselineskip}
+\noindent
+\mintinline{python}{mocker.object(target, attribute, return_value=val)}
+\vspace{\baselineskip}
+
+\noindent
+where \textit{attribute} is the method being mocked. More mock methods can be added by simply using the \mintinline{python}{mocker.object()} multiple times. Extra rigorous test scripts can also use the \mintinline{python}{assert_called()} functions to ensure the mock functions were called the correct number of times with the correct arguments. Lastly, if the code being mocked should raise an exception, the \mintinline{python}{side_effect} attribute can be used. The code below demonstrates the \mintinline{python}{pytest-mock} extension.
+
+\inputminted[]{python}{python_examples/pytest-mock_example.py}
+
 \subsection{Further reading}
 
 \begin{itemize}
     \item Boundary value analysis and equivalence partioning: \url{https://www.guru99.com/equivalence-partitioning-boundary-value-analysis.html}
     \item Python \mintinline{python}{assert} documentation: \url{https://docs.python.org/3/reference/simple_stmts.html#the-assert-statement}
     \item \texttt{pytest} official website: \url{https://docs.pytest.org/en/6.2.x/}
+    \item Mocking official docs: \url{https://docs.python.org/3/library/unittest.mock.html#the-patchers}
+    \item \texttt{pytest-mock} PyPI page: \url{https://pypi.org/project/pytest-mock/}
+    \item Excellent \texttt{pytest-mock} tutorial: \url{https://changhsinlee.com/pytest-mock/}
 \end{itemize}
 
 %\newpage

@@ -9,6 +9,8 @@ TODO:
     * Implement datalogging
 """
 
+## getters & setters - @property 
+
 from typing import *
 
 VerifyFunc = Callable[[Hashable, Any], bool]
@@ -30,6 +32,12 @@ class Attendee:
             file_url (str): The URL to the certificate file, defaults to None.
             kwargs (dict): All other attributes of the attendee.
         """
+        self.fname = fname
+        self.lname = lname
+        self.email = email
+        self.file_path = file_path
+        self.file_url = file_url
+
         raise NotImplementedError
 
     # TODO: Write getters for fname, lname, email, file_path, and file_url
@@ -48,6 +56,8 @@ class Attendee:
             TypeError if key is not hashable.
             KeyError if attendee does not have attribute with name key.
         """
+        return self.key
+
         raise NotImplementedError
 
     def has_attribute(self, key: Hashable) -> bool:
@@ -79,7 +89,17 @@ class Attendee:
             TypeError if key is not hashable.
             ValueError if key is "fname", "lname", or "email"
         """
+        self.key = key
+        self.value = value
+        self.verifyFunc = verifyFunc
+
         raise NotImplementedError
+        
+        if type(key) is not Hashable:
+            raise TypeError("key is not hashable")
+
+        if key is 'fname'
+            raise ValueError("key cannot be 'fname'")
 
     def remove_attribute(self, key: Hashable):
         """
@@ -91,4 +111,8 @@ class Attendee:
         Raises:
             TypeError if key is not hashable.
         """
+        
         raise NotImplementedError
+                
+        raise TypeError
+

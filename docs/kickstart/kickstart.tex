@@ -903,7 +903,7 @@ To use Sphinx, a few simple steps must be followed. First, the docstrings must b
 \noindent
 Note that the \mintinline{shell}{-o .} tells Sphinx to create the files in the current working directory (e.g. \mintinline{shell}{docs/}), and \mintinline{shell}{../src} tells Sphinx where to look for source code files. Finally, running \mintinline{shell}{make html} tells Sphinx to use the reStructedText files to generate HTML files.
 
-If the docstrings are updated, then the command \mintinline{shell}{make html} can be rerun to update the HTML files. Fortunately, the reStructedText files refer to the docstrings instead of copying them, meaning they do not need to be recreated.
+If the docstrings are updated, then the command \mintinline{shell}{make html} can be rerun to update the HTML files. Fortunately, the reStructedText files refer to the docstrings instead of copying them, meaning they do not need to be recreated. For Mac and Linux users, the Makefile program should already be installed. For Windows users, Makefile can be installed via installing Chocolatey first, then running \mintinline{shell}{choco install make}.
 
 \subsection{Further reading}
 

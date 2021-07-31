@@ -75,6 +75,8 @@ html_static_path = ['_static']
 # autodoc settings
 autodoc_type_aliases = {
     "BatchStatusFunc": "BatchStatusFunc",
+    "NamingFunc": "NamingFunc",
+    "CertStatusFunc": "CertStatusFunc"
 }
 
 autodoc_default_options = {

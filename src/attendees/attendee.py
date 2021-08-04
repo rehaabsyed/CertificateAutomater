@@ -9,9 +9,8 @@ TODO:
     * Implement datalogging
 """
 
-## getters & setters - @property 
-
 from typing import *
+import string
 
 VerifyFunc = Callable[[Hashable, Any], bool]
 
@@ -32,13 +31,14 @@ class Attendee:
             file_url (str): The URL to the certificate file, defaults to None.
             kwargs (dict): All other attributes of the attendee.
         """
-        self.fname = fname
-        self.lname = lname
-        self.email = email
-        self.file_path = file_path
-        self.file_url = file_url
-
-        raise NotImplementedError
+        self._fname = fname
+        self._lname = lname
+        self._email = email
+        self._file_path = file_path
+        self._file_url = file_url
+        
+        #for item in kwargs.items():
+            #return/ ignore item?
 
     # TODO: Write getters for fname, lname, email, file_path, and file_url
 
@@ -53,13 +53,33 @@ class Attendee:
             Any: The attribute value.
         
         Raises:
-            TypeError if key is not hashable.
-            KeyError if attendee does not have attribute with name key.
+            TypeError: if key is not hashable.
+            KeyError: if attendee does not have attribute with name key.
         """
-        return self.key
 
-        raise NotImplementedError
+    @property
+    def get_fname(self):
+        if self._fname.values() = None:
+            raise KeyError('Attendee does not have attribute with name key')
+        else:
+            return self._fname.values()
 
+    @property
+    def get_lname(self):
+        return self._lname.values()
+        
+    @property
+    def get_email(self):
+        return self._email.values()
+
+    @property
+    def get_file_path(self):
+        return self._file_path.values()
+
+    @property
+    def get_file_url(self):
+        return self._file_url.values()
+        
     def has_attribute(self, key: Hashable) -> bool:
         """
         Checks if Attendee has a specificed attribute.
@@ -70,7 +90,12 @@ class Attendee:
         Returns:
             bool: True if Attendee has attribute and vice-versa.
         """
-        raise NotImplementedError
+    @property
+    def has_fname:    
+        if self.fname == None:
+            return False
+        else:
+            return True
 
     def set_attribute(self, key: Hashable, value: Any,
                      verifyFunc: VerifyFunc = None):
@@ -86,20 +111,32 @@ class Attendee:
             the value being set, if let as None, will not verify value.
         
         Raises:
-            TypeError if key is not hashable.
-            ValueError if key is "fname", "lname", or "email"
+            TypeError: if key is not hashable.
+            ValueError: if key is "fname", "lname", or "email"
         """
-        self.key = key
-        self.value = value
-        self.verifyFunc = verifyFunc
 
-        raise NotImplementedError
+        global valid_set
+        a = string.ascii_lowercase
+        valid_set = set(a) 
         
-        if type(key) is not Hashable:
-            raise TypeError("key is not hashable")
+        @fname.setter
+        def set_fname(self, value):
+            self._fname = value
+        
+        # is below what needs to be in the verifyFunc function?
+            for i in value:
+                if i is in valid_set:
+                    None
+            elif:
+                raise ValueError(f"Name must not contain {i}")
 
-        if key is 'fname'
-            raise ValueError("key cannot be 'fname'")
+        @lname.setter
+        def set_lname(self, value):
+            self._lname = value
+
+        @email.setter
+        def set_email(self, value):
+            self._email = value
 
     def remove_attribute(self, key: Hashable):
         """
@@ -109,10 +146,9 @@ class Attendee:
             key (Hashable): The name of the attendee.
         
         Raises:
-            TypeError if key is not hashable.
+            TypeError: if key is not hashable.
         """
         
-        raise NotImplementedError
+        del(self._fname.values())
                 
-        raise TypeError
-
+    

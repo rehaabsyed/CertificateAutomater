@@ -36,10 +36,8 @@ class Attendee:
         self._email = email
         self._file_path = file_path
         self._file_url = file_url
-        
-        #for item in kwargs.items():
-            #return/ ignore item?
-
+        self._misc = kwargs.copy()
+         
     # TODO: Write getters for fname, lname, email, file_path, and file_url
 
     def get_attribute(self, key: Hashable) -> Any:
@@ -118,25 +116,26 @@ class Attendee:
         global valid_set
         a = string.ascii_lowercase
         valid_set = set(a) 
-        
-        @fname.setter
-        def set_fname(self, value):
-            self._fname = value
-        
-        # is below what needs to be in the verifyFunc function?
-            for i in value:
-                if i is in valid_set:
-                    None
-            elif:
+    
+    # set & get for misc - separate for the miscs
+    # need to pass in key & value, changing value, mutating object 
+
+    @fname.setter
+    def fname(self, value):
+        self._fname = value
+    
+    # is below what needs to be in the verifyFunc function?
+        for i in value:
+            if i is not in valid_set:
                 raise ValueError(f"Name must not contain {i}")
 
-        @lname.setter
-        def set_lname(self, value):
-            self._lname = value
+    @lname.setter
+    def lname(self, value):
+        self._lname = value
 
-        @email.setter
-        def set_email(self, value):
-            self._email = value
+    @email.setter
+    def email(self, value): # check if string / empty string
+        self._email = value
 
     def remove_attribute(self, key: Hashable):
         """

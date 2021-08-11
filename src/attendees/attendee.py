@@ -92,11 +92,39 @@ class Attendee:
         """
     @property
     def has_fname:    
-        if self.fname == None:
+        if self._fname == None:
+            return False
+        else:
+            return True
+    
+    @property
+    def has_lname:    
+        if self._lname == None:
+            return False
+        else:
+            return True
+    
+    @property
+    def has_email:    
+        if self._email == None:
             return False
         else:
             return True
 
+    @property
+    def has_file_url:    
+        if self._file_url == None:
+            return False
+        else:
+            return True
+
+    @property
+    def has_file_path:    
+        if self._file_url == None:
+            return False
+        else:
+            return True
+    
     def set_attribute(self, key: Hashable, value: Any,
                      verifyFunc: VerifyFunc = None):
         """

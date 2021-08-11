@@ -54,29 +54,31 @@ class Attendee:
             TypeError: if key is not hashable.
             KeyError: if attendee does not have attribute with name key.
         """
+        for key,value in kwargs.items():
+            return value
+
+    # set & get for misc - separate for the miscs
+    # need to pass in key & value, changing value, mutating object 
 
     @property
     def get_fname(self):
-        if self._fname.values() = None:
-            raise KeyError('Attendee does not have attribute with name key')
-        else:
-            return self._fname.values()
+        return self._fname
 
     @property
     def get_lname(self):
-        return self._lname.values()
+        return self._lname
         
     @property
     def get_email(self):
-        return self._email.values()
+        return self._email
 
     @property
     def get_file_path(self):
-        return self._file_path.values()
+        return self._file_path
 
     @property
     def get_file_url(self):
-        return self._file_url.values()
+        return self._file_url
         
     def has_attribute(self, key: Hashable) -> bool:
         """
@@ -117,9 +119,6 @@ class Attendee:
         a = string.ascii_lowercase
         valid_set = set(a) 
     
-    # set & get for misc - separate for the miscs
-    # need to pass in key & value, changing value, mutating object 
-
     @fname.setter
     def fname(self, value):
         self._fname = value

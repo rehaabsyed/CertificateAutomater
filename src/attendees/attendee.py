@@ -143,26 +143,47 @@ class Attendee:
             ValueError: if key is "fname", "lname", or "email"
         """
 
-        global valid_set
+        global valid_name   
+        global valid_email
         a = string.ascii_lowercase
-        valid_set = set(a) 
+        A = string.ascii_uppercase
+        b = '@1234567890_'
+        valid_name = set(a+A) 
+        valid_email = set(a+A+b)
+    
+        #def verifyFunc(chars):
+        #    if self._misc = None:
+
+        def validate(string, valid_set) 
+            for for i in string:
+                if i is not in valid_set:
+                    raise ValueError(f"Name must not contain {i}")
     
     @fname.setter
     def fname(self, value):
         self._fname = value
+        validate(value, valid_name)
     
-    # is below what needs to be in the verifyFunc function?
-        for i in value:
-            if i is not in valid_set:
-                raise ValueError(f"Name must not contain {i}")
-
     @lname.setter
     def lname(self, value):
         self._lname = value
+        validate(value, valid_name)
 
     @email.setter
     def email(self, value): # check if string / empty string
         self._email = value
+        validate(value, valid_email)
+    
+    @file_url.setter
+    def file_url(self, value):
+        self._fname = value
+        #validate(value, )
+    
+    @file_path.setter
+    def file_url(self, value):
+        self._fname = value
+        #validate(value, )
+    
 
     def remove_attribute(self, key: Hashable):
         """
@@ -176,5 +197,5 @@ class Attendee:
         """
         
         del(self._fname.values())
-                
+               
     

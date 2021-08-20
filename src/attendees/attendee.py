@@ -57,9 +57,6 @@ class Attendee:
         for key,value in kwargs.items():
             return value
 
-    # set & get for misc - separate for the miscs
-    # need to pass in key & value, changing value, mutating object 
-
     @property
     def get_fname(self):
         return self._fname
@@ -143,47 +140,62 @@ class Attendee:
             ValueError: if key is "fname", "lname", or "email"
         """
 
-        global valid_name   
-        global valid_email
+        global valid_set   
+        global invalid_set
         a = string.ascii_lowercase
         A = string.ascii_uppercase
-        b = '@1234567890_'
-        valid_name = set(a+A) 
-        valid_email = set(a+A+b)
+        punc = "'- "
+        valid_set = set(a + A + punc) 
+        invalid_set = set(punc)
     
         #def verifyFunc(chars):
         #    if self._misc = None:
-
-        def validate(string, valid_set) 
-            for for i in string:
+    
+        def checkString(value):    # checks if string and if empty
+            if type(value) != str:
+                raise TypeError("Value should be a string")
+            if value = "":
+                raise ValueError("Value is empty")
+        
+        def verifyName(string): 
+            if string[0].islower():    # checks for first letter capital
+                raise ValueError("Name must start with capital letter")
+            
+            n = len(string)-1
+            if string[n] is in invalid_set:    # checks if ends in - ' or space
+                raise ValueError(f"Name cannot end with {string[n]}")
+            
+            for i in string:    # checks if contains alphabet chars only
                 if i is not in valid_set:
                     raise ValueError(f"Name must not contain {i}")
-    
+                
+        
     @fname.setter
     def fname(self, value):
         self._fname = value
-        validate(value, valid_name)
-    
+        checkString(value)
+        verifyName(value)
+        
     @lname.setter
     def lname(self, value):
         self._lname = value
-        validate(value, valid_name)
+        checkString(value)
+        verifyName(value)
 
     @email.setter
-    def email(self, value): # check if string / empty string
+    def email(self, value): 
         self._email = value
-        validate(value, valid_email)
+        checkString(value)
     
     @file_url.setter
     def file_url(self, value):
-        self._fname = value
-        #validate(value, )
+        self._file_url = value
+        checkString(value)
     
     @file_path.setter
     def file_url(self, value):
-        self._fname = value
-        #validate(value, )
-    
+        self._file_path = value
+        checkString(value)
 
     def remove_attribute(self, key: Hashable):
         """

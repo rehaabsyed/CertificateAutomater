@@ -207,20 +207,6 @@ class Attendee:
         Raises:
             TypeError: if key is not hashable.
         """
-        
-        if key = self._fname:
-            del fname
-        if key = self._lname:
-            del lname
-        if key = self._email:
-            del email
-        if key = self._file_url:
-            del file_url
-        if key = self._file_path:
-            del file_path
                
-               
-               
-               
-               
+            del self._misc[key]
     

@@ -7,6 +7,8 @@ TODO:
     * Implement methods
     * Write getters and setters
     * Implement datalogging
+    * Implement email address validation
+    * Add UTF-8 support for validating names
 """
 
 from typing import *

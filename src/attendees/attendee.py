@@ -148,9 +148,6 @@ class Attendee:
         valid_set = set(a + A + punc) 
         invalid_set = set(punc)
     
-        #def verifyFunc(chars):
-        #    if self._misc = None:
-    
         def checkString(value):    # checks if string and if empty
             if type(value) != str:
                 raise TypeError("Value should be a string")
@@ -168,7 +165,10 @@ class Attendee:
             for i in string:    # checks if contains alphabet chars only
                 if i is not in valid_set:
                     raise ValueError(f"Name must not contain {i}")
-                
+        
+        def verifyFunc():
+            for key,value in kwargs.items():
+                checkString(value)
         
     @fname.setter
     def fname(self, value):

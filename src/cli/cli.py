@@ -36,8 +36,11 @@ def load_attendees(path: str) -> AttendeeManager:
 
     Return:
         AttendeeManager: the CSV file of attendees converted to an AttendeeManager.
-    """
 
+    Raise:
+        OSError: if there is an error with loading attendees.
+    """
+    raise NotImplementedError
 
 
 

@@ -551,7 +551,7 @@ Furthermore, the \mintinline{python}{response = mailchimp.batches.start(payload)
 \noindent
 Once all requests have been processed, a gzipped archive of the responses can be downloaded through the \texttt{response\_body\_url} available in the batch response. 
 
-Since downloading, extracting, and processing the responses would be slow, it is strongly recommended the method that makes the batch request simply return the final batch response. If the responses are desired, then another method should be written to use the \texttt{response\_body\_url} to download the responses. From there, the file can be unzipped, which reveals one JSON file per request. It should be noted that Mailchimp will only store the responses for seven days. Furthermore, the \texttt{response\_body\_url} will only last for 10 minutes for security purposes. If the \texttt{response\_body\_url} expires, another can be retrieved via a batch status request using the batch ID.
+Since downloading, extracting, and processing the responses would be slow, it is strongly recommended the method that makes the batch request simply return the final batch response. If the responses are desired, then another method should be written to use the \texttt{response\_body\_url} to download the responses. From there, the file can be unzipped, which reveals one JSON file per request. It should be noted that Mailchimp will only store the responses for seven days \cite{mailchimp-batch}. Furthermore, the \texttt{response\_body\_url} will only last for 10 minutes for security purposes. If the \texttt{response\_body\_url} expires, another can be retrieved via a batch status request using the batch ID.
 
 \subsection{Using callbacks to retrieve the status}
 

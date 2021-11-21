@@ -524,12 +524,12 @@ While more complicated to implement than using an API key, OAuth2 has multiple k
 
 \subsection{Doing single POST requests}
 
-After gaining Mailchimp authorisation, the certificates can be uploaded to Mailchimp. First of, a folder should be created to store the files within. According to the Mailchimp API, this is possible by making the POST request below:
+After gaining Mailchimp authorisation, the certificates can be uploaded to Mailchimp. First of, a folder should be created to store the files within. According to the Mailchimp API, this is possible by making the POST request below \cite{mailchimp-add-folder}:
 
 \inputminted[linenos=true]{python}{mailchimp_examples/create_folder.py}
 
 \noindent
-The response of which will contain the folder ID, an integer that uniquely identifies that folder. Given the folder ID, the certificates can then be uploaded via a the POST request
+The response of which will contain the folder ID, an integer that uniquely identifies that folder. Given the folder ID, the certificates can then be uploaded via a the POST request \cite{mailchimp-add-file}
 
 \inputminted[linenos=true]{python}{mailchimp_examples/upload_file.py}
 
@@ -538,13 +538,13 @@ The responses of uploading the files will contain a \texttt{full\_size\_url} fie
 
 \subsection{Doing multiple async requests with batches}
 
-However, the exact manner in which the requests are made can cause the program to lock up for prolonged periods of time. This is due to the \mintinline{python}{client.fileManager.create_folder()} and \mintinline{python}{client.fileManager.upload()} functions being ``blocking functions''. Such functions halt the program's progress for a long period of time. In this case, it is caused by waiting for a response from the Mailchimp server. Furthermore, to prevent server overloading, the Mailchimp API will only allow 10 concurrent requests per API key. Considering that it takes 120 seconds for the for a request to time out, the worst case scenario is that it will take an hour and 40 minutes to process 50 attendees in a sequential manner. With concurrent requests, this worst case reduces to 10 minutes, still far too long for a user to wait.
+However, the exact manner in which the requests are made can cause the program to lock up for prolonged periods of time. This is due to the \mintinline{python}{client.fileManager.create_folder()} and \mintinline{python}{client.fileManager.upload()} functions being ``blocking functions''. Such functions halt the program's progress for a long period of time. In this case, it is caused by waiting for a response from the Mailchimp server. Furthermore, to prevent server overloading, the Mailchimp API will only allow 10 concurrent requests per API key \cite{mailchimp-batch}. Considering that it takes 120 seconds for the for a request to time out, the worst case scenario is that it will take an hour and 40 minutes to process 50 attendees in a sequential manner. With concurrent requests, this worst case reduces to 10 minutes, still far too long for a user to wait.
 
-The solution is to use Mailchimp's batch feature. Instead of making one POST request per certificate, all the POST requests can be bundled into a batch. Making the batch request given the individual requests is trivial, as the body of the request is simply a JSON object containing one field, \texttt{payload}, whose value is a Python list (or Javascript array) of the individual requests. The code below is Mailchimp's example of adding 1000 contacts at once.
+The solution is to use Mailchimp's batch feature. Instead of making one POST request per certificate, all the POST requests can be bundled into a batch \cite{mailchimp-batch}. Making the batch request given the individual requests is trivial, as the body of the request is simply a JSON object containing one field, \texttt{payload}, whose value is a Python list (or JavaScript array) of the individual requests. The code below is Mailchimp's example of adding 1000 contacts at once \cite{mailchimp-batch}.
 
 \inputminted[linenos=true]{python}{mailchimp_examples/batch_request.py}
 
-Furthermore, the \mintinline{python}{response = mailchimp.batches.start(payload)} is not a blocking function. Instead, it returns a response that Mailchimp generates and sends as soon as possible, even though the individual requests have not been processed. The body of the initial request includes a batch ID, which can be used to do another request to see the status of the batch via
+Furthermore, the \mintinline{python}{response = mailchimp.batches.start(payload)} is not a blocking function. Instead, it returns a response that Mailchimp generates and sends as soon as possible, even though the individual requests have not been processed \cite{mailchimp-batch}. The body of the initial request includes a batch ID, which can be used to do another request to see the status of the batch via
 
 \mint[linenos=false, frame=none]{python}|response = mailchimp.batches.status(batch_id)|
 

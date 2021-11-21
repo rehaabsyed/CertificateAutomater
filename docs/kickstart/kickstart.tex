@@ -723,7 +723,7 @@ With an online repository setup, the best practice manner of contributing to a p
 
 As a matter of practicality, modern software is built using code already written. This can range from using libraries built-in to the language of choice, all the way to using complex frameworks built on so many other layers of libraries, it becomes impossible to fully grasp just how deep and expansive the code reliances are. Regardless of the quantity of external code used, all libraries and frameworks used must be declared.
 
-Python provides a simple manner to explicitly declare what libraries and frameworks are being used. This is achieved through a \texttt{requirements.txt} file: a simple text file where each line represents a library or framework, potentially with the accepted versions. Since multiple versions may be compatible with the codebase, there are multiple ways for declaring which versions are acceptable. A double equals (\texttt{==}) means only that specific version is accepted, whereas a greater-than-or-equal-to symbol (\texttt{>=}) means any version at least as new as the version specified. If a range of versions is accepted, then a comma (\texttt{,}) can be used to specify a range. A not equal to symbol (\texttt{!=}) means any version except for the one specified (useful if that version has a known bug). Most confusingly, the tilde-equals (\url{~=}) means a compatible version: so any version matching the same numbers excluding the last number, where the version number must be at least as high as specified. This version is useful for specifying a range without two version numbers. Furthermore, the wildcard \texttt{*} is useful for specifying any version mathcing the start of the specified version. The text below is an example that uses all the version numbering conventions.
+Python provides a simple manner to explicitly declare what libraries and frameworks are being used. This is achieved through a \mintinline{shell}{requirements.txt} file: a simple text file where each line represents a library or framework, potentially with the accepted versions. Since multiple versions may be compatible with the codebase, there are multiple ways for declaring which versions are acceptable. A double equals (\mintinline{shell}{==}) means only that specific version is accepted, whereas a greater-than-or-equal-to symbol (\mintinline{shell}{>=}) means any version at least as new as the version specified. If a range of versions is accepted, then a comma (\mintinline{shell}{,}) can be used to specify a range. A not equal to symbol (\mintinline{shell}{!=}) means any version except for the one specified (useful if that version has a known bug). Most confusingly, the tilde-equals (\mintinline{shell}{~=}) means a compatible version: so any version matching the same numbers excluding the last number, where the version number must be at least as high as specified. This version is useful for specifying a range without two version numbers. Furthermore, the wildcard \mintinline{shell}{*} is useful for specifying any version matching the start of the specified version. The text below is an example that uses all the version numbering conventions.
 
 \inputminted[linenos=true]{python}{python_examples/requirements_example.txt}
 
@@ -733,12 +733,12 @@ While installing libraries and frameworks is a necessity for modern software, it
 
 The solution is simple to use but odd to consider. Instead of installing the requirements directly into the installed language, a virtual environment can be made. A virtual environment can be thought of as an isolated instance of the entire programming language for one project. With this isolated instance, libraries and frameworks can be installed without affecting other projects on the same device.
 
-In Python, using virtual environments is handled via the \texttt{virtualenv} package. Once installed with \texttt{pip} or \texttt{conda}, the virtual environment can be created in the current working directory via
+In Python, using virtual environments is handled via the \texttt{virtualenv} package. Once installed with \mintinline{shell}{pip} or \mintinline{shell}{conda}, the virtual environment can be created in the current working directory via
 
 \mint[linenos=false, frame=none]{shell}|python -m venv <name>|
 
 \noindent
-where \texttt{<name>} is the name of the virtual environment, typically \texttt{venv}. A file system will be created with an activiate file. To start the virtual environment, simply type
+where \mintinline{shell}{<name>} is the name of the virtual environment, typically \mintinline{shell}{venv}. A file system will be created with an activiate file. To start the virtual environment, simply type
 
 \mint[linenos=false, frame=none]{shell}|.\<name>\Scripts\activate.bat|
 
@@ -748,7 +748,7 @@ on Windows, or
 \mint[linenos=false, frame=none]{shell}|source ./<name>/bin/activate|
 
 \noindent
-on Unix of MacOS systems. From this point onwards, the virtual environment's Python interpreter will be used, as confirmable by running \mintinline{shell}{which python} in the terminal. Since the virtual environment is made for a specific project, the \texttt{requirements.txt} file can be use to install all the required libraries via the command
+on Unix of MacOS systems. From this point onwards, the virtual environment's Python interpreter will be used, as confirmable by running \mintinline{shell}{which python} in the terminal. Since the virtual environment is made for a specific project, the \mintinline{shell}{requirements.txt} file can be use to install all the required libraries via the command
 
 \mint[linenos=false, frame=none]{shell}|pip install -r requirements.txt|
 

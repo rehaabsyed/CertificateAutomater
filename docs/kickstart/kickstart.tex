@@ -133,7 +133,7 @@
 
 \subsection{Context}
 
-Curtin IET On Campus (or ``CIET'' for short) provides multiple industry talks and workshops to STEM students (particularly engineering and computer related science). As part of CIET's commitment to quality, attendees shall recieve a certificate of attendance stating the name of the event, the club name, the president's full name with a signature, the the attendee's full name, and the number of approved CPD hours. This certificate of attendance must be done in a PDF document with vector graphics where possible, then emailed to attendees as soon as possible. This is particularly important for undergraduate engineering students, as one graduation requirement is to obtain a minimum of 16 weighted hours (or five and a third actual) in the PRES category (technical presentations and workshops by a professional body). By creating and sending out these certificates, CIET is holding itself to a high standard of attendee satisfaction and professional development.
+Curtin IET On Campus (or ``CIET'' for short) provides multiple industry talks and workshops to STEM students (particularly engineering and computer related science). As part of CIET's commitment to quality, attendees shall recieve a certificate of attendance stating the name of the event, the club name, the president's full name with a signature, the the attendee's full name, and the number of approved CPD hours. This certificate of attendance must be done in a PDF document with vector graphics where possible, then emailed to attendees as soon as possible. This is particularly important for undergraduate engineering students, as one graduation requirement is to obtain a minimum of 16 weighted hours (or five and a third actual) in the PRES category (technical presentations and workshops by a professional body) \cite{eng-logbook}. By creating and sending out these certificates, CIET is holding itself to a high standard of attendee satisfaction and professional development.
 
 \subsection{Problem}
 
@@ -155,7 +155,7 @@ All up, this process takes at least two hours per 50 attendees for someone who h
 
 \subsection{Rundown}
 
-After some research, it has been discovered that stages 2, 3, and 4 of the old solution can be automated. For stage 1, instead of creating each certificate manually via Canva, the template can be created once and used to automatically create every certificate. Note that the template must be a Word document with merge fields or variables, not a PDF. The MailChimp API can be used to automate stage 3, where each certificate can be uploaded and have its URI recorded. With the URIs known, the attendee record can be updated and uploaded to MailChimp. Since the certificates were created automatically, stage 4 becomes redundant. This process is summarised in figure \ref{fig:new-solution}. With such a script, CIET can be confident in its ability to deliver the correct certificates to its members on time with minimal effort.
+After some research, it has been discovered that stages 2, 3, and 4 of the old solution can be automated. For stage 1, instead of creating each certificate manually via Canva, the template can be created once and used to automatically create every certificate. Note that the template must be a Word document with merge fields or variables, not a PDF. The MailChimp API can be used to automate stage 3, where each certificate can be uploaded and have its URI recorded \cite{mailchimp-api}. With the URIs known, the attendee record can be updated and uploaded to MailChimp. Since the certificates were created automatically, stage 4 becomes redundant. This process is summarised in figure \ref{fig:new-solution}. With such a script, CIET can be confident in its ability to deliver the correct certificates to its members on time with minimal effort.
 
 \begin{figure}[b!]
     \centering
@@ -166,9 +166,9 @@ After some research, it has been discovered that stages 2, 3, and 4 of the old s
 
 Realising this goal, however, will require a well organised team and a plan. Due to the varied actions this script must perform, a moderately large codebase utilising several libraries is needed, demanding a significant time investment and expertise. This complexity is compounded by delegating the workload between a team, needing appropriate version control, task management, and enforeable coding standards. Furthermore, such a project could easily suffer from scope creep, especially with the user interface. Hence, the need for subsequent sections in this document.
 
-\subsection{Prototype}
+\subsection{Proof of concept}
 
-For the sake of time, a prototype can be implemented before scope creep becomes an issue. A prototype must include:
+For the sake of time, a proof of concept can be implemented before scope creep becomes an issue. A proof of concept must include:
 
 \begin{enumerate}
     \item Command line interface to run program.
@@ -177,7 +177,7 @@ For the sake of time, a prototype can be implemented before scope creep becomes 
         \item Strongly recommended to use \mintinline{python}{argparse} library.
     \end{enumerate}
     \item Must be able to load attendee records from a CSV file.
-    \item Generate a certificate of attendance for each attendee
+    \item Generate a certificate of attendance for each attendee.
     \begin{enumerate}
         \item Must be saved into a folder called \mintinline{shell}{/certificates} in the current working directory.
         \item Each certificate must be named based on attendee's full name.
@@ -198,7 +198,7 @@ For the sake of time, a prototype can be implemented before scope creep becomes 
     \begin{enumerate}
         \item Can be done once the program has finished everything else.
     \end{enumerate}
-    \item All public and protected classes, methods, and function must have Google style docstrings.
+    \item All public and protected classes, methods, and function must have Google style docstrings \cite{google-docstring}.
     \item Must be able to run on Windows, Linux, and Mac systems capable of running Python 3.
 \end{enumerate}
 
@@ -218,10 +218,10 @@ For the sake of time and simplicity, the following assumptions can be made:
 
 \subsection{Minimal Viable Product}
 
-Once a prototype is complete, a minimal viable product (MVP) can be written. The MVP has all the criteria of the prototype, excluding 2, and
+Once a proof of concept is complete, a minimal viable product (MVP) can be written. The MVP has all the criteria of the prototype, excluding 2, and
 
 \begin{enumerate}
-    \item Can be run via an executable.
+    \item Can be run via an executable or in the browser as a webapp.
     \begin{enumerate}
         \item No command line interfacing should be necessary.
     \end{enumerate}
@@ -234,7 +234,7 @@ Once a prototype is complete, a minimal viable product (MVP) can be written. The
     \begin{enumerate}
         \item Debug messages are optional.
         \item It must be known where the log file is.
-        \item The GUI should have a button for viewing the log file.
+        \item The GUI should have a button for viewing or downloading the log file.
         \item Strongly recommended to use the \mintinline{python}{logging} library.
     \end{enumerate}
     \item Must use OAuth 2 to get Mailchimp authorisation.
@@ -271,7 +271,7 @@ If the MVP is done, a competitive, market ready, version can be done. This versi
         \item Where possible, offers a solution.
         \item Where possible, offers links to online documentation.
     \end{enumerate}
-    \item Must include install wizard with a build machine.
+    \item Must include install wizard with a build machine if not a webapp.
     \begin{enumerate}
         \item Must be able to choose where to install program.
     \end{enumerate}
@@ -288,6 +288,8 @@ If the MVP is done, a competitive, market ready, version can be done. This versi
         \item Can select what goes on the report.
     \end{enumerate}
     \item Must have an aesthetically pleasing GUI.
+    \item Must have tutorials on how to use software.
+    \item Must have a "Help" feature.
 \end{enumerate}
 
 \newpage
@@ -998,8 +1000,8 @@ where \textit{attribute} is the method being mocked. More mock methods can be ad
     \item Excellent \texttt{pytest-mock} tutorial: \url{https://changhsinlee.com/pytest-mock/}
 \end{itemize}
 
-%\newpage
-%
-%\printbibliography
+\newpage
+
+\printbibliography
 
 \end{document}

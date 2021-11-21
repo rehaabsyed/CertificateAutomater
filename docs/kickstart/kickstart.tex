@@ -775,10 +775,10 @@ Any software engineering project will fail before it even starts if coding style
 
 \begin{enumerate}
     \item Identifiers should be short and descriptive.
-    \item Class names should be in \texttt{PascalCase}.
-    \item Constant names should be in \texttt{UPPERCASE} with underscores.
-    \item Function and variable names should be in \texttt{camelCase} or \texttt{snake\_case}.
-    \item Abbreviations and acrynonyms should only be used when a common convention (e.g. using \texttt{num} for \texttt{number}), or if obvious based on context.
+    \item Class names should be in \mintinline{shell}{PascalCase}.
+    \item Constant names should be in \mintinline{shell}{UPPERCASE} with underscores.
+    \item Function and variable names should be in \mintinline{shell}{camelCase} or \mintinline{shell}{snake\_case}.
+    \item Abbreviations and acrynonyms should only be used when a common convention (e.g. using \mintinline{shell}{num} for \mintinline{shell}{number}), or if obvious based on context.
     \item The naming conventions should be consistent across the entire codebase and documentation.
     \item Short functions are preferred over long functions, even if they lead to more functions.
     \item Global variables must be avoided at all costs.
@@ -793,12 +793,13 @@ Any software engineering project will fail before it even starts if coding style
     \item \mintinline{python}{import} statements should be at the top of a file, before any other code.
     \begin{enumerate}
         \item From top-to-bottom, the built-in libraries come first, then the third-party ones, then the project libraries.
+        \item There should be an empty line inbetween the three different types of libraries.
     \end{enumerate}
     \item Public methods of a class should come before protected ones, then followed by the private ones.
 \end{enumerate}
 
 \noindent
-Furthermore, Python specific style guide principles can also be established:
+Furthermore, Python specific style guide principles can also be established \cite{python-style}:
 
 \begin{itemize}
     \item The datatypes of parameters and return types should be written.

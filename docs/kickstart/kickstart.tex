@@ -155,7 +155,7 @@ All up, this process takes at least two hours per 50 attendees for someone who h
 
 \subsection{Rundown}
 
-After some research, it has been discovered that stages 2, 3, and 4 of the old solution can be automated. For stage 1, instead of creating each certificate manually via Canva, the template can be created once and used to automatically create every certificate. Note that the template must be a Word document with merge fields or variables, not a PDF. The MailChimp API can be used to automate stage 3, where each certificate can be uploaded and have its URI recorded \cite{mailchimp-api-first-call}. With the URIs known, the attendee record can be updated and uploaded to MailChimp. Since the certificates were created automatically, stage 4 becomes redundant. This process is summarised in figure \ref{fig:new-solution}. With such a script, CIET can be confident in its ability to deliver the correct certificates to its members on time with minimal effort.
+After some research, it has been discovered that stages 2, 3, and 4 of the old solution can be automated. For stage 1, instead of creating each certificate manually via Canva, the template can be created once and used to automatically create every certificate. Note that the template must be a Word document with merge fields or variables, not a PDF. The MailChimp API can be used to automate stage 3, where each certificate can be uploaded and have its URI recorded \cite{mailchimmp-first-api-call}. With the URIs known, the attendee record can be updated and uploaded to MailChimp. Since the certificates were created automatically, stage 4 becomes redundant. This process is summarised in figure \ref{fig:new-solution}. With such a script, CIET can be confident in its ability to deliver the correct certificates to its members on time with minimal effort.
 
 \begin{figure}[b!]
     \centering
@@ -501,7 +501,7 @@ Under no circumstances should an API key ever be disclosed to anyone! This inclu
 
 \begin{figure}[b!]
     \centering
-    \includegraphics[width\textwidth]{figures/oauth2workflow.png}
+    \includegraphics[width=\textwidth]{figures/oauth2workflow.png}
     \caption{OAuth2 simplified flowchart \cite{oauth2-fig}.}
     \label{fig:oauth-flowchart}
 \end{figure}

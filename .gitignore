@@ -144,3 +144,10 @@ dmypy.json
 *.blg
 *.bbl
 *.run.xml
+*.acn
+*.acr
+*.alg
+*.glg
+*.glo
+*.gls
+*.ist

@@ -35,8 +35,12 @@
 
 \usepackage[
     colorlinks=true,
-    linkcolor=black
+    linkcolor=black,
+    breaklinks=true,
+    citecolor=black
 ]{hyperref}
+\def\UrlBreaks{\do\/\do-}
+
 \usepackage{bookmark}   % bookmarks for PDF viewing
 
 \numberwithin{equation}{section}
@@ -48,10 +52,24 @@
 \usepackage{float}
 \usepackage{tabularx}
 \usepackage{multirow}
+\usepackage{wrapfig}
 
-\usepackage{fancyhdr}	% Header and footer control
+\captionsetup[figure]{labelfont=bf,
+    labelsep=colon,
+    justification=raggedright,
+    singlelinecheck=off}
+\captionsetup[subfigure]{labelfont=bf,
+    labelsep=space,
+    justification=raggedright,
+    singlelinecheck=off}
+\captionsetup[table]{labelfont=bf,
+    labelsep=colon,
+    justification=raggedright,
+    singlelinecheck=off}
 
-\usepackage{minted}	% Code formatting and syntax highlighting
+\usepackage{fancyhdr}    % Header and footer control
+
+\usepackage{minted}    % Code formatting and syntax highlighting
 %\surroundwithmdframed{minted}
 \definecolor{DarkGray}{rgb}{0.9, 0.9, 0.9}
 \setminted{linenos=true,
@@ -61,16 +79,15 @@
     python3=true,
     frame=lines
 }
-\setmintedinline{bgcolor={}}
+\setmintedinline{bgcolor=DarkGray}
 
-\usepackage{chngcntr}
-\counterwithin{figure}{section}
-
-% Referencing manager
-%%\usepackage[
-%%	backend=biber,
-%%	style=ieee
-%%]{biblatex}
+%Referencing package
+\usepackage[
+    backend = biber,
+    style = ieee,
+    natbib = true
+    ]{biblatex}
+\addbibresource{citations.bib}
 
 %----------------------------------------------------------------------------------------
 %    DOCUMENT MARGINS

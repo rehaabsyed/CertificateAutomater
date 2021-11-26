@@ -17,16 +17,18 @@
 
 
 %----------------------------------------------------------------------------------------
-%    PACKAGES AND OTHER DOCUMENT CONFIGURATIONS
+%    PACKAGES AND OTHER DOCUMENT CONFIGURAT\acrshort{io}NS
 %----------------------------------------------------------------------------------------
 
 \documentclass[11pt]{article}
 
 \input{structure.tex} % Include the file specifying the document structure and custom commands
 
+\input{glossary.tex}
+
 \usepackage{draftwatermark}
-\SetWatermarkText{\textsf{\textbf{CONFIDENTAL}}}
-\SetWatermarkScale{2.5}
+\SetWatermarkText{\textsf{\textbf{DRAFT 6}}}
+\SetWatermarkScale{3.5}
 \SetWatermarkColor[gray]{0.8}
 \SetWatermarkAngle{50}
 
@@ -39,7 +41,7 @@
 \cfoot{Page \thepage}
 
 %----------------------------------------------------------------------------------------
-%    ASSIGNMENT INFORMATION
+%    ASSIGNMENT INFORMAT\acrshort{io}N
 %----------------------------------------------------------------------------------------
 
 \title{Certificate Automater Kickstart Manual} % Title of the assignment
@@ -116,14 +118,20 @@
 
 \tableofcontents
 
-\bigskip
+\newpage
 
 \listoffigures
 
 \newpage
 
+\printglossary[type=\acronymtype]
+
+\printglossary
+
+\newpage
+
 %----------------------------------------------------------------------------------------
-%    INTRODUCTION
+%    INTRODUCT\acrshort{io}N
 %----------------------------------------------------------------------------------------
 
 \pagenumbering{arabic}
@@ -133,13 +141,13 @@
 
 \subsection{Context}
 
-Curtin IET On Campus (or ``CIET'' for short) provides multiple industry talks and workshops to STEM students (particularly engineering and computer related science). As part of CIET's commitment to quality, attendees shall recieve a certificate of attendance stating the name of the event, the club name, the president's full name with a signature, the the attendee's full name, and the number of approved CPD hours. This certificate of attendance must be done in a PDF document with vector graphics where possible, then emailed to attendees as soon as possible. This is particularly important for undergraduate engineering students, as one graduation requirement is to obtain a minimum of 16 weighted hours (or five and a third actual) in the PRES category (technical presentations and workshops by a professional body). By creating and sending out these certificates, CIET is holding itself to a high standard of attendee satisfaction and professional development.
+\acrfull{ciet} provides multiple industry talks and workshops to \acrshort{stem} students (particularly engineering and computer related science). As part of \acrshort{ciet}'s commitment to quality, attendees shall recieve a certificate of attendance stating the name of the event, the club name, the president's full name with a signature, the the attendee's full name, and the number of approved \acrshort{cpd} hours. This certificate of attendance must be done in a \acrshort{pdf} document with vector graphics where possible, then emailed to attendees as soon as possible. This is particularly important for undergraduate engineering students, as one graduation requirement is to obtain a minimum of 16 weighted hours (or five and a third actual) in the PRES category (technical presentations and workshops by a professional body) \cite{eng-logbook}. By creating and sending out these certificates, \acrshort{ciet} is holding itself to a high standard of attendee satisfaction and professional development.
 
 \subsection{Problem}
 
-Despite the necessity of creating and sending certificates, the process for doing so is extremely time consuming and error prone. As shown in Figure \ref{fig:old-solution}, this process is comprised of four stages: (1) the attendee record must be collected from the events team and checked for errors, e.g. multiple registrations from one person or missing but required information. (2) one certificate is made for each attendee via the template on CIET's Canva account. Each certificate is then checked one by one for errors, being recreated if erroneous. (3) the certificates are uploaded to CIET's MailChimp account, where MailChimp auto-generates a URI for each certificate, required later on. Unfortunately, these URIs involve a randomly generated hexadecimal string, meaning each URI must be recorded manually in the attendee record, then checked for errors. Once the attendee record has been updated with certificate URIs, it is uploaded to MailChimp. (4) The certificates are checked one last time by creating a mock campaign on MailChimp, going through each attendee, downloading the certificate, then checking the certificate for errors and fixing where erroneous.
+Despite the necessity of creating and sending certificates, the process for doing so is extremely time consuming and error prone. As shown in Figure \ref{fig:old-solution}, this process is comprised of four stages: (1) the attendee record must be collected from the events team and checked for errors, e.g. multiple registrations from one person or missing but required information. (2) one certificate is made for each attendee via the template on \acrshort{ciet}'s \Gls{canva} account. Each certificate is then checked one by one for errors, being recreated if erroneous. (3) the certificates are uploaded to \acrshort{ciet}'s \Gls{mailchimp} account, where \Gls{mailchimp} auto-generates a \acrshort{uri} for each certificate, required later on. Unfortunately, these \acrshort{uri}s involve a randomly generated hexadecimal string, meaning each \acrshort{uri} must be recorded manually in the attendee record, then checked for errors. Once the attendee record has been updated with certificate \acrshort{uri}s, it is uploaded to \Gls{mailchimp}. (4) The certificates are checked one last time by creating a mock campaign on \Gls{mailchimp}, going through each attendee, downloading the certificate, then checking the certificate for errors and fixing where erroneous.
 
-All up, this process takes at least two hours per 50 attendees for someone who has gone through it before, and \textbf{far} longer for someone who has not. Worse yet, despite every certificate being checked three times during this process, it is still possible for erroneous certificates to be sent out, which has happened on at least one occasion. Clearly, this process is extremely time consuming and error prone, leading to attendee frustration and a negative impact on CIET's reputation.
+All up, this process takes at least two hours per 50 attendees for someone who has gone through it before, and \textbf{far} longer for someone who has not. Worse yet, despite every certificate being checked three times during this process, it is still possible for erroneous certificates to be sent out, which has happened on at least one occasion. Clearly, this process is extremely time consuming and error prone, leading to attendee frustration and a negative impact on \acrshort{ciet}'s reputation.
 
 \newpage
 
@@ -155,7 +163,7 @@ All up, this process takes at least two hours per 50 attendees for someone who h
 
 \subsection{Rundown}
 
-After some research, it has been discovered that stages 2, 3, and 4 of the old solution can be automated. For stage 1, instead of creating each certificate manually via Canva, the template can be created once and used to automatically create every certificate. Note that the template must be a Word document with merge fields or variables, not a PDF. The MailChimp API can be used to automate stage 3, where each certificate can be uploaded and have its URI recorded. With the URIs known, the attendee record can be updated and uploaded to MailChimp. Since the certificates were created automatically, stage 4 becomes redundant. This process is summarised in figure \ref{fig:new-solution}. With such a script, CIET can be confident in its ability to deliver the correct certificates to its members on time with minimal effort.
+After some research, it has been discovered that stages 2, 3, and 4 of the old solution can be automated. For stage 1, instead of creating each certificate manually via \Gls{canva}, the template can be created once and used to automatically create every certificate. Note that the template must be a Word document with merge fields or variables, not a \acrshort{pdf}. The \Gls{mailchimp} \acrshort{api} can be used to automate stage 3, where each certificate can be uploaded and have its \acrshort{uri} recorded \cite{mailchimp-first-api-call}. With the \acrshort{uri}s known, the attendee record can be updated and uploaded to \Gls{mailchimp}. Since the certificates were created automatically, stage 4 becomes redundant. This process is summarised in figure \ref{fig:new-solution}. With such a script, \acrshort{ciet} can be confident in its ability to deliver the correct certificates to its members on time with minimal effort.
 
 \begin{figure}[b!]
     \centering
@@ -164,49 +172,49 @@ After some research, it has been discovered that stages 2, 3, and 4 of the old s
     \label{fig:new-solution}
 \end{figure}
 
-Realising this goal, however, will require a well organised team and a plan. Due to the varied actions this script must perform, a moderately large codebase utilising several libraries is needed, demanding a significant time investment and expertise. This complexity is compounded by delegating the workload between a team, needing appropriate version control, task management, and enforeable coding standards. Furthermore, such a project could easily suffer from scope creep, especially with the user interface. Hence, the need for subsequent sections in this document.
+Realising this goal, however, will require a well organised team and a plan. Due to the varied actions this script must perform, a moderately large codebase utilising several \glspl{library} is needed, demanding a significant time investment and expertise. This complexity is compounded by delegating the workload between a team, needing appropriate version control, task management, and enforeable coding standards. Furthermore, such a project could easily suffer from scope creep, especially with the \gls{user} interface. Hence, the need for subsequent sections in this document.
 
-\subsection{Prototype}
+\subsection{Proof of concept}
 
-For the sake of time, a prototype can be implemented before scope creep becomes an issue. A prototype must include:
+For the sake of time, a \gls{poc} can be implemented before scope creep becomes an issue. A \gls{poc} must include:
 
 \begin{enumerate}
-    \item Command line interface to run program.
-    \item Must start program with certificate template path, attendee record path, and Mailchimp API and server keys as command line arguments
+    \item \Gls{cli} to run program.
+    \item Must start program with certificate template \gls{path}, attendee record \gls{path}, and \Gls{mailchimp} \acrshort{api} and \gls{server} keys as \glspl{cla}.
     \begin{enumerate}
-        \item Strongly recommended to use \mintinline{python}{argparse} library.
+        \item Strongly recommended to use \mintinline{python}{argparse} \gls{library}.
     \end{enumerate}
-    \item Must be able to load attendee records from a CSV file.
-    \item Generate a certificate of attendance for each attendee
+    \item Must be able to load attendee records from a \acrshort{csv} file.
+    \item Generate a certificate of attendance for each attendee.
     \begin{enumerate}
         \item Must be saved into a folder called \mintinline{shell}{/certificates} in the current working directory.
         \item Each certificate must be named based on attendee's full name.
     \end{enumerate}
-    \item Upload certificates to Mailchimp, keeping track of the file URIs.
+    \item Upload certificates to \Gls{mailchimp}, keeping track of the file \acrshort{uri}s.
     \begin{enumerate}
-        \item Uploading of certificates must be done as a batch, not individually uploaded.
+        \item Uploading of certificates must be done as a \gls{batch}, not individually uploaded.
     \end{enumerate}
-    \item Update the attendee record with the certificate URIs.
-    \item Update the Mailchimp contacts with file URIs.
-    \item Inform the user of what the program is currently doing.
+    \item Update the attendee record with the certificate \acrshort{uri}s.
+    \item Update the \Gls{mailchimp} contacts with file \acrshort{uri}s.
+    \item Inform the \gls{user} of what the program is currently doing.
     \begin{enumerate}
         \item Can just be a simple sentence, e.g. "Uploading certificates to Mailchimp..."
     \end{enumerate}
     \item Be able to process errors without crashing.
     \item Must be able to continue processing certificates when one fails.
-    \item Must inform user of which step or certificates failed and why.
+    \item Must inform \gls{user} of which step or certificates failed and why.
     \begin{enumerate}
         \item Can be done once the program has finished everything else.
     \end{enumerate}
-    \item All public and protected classes, methods, and function must have Google style docstrings.
-    \item Must be able to run on Windows, Linux, and Mac systems capable of running Python 3.
+    \item All public and protected \gls{class}es, methods, and function must have Google style \glspl{docstring} \cite{google-docstring}.
+    \item Must be able to run on Windows, Linux, and Mac systems capable of running \Gls{python} 3.
 \end{enumerate}
 
 \noindent
 For the sake of time and simplicity, the following assumptions can be made:
 
 \begin{enumerate}
-    \item The certificate of attendance is known.
+    \item The certificate of attendance template is known.
     \begin{enumerate}
         \item The only field to be changed is the attendee name.
         \item The exact location of the attendee name field is known and constant.
@@ -218,32 +226,32 @@ For the sake of time and simplicity, the following assumptions can be made:
 
 \subsection{Minimal Viable Product}
 
-Once a prototype is complete, a minimal viable product (MVP) can be written. The MVP has all the criteria of the prototype, excluding 2, and
+Once a \gls{poc} is complete, a \acrfull{mvp} can be written. The \acrshort{mvp} has all the criteria of the \gls{poc}, excluding 2, and
 
 \begin{enumerate}
-    \item Can be run via an executable.
+    \item Can be run via an executable or in the \gls{browser} as a \gls{webapp}.
     \begin{enumerate}
         \item No command line interfacing should be necessary.
     \end{enumerate}
-    \item Should have a simple and initiative GUI.
+    \item Should have a simple and initiative \acrshort{gui}.
     \begin{enumerate}
-        \item GUI does not need to be aesthetically pleasing.
+        \item \acrshort{gui} does not need to be aesthetically pleasing.
     \end{enumerate}
     \item Can select input files via file explorer.
-    \item Must log at least info, warning, error, and critical messages to a log file.
+    \item Must \gls{log} at least info, warning, error, and critical messages to a \gls{log} file.
     \begin{enumerate}
         \item Debug messages are optional.
-        \item It must be known where the log file is.
-        \item The GUI should have a button for viewing the log file.
-        \item Strongly recommended to use the \mintinline{python}{logging} library.
+        \item It must be known where the \gls{log} file is.
+        \item The \acrshort{gui} should have a button for viewing or downloading the \gls{log} file.
+        \item Strongly recommended to use the \mintinline{python}{logging} \gls{library}.
     \end{enumerate}
-    \item Must use OAuth 2 to get Mailchimp authorisation.
+    \item Must use OAuth 2 to get \Gls{mailchimp} \gls{authorisation}.
     \begin{enumerate}
-        \item The program should not have the option to use API keys.
+        \item The program should not have the option to use \acrshort{api} keys.
     \end{enumerate}
-    \item Should be able to inform the user of errors that occur in real time without interrupting background tasks.
-    \item Use appropriate colour coding and symbols to inform user of successes, warnings, and errors.
-    \item Must be able to instantly respond to user inputs without stuttering.
+    \item Should be able to inform the \gls{user} of errors that occur in real time without interrupting background tasks.
+    \item Use appropriate colour coding and symbols to inform \gls{user} of successes, warnings, and errors.
+    \item Must be able to instantly respond to \gls{user} inputs without stuttering.
     \item Multiprocessing and multithreading must be used to prevent the program from locking.
     \item Must be able to check attendee record for errors.
     \begin{enumerate}
@@ -253,177 +261,106 @@ Once a prototype is complete, a minimal viable product (MVP) can be written. The
     \end{enumerate}
     \item Must be able to display and select merge fields or variables in certificate template.
     \begin{enumerate}
-        \item Must be able to view template within GUI.
+        \item Must be able to view template within \acrshort{gui}.
         \item Must be able to select the merge field or variable where the full name goes.
     \end{enumerate}
-    \item All code declared as public must be documented using Sphinx.
+    \item All code declared as public must be documented using \Gls{sphinx}.
 \end{enumerate}
 
 \subsection{Competitive Product}
 
-If the MVP is done, a competitive, market ready, version can be done. This version should have everything the MVP has and
+If the \acrshort{mvp} is done, a competitive, market ready, version can be done. This version should have everything the \acrshort{mvp} has and
 
 \begin{enumerate}
     \item Must be able to load attendee records from an Excel file.
     \item Has ultra-specific error messages.
     \begin{enumerate}
-        \item Informs the user of what exactly went wrong.
+        \item Informs the \gls{user} of what exactly went wrong.
         \item Where possible, offers a solution.
         \item Where possible, offers links to online documentation.
     \end{enumerate}
-    \item Must include install wizard with a build machine.
+    \item Must include install wizard with a build machine if not a \gls{webapp}.
     \begin{enumerate}
         \item Must be able to choose where to install program.
     \end{enumerate}
-    \item Allows user to select where log files are saved.
-    \item Allows user to select what types of messages get logged.
+    \item Allows \gls{user} to select where log files are saved.
+    \item Allows \gls{user} to select what types of messages get logged.
     \item Must be able to select multiple fields in template as placeholders.
     \begin{enumerate}
         \item Must be able to select what each placeholder gets replaced with graphically.
         \item Must be able to select between attendee attribute, constant value (e.g. event name), or system value (e.g. timestamp).
     \end{enumerate}
-    \item Must be able to generate PDF report of what happened.
+    \item Must be able to generate \acrshort{pdf} report of what happened.
     \begin{enumerate}
         \item Can select where report gets saved to.
         \item Can select what goes on the report.
     \end{enumerate}
-    \item Must have an aesthetically pleasing GUI.
+    \item Must have an aesthetically pleasing \acrshort{gui}.
+    \item Must have tutorials on how to use software.
+    \item Must have a "Help" feature.
 \end{enumerate}
 
 \newpage
 
-\section{Prerequisite Knowledge}
+\section{Prerequisite Technical Knowledge}
 
-\subsection{Python Language}
+\subsection{\Gls{python} Language}
 
-While Python was originally designed as a simple scripting language, it has since evolved into one of the most used and popular languages. The simplicity of Python lends itself well to rapid prototyping, so simple that Python's syntax is often considered to be pseudocode. Furthermore, the library support for Python, both first and third-party, makes it extremely easy to make complex tasks simple. The sheer abundance of libaries available creates a compunding effect, as existing libraries makes it easier to wrote other libraries, leading to an exponential growth in library support. Whenever a new protocol or standard becomes prominent, chances are someone has already made a Python library to make it trivial to implement the protocol or standard within other programs. Additionally, the popularity of Python means there is ambundant support online for both known issues and asking online for assistance. For the sake of prototyping, it is difficult to find a better language than Python.
+While \Gls{python} was originally designed as a simple scripting language, it has since evolved into one of the most used and popular languages. The simplicity of \Gls{python} lends itself well to rapid prototyping, so simple that \Gls{python}'s syntax is often considered to be \gls{pseudocode}. Furthermore, the \gls{library} support for \Gls{python}, both first and third-party, makes it extremely easy to make complex tasks simple. The sheer abundance of libaries available creates a compunding effect, as existing libraries makes it easier to wrote other libraries, leading to an exponential growth in \gls{library} support. Whenever a new protocol or standard becomes prominent, chances are someone has already made a \Gls{python} \gls{library} to make it trivial to implement the protocol or standard within other programs. Additionally, the popularity of \Gls{python} means there is ambundant support online for both known issues and asking online for assistance. For the sake of prototyping, it is difficult to find a better language than \Gls{python}.
 
-Considering the ambundance of support for Python, learning the language is best done with interactive tutorials foudn online. Such examples include W3 Schools, Codecademny, and Learn Python. Numerous other tutorials exist, such as those on Tutorials Point and the countless YouTube videos; however, these tutorials lack an interactive component, leading to reading or watching without learning. When learning a new language, the resource is less important than the interaction between the material and the student.
+Considering the ambundance of support for \Gls{python}, learning the language is best done with interactive tutorials found online. Such examples include W3 Schools \cite{w3-schools-python}, Codecademny \cite{codecademy-python}, and Learn \Gls{python} \cite{learn-python}. Numerous other tutorials exist, such as those on Tutorials Point \cite{tutorialspoint-python} and the countless YouTube videos; however, these tutorials lack an interactive component, leading to reading or watching without learning. When learning a new language, the resource is less important than the interaction between the material and the student.
 
-Where Python's weakness lies is in its performance. Since Python is a weak typed language, datatype checking must be done during runtime, greatly reducing performance. Far worse, the interpreted nature of Python means compiler optimisations cannot be performed, slowing down Python to a crawl. Compared to optimised compiled languages, such as C, Rust, and C++, Python performs dozens of times worse when comparing equivelant programs. This can be greatly mitigated by taking advantage of scientific libraries, such as NumPy and Pandas. These libraries are written in C and C++, allowing for speeds within the ballpark of C, C++, and Rust. However, certain conventions must be followed to take advantage of vectorised data, leading to data needing to be structured in vectors or matrices. Unfortunately, this will only result in a performance increase when doing mathematical operations on numeric data, such as vector dot products or summing an array. Ergo, Python is a poor choice for performance critical applications.
+Where \Gls{python}'s weakness lies is in its performance. Since \Gls{python} is a weak typed language, datatype checking must be done during runtime, greatly reducing performance. Far worse, the interpreted nature of \Gls{python} means compiler optimisations cannot be performed, slowing down \Gls{python} to a crawl. Compared to optimised compiled languages, such as C, Rust, and C++, \Gls{python} performs dozens of times worse when comparing equivelant programs. This can be greatly mitigated by taking advantage of scientific libraries, such as NumPy \cite{numpy} and Pandas \cite{pandas}. These libraries are written in C and C++, allowing for speeds within the ballpark of C, C++, and Rust. However, certain conventions must be followed to take advantage of vectorised data, leading to data needing to be structured in vectors or matrices. Unfortunately, this will only result in a performance increase when doing mathematical operations on numeric data, such as vector dot products or summing an \gls{array}. Ergo, \Gls{python} is a poor choice for performance critical applications.
 
+\subsection{\acrshort{http} Requests and Responses}    \label{sec:http}
 
-\subsection{OSI and TCP/IP Models}
+Of interest to interfacing with internet-based \gls{server}s is the \acrfull{http}. Invented circa 1990, \acrshort{http} is a \gls{request}-\gls{response} protocol, transferring data in simple text documents. As of the time of writing, \acrshort{http} 1.1 is the most commonly used version, with 2.0 slowly replacing 1.1. In all versions, the first step is for the \gls{client} to connect to the \gls{server} via a \acrshort{tcp} handshake. Once a connection has been established, the \gls{client} can proceed to send a ``\gls{request}'', which the \gls{server} processes then replies with a ``\gls{response}'' \cite{http-message}.
 
-To understand how programs interface with each other over the internet, the Open Systems Interconnection (OSI) model must be introduced. Starting in the late 1970s, the OSI model details how computers, or ``nodes'', communicate with each other over a network. The model is split into seven layers, each with their own purpose and protocols, shown in table \ref{table:OSI-model}. Each layer only needs to know about the adjacent layers, decoupling the responsibilities as much as possible. When sending messages over a network, the sender goes through the layers from top-to-bottom, whereas the receiver goes through the layers bottom-to-top. Despite the significant learning curve, the OSI model successfully delegates the numerous responsibilities of network communication across seven mostly decoupled layers.
-
-\begin{table}[t!]
-    \begin{threeparttable}[t]
-        \caption{OSI Model for computer networking}
-        \label{table:OSI-model}
-        \begin{tabular}{m{0.1\textwidth}<{\centering} || m{0.26\textwidth} | m{0.26\textwidth} | m{0.26\textwidth}}
-            \toprule
-            \textbf{No.}    &   \textbf{TCP/IP Model} &   \textbf{OSI Model}  &   \textbf{Protocols} \\
-            \midrule
-            7   &   \multirow{3}*{Application}      &   Application     &   HTTP, FTP, WS, RTP \\
-            \cline{1-1} \cline{3-4}
-            6   &                                   &   Presentation    &   JPEG, TSL, SSL \\
-            \cline{1-1} \cline{3-4}
-            5   &                                   &   Session         &   NFS, SQL, PAP \\
-            \hline
-            4   &   Host-to-Host                    &   Transport       &   TCP, UDP \\
-            \hline
-            3   &   Internet                        &   Network         &   IPv4, IPv6 \\
-            \hline
-            2   &   \multirow{2}*{Network Access}   &   Data Link       &   ARP, CDP, STP \\
-            \cline{1-1} \cline{3-4}
-            1   &                                   &   Physical        &   Ethernet, Wi-Fi \\
-            \bottomrule
-        \end{tabular}
-    \end{threeparttable}
-\end{table}
-
-{\setlength{\parindent}{0cm}
-\vspace{\baselineskip}
-\textbf{1. Physical Layer}
-
-What physical devices are used to connect the nodes within a local area network (LAN). By extension, also dictates the bit rate, what receives data, and what sends data. Does not understand data beyond a sequence of 1s and 0s.
-
-\vspace{\baselineskip}
-\textbf{2. Data Link Layer}
-
-Establishes and terminates a connection between two physically connected nodes. Data from layer 3 is broken into packets and organised into frames. Uses a logical link control (LLC) to identify network protocols, check for errors, and synchronise frames. Also uses Media Access Control (MAC) addresses to uniquely identify nodes and setup connections, including permissions.
-
-\vspace{\baselineskip}
-\textbf{3. Network Layer}
-
-Uses routers to sent segment of data from layer 4 and pair them with an address, typically an IPv4 address. Each segment with sent between routers to the correct LAN, where layer 2 takes control. By extension, also responsible for determining the fastest path to sent the segments through routers. Without layer 3, communication between LANs (e.g. the entire internet) would not be possible. Sometimes known as a ``connectionless'' protocol, as messages are sent without checking they were successfully sent.
-
-\vspace{\baselineskip}
-\textbf{4. Transport Layer}
-
-Takes data being sent from layer 5 and breaks it into segments to be sent over layer 3. Also responsible for reassembling segments back into the full message on the receiving end. Transmission Control Protocol (TCP) prioritises reliability over speed, ensuring that segments (called packets) are received intact. If a segment is curropt or not sent within a time limit, the receiver asks for the segment again. The receiver must also sends back a message which, if incorrect, the sender resends the message. Alternatively, User Datagram Protocol (UDP) treats segements as datagrams, sending them without any error checking, prioritising speed over reliability. Just like layer 3, UDP is also known as connectionless. The former is used for internet browsing and uploading to a server, whereas the latter is used for streaming videos, music, and playing games online.
-
-\vspace{\baselineskip}
-\textbf{5. Session Layer}
-
-Manages communication channels, or ``sessions'', between devices. Responsible for opening sessions, ensuring sessions remain open during data transfer, and closing sessions. Can also setup ``checkpoints'', ensuring that if the data flow is interrupted, it can be continued latter without restarting.
-
-\vspace{\baselineskip}
-\textbf{6. Presentation Layer}
-
-Prepares data from layer 7 before being sent via layer 5. Performs compression, encoding on the sending end, decoding on the receiving end, and encryption. The `s' in ``https'' stand for secure and is handled by the Transport Layer Security (TLS) protocol, often mistaken for the outdated and hacked Secure Socket Layer (SSL).
-
-\vspace{\baselineskip}
-\textbf{7. Application Layer}
-
-The programs that are generating the data being sent and received. Examples include web browers, email clients, servers, and streaming services such as Netflix and Twitch. Also responsible for presenting the data in a meaningful way to end users.
-}
-
-\vspace{\baselineskip}
-
-The observant reader would also notice that there is a simplified TCP/IP model, only comprised of four layers. In it, the bottom two layers of OSI are combined into the ``Network Access layer'', where frames are transmitted between nodes on a LAN via mapping IP addresses and port numbers to MAC addresses. The next layer, called the ``Internet layer'', uses the assigned IP addresses to direct packets to the correct LAN. The internet layer also uses Internet Control Message Protocol (ICMP) to inform hosts about network issues, encapsulated within the IP dataframes. To determine the physical address of a node, layer 2 also uses Address Resolution Protocol (ARP). Layer 3 in the TCP/IP model is identical to the transport layer in the OSI model.\footnote{Despite the name, UDP can be used in the TCP/IP model} Lastly, the top three layers of OSI are combined into the application layer in TCP/IP model. Due to the reduced complexity, the TCP/IP model is often used over the OSI model for internet communications.
-
-
-\subsection{HTTP Requests and Responses}
-
-Of interest to interfacing with internet-based servers is the hypertext transfer protocol (HTTP). Invented circa 1990, HTTP is a request-response protocol, transferring data in simple text documents. As of the time of writing, HTTP 1.1 is the most commonly used version, with 2.0 slowly replacing 1.1. In all versions, the first step is for the client to connect to the server via a TCP handshake. Once a connection has been established, the client can proceed to send a ``request'', which the server processes then replies with a ``response''.
-
-The request is a text document made of three, sometimes four parts. The first line is always the request header, formatted as the method type, followed by the path to the resource, then the HTTP version. Afterwards, each line then comprises the one key-value pair of the header, used to specify metadata, such as the host, accepted languages, authorisation codes, connection type, and expected content type(s). To end the header, an empty line must then follow. For some requests, a body may also be necessary, such as the content being uploaded to the server. Below is an example of such a request.
+The \gls{request} is a text document made of three, sometimes four parts. The first line is always the \gls{request} header, formatted as the method type, followed by the path to the resource, then the \acrshort{http} version \cite{http-message}. Afterwards, each line then comprises the one key-value pair of the header, used to specify \gls{metadata}, such as the host, accepted languages, authorisation codes, connection type, and expected content type(s) \cite{http-message}. To end the header, an empty line must then follow. For some \glspl{request}, a body may also be necessary, such as the content being uploaded to the \gls{server} \cite{http-message}. Below is an example of such a \gls{request}.
 
 \vspace{0.5\baselineskip}
 
 \inputminted[linenos=true]{html}{http_examples/post_request.html}
 
-Once the server has finished processing the request, it sends back a response, formatted very similarly to a request. The response's first line is always the status line, formatted as the HTTP version, the status code, then the status message. The status code is a three digit code informing the client of how the server handled the request. The first digit is the broad type of code, then the next two digits specifies the exact type of code. The status message is simply a humanly readable message version of the status code. After the status line, the header fields are then declared line-by-line, ending with an empty line. For some requests, a body will also be included after the empty line. See the example below.
+Once the \gls{server} has finished processing the \gls{request}, it sends back a \gls{response}, formatted very similarly to a \gls{request}. The \gls{response}'s first line is always the status line, formatted as the \acrshort{http} version, the status code, then the status message \cite{http-response}. The status code is a three digit code informing the \gls{client} of how the \gls{server} handled the \gls{request}. The first digit is the broad type of code, then the next two digits specifies the exact type of code. The status message is simply a humanly readable message version of the status code. After the status line, the header fields are then declared line-by-line, ending with an empty line. For some \gls{request}s, a body will also be included after the empty line. See the example below.
 
 \vspace{0.5\baselineskip}
 
 \inputminted[linenos=true]{html}{http_examples/get_response.html}
 
-\begin{info}[HTTP Status Codes]
-For long messages split into multiple requests, a \texttt{1xx} status code means the server successfully received the segment and the client should send the next. \texttt{2xx} means the message was received, understood, and processed successfully. \texttt{3xx} means the server does not have the resource being requested but does know another server that does.\footnote{Responses with status codes of \texttt{3xx} should always include the server connection details in the body} 4xx means the client did something wrong, such as the classic \texttt{404} page not found error. Lastly, \texttt{5xx} means the server did something wrong.
+\begin{info}[\acrshort{http} Status Codes]
+For long messages split into multiple \gls{request}s, a \texttt{1xx} status code means the \gls{server} successfully received the segment and the \gls{client} should send the next. \texttt{2xx} means the message was received, understood, and processed successfully. \texttt{3xx} means the \gls{server} does not have the resource being \gls{request}ed but does know another \gls{server} that does.\footnote{Responses with status codes of \texttt{3xx} should always include the \gls{server} connection details in the body} 4xx means the \gls{client} did something wrong, such as the classic \texttt{404} page not found error. Lastly, \texttt{5xx} means the \gls{server} did something wrong.
 \end{info}
 
-As of HTTP 1.1, there are nine accepted methods. Introduced in HTTP 0.9 (the first public version), the \texttt{GET} request is a simple read only request to retrieve a copy of a resource from the server. As of HTTP 1.0, the \texttt{POST} request allows for clients to upload new resources onto the server. Also as of HTTP 1.0, the \texttt{HEAD} request works identically to a \texttt{GET} request, expect that the body is not included. In HTTP 1.1, two important methods were added: A \texttt{PUT} request allows a client to replace an existing resource on a server with the one in the request body, whereas a \texttt{DELETE} request simply tells the server to delete the specified resource. Similar to a \texttt{PUT} request, a \texttt{PATCH} request tells the server to partially update a resource instead of replacing it. While not commonly used, HTTP 1.1 also introduced the \texttt{TRACE} and \texttt{OPTIONS} request types. The former performs a message loop-back test from the path of the specified resource, whereas the latter requests the server to describe all available commincation options for the specified resource. Lastly, the \texttt{CONNECT} request allows clients to connect to a server through another server, useful for setting up proxy servers or websites using TSL (i.e. HTTPS).
+As of \acrshort{http} 1.1, there are nine accepted methods \cite{http-methods}. Introduced in \acrshort{http} 0.9 (the first public version), the \texttt{GET} \gls{request} is a simple read only \gls{request} to retrieve a copy of a resource from the \gls{server} \cite{http-0-9}. As of \acrshort{http} 1.0, the \texttt{P\acrshort{os}T} \gls{request} allows for \gls{client}s to upload new resources onto the \gls{server}. Also as of \acrshort{http} 1.0, the \texttt{HEAD} \gls{request} works identically to a \texttt{GET} \gls{request}, expect that the body is not included. In \acrshort{http} 1.1, two important methods were added: A \texttt{PUT} \gls{request} allows a \gls{client} to replace an existing resource on a \gls{server} with the one in the \gls{request} body, whereas a \texttt{DELETE} \gls{request} simply tells the \gls{server} to delete the specified resource. Similar to a \texttt{PUT} \gls{request}, a \texttt{PATCH} \gls{request} tells the \gls{server} to partially update a resource instead of replacing it. While not commonly used, \acrshort{http} 1.1 also introduced the \texttt{TRACE} and \texttt{OPT\acrshort{io}NS} \gls{request} types. The former performs a message loop-back test from the path of the specified resource, whereas the latter \gls{request}s the \gls{server} to describe all available commincation options for the specified resource. Lastly, the \texttt{CONNECT} \gls{request} allows \gls{client}s to connect to a \gls{server} through another \gls{server}, useful for setting up proxy \gls{server}s or websites using TSL (i.e. \acrshort{http}S).
 
-While HTTP 1.1 remains the predominant version as of the time of writing, HTTP 2.0 will eventually replace it. HTTP 1.1 introduced vast performance improvements over 1.0, most notably the ability to remain connected to the server after each request-response cycle instead of having to reconnect to the server. However, in 1.1, the server can only process one request from any client at a time, meaning the client must wait until the current request has been responded before sending another. This has changed in 2.0, allowing for mutliple requests to be sent, processed, and responded to after a connection has been established, shown in figure \ref{fig:http-visualised}. For now, this project can ignore HTTP 2.0, but future versions may need to consider the inevitable obsoletion of HTTP 1.1.
+While \acrshort{http} 1.1 remains the predominant version as of the time of writing, \acrshort{http} 2.0 will eventually replace it. \acrshort{http} 1.1 introduced vast performance improvements over 1.0, most notably the ability to remain connected to the \gls{server} after each \gls{request}-\gls{response} cycle instead of having to reconnect to the \gls{server}. However, in 1.1, the \gls{server} can only process one \gls{request} from any \gls{client} at a time, meaning the \gls{client} must wait until the current \gls{request} has been responded before sending another. This has changed in 2.0, allowing for mutliple \gls{request}s to be sent, processed, and responded to after a connection has been established \cite{http2}, shown in figure \ref{fig:http-visualised}. For now, this project can ignore \acrshort{http} 2.0, but future versions may need to consider the inevitable obsoletion of \acrshort{http} 1.1.
 
 \begin{figure}[h!]
     \centering
     \includegraphics[width=0.9\textwidth]{figures/http1-vs-http2-multiplexing.png}
-    \caption{HTTP 1.1 and HTTP 2.0 visualised.}
+    \caption{\acrshort{http} 1.1 and \acrshort{http} 2.0 visualised \cite{http1-vs-http2}.}
     \label{fig:http-visualised}
 \end{figure}
 
 \subsection{Object Orientation}
 
-Critical to software engineering, object orientated programming (OOP) has proven invaluable to large scale and collaborative code-based projects. This is possible via a sophisticated application of the broad divide and conquer approach, splitting complex programs into simple and decoupled modules and submodules. OOP achieves this through four main principles: encapsulation, abstraction, inheritance, and polymorphism.
+Critical to software engineering, \acrfull{oop} has proven invaluable to large scale and collaborative code-based projects. This is possible via a sophisticated application of the broad divide and conquer approach, splitting complex programs into simple and decoupled modules and submodules. \acrshort{oop} achieves this through four main principles: \gls{encapsulation}, \gls{abstraction}, \gls{inheritance}, and \gls{polymorphism}.
 
 \subsubsection{Encapsulation}
 
-Consider the logistics in running a store: the stock available, the stock reserved for customers yet to buy them, preorders, cancellations, the stock on its way, the customers who have signed up as members, newsletters, purchases, overhead costs, etc. How does a business maintain such logistics? Who records the data? Who files and organises the data? Who has access to what data? Who is authorised to fix errors in the data and what process must they go through to make these fixes? Perhaps most importantly, who or what ensures the data is valid \textit{before} it is placed with existing data? Such problems can be at least mitigated using the OOP paradigm.
+Consider the logistics in running a store: the stock available, the stock reserved for customers yet to buy them, preorders, cancellations, the stock on its way, the customers who have signed up as members, newsletters, purchases, overhead costs, etc. How does a business maintain such logistics? Who records the data? Who files and organises the data? Who has access to what data? Who is authorised to fix errors in the data and what process must they go through to make these fixes? Perhaps most importantly, who or what ensures the data is valid \textit{before} it is placed with existing data? Such problems can be at least mitigated using the \acrshort{oop} paradigm.
 
-Since objects contain data as variables, the objects can be made responsible for protecting the data from curroption. Instead of making the variables directly accessible, the object can have getters and setters (also known as mutators) to access the data. Getters should always return a copy of the variable, whereas setters must validate the new value before setting the variable. For example, it is impossible for a jar to have a negative number of marbles, hence if outside code attempts to remove more marbles from a jar object than what is available an error can be raised and the jar's number of marbles remains unchanged. Similarly, the jar will probably also have a capacity, so that if too many marbles are attempted to be inserted a different error should be raised. Some object variable may not even have getters, such as the length of a collection (e.g. an array or a linked list). Instead, the length variable should automatically change as elements are inserted or removed. Even further encapsulated, other variables may not even have getters, as they may be variables that should only be used by the object internally, such as an array inside of a hash table. Protecting data like this greatly mitigates the data from being curropted or otherwise useless.
+Since \glspl{object} contain data as variables, the \glspl{object} can be made responsible for protecting the data from corruption. Instead of making the variables directly accessible, the \gls{object} can have getters and setters (also known as mutators) to access the data. Getters should always return a copy of the variable, whereas setters must validate the new value before setting the variable. For example, it is impossible for a jar to have a negative number of marbles, hence if outside code attempts to remove more marbles from a jar \gls{object} than what is available an error can be raised and the jar's number of marbles remains unchanged. Similarly, the jar will probably also have a capacity, so that if too many marbles are attempted to be inserted a different error should be raised. Some \gls{object} variable may not even have getters, such as the length of a collection (e.g. an \gls{array} or a linked list). Instead, the length variable should automatically change as elements are inserted or removed. Even further encapsulated, other variables may not even have getters, as they may be variables that should only be used by the \gls{object} internally, such as an \gls{array} inside of a hash table. Protecting data like this greatly mitigates the data from being curropted or otherwise useless.
 
 \begin{figure}[b!]
     \centering
     \includegraphics[width=0.5\textwidth]{figures/encapsulation.jpg}
-    \caption{Encapsulation visualisation.}
+    \caption{Encapsulation visualisation \cite{oop-encapsulation}.}
     \label{fig:encapsulation}
 \end{figure}
 
-In Python, encapsulation is implemented very differently to other OOP languages. Languages like Java, C\#, and C++ have the keywords \mintinline{c++}{public}, \mintinline{c++}{protected}, and \mintinline{c++}{private} for deciding how hidden a variable or method is. \mintinline{c++}{public} simply means anything that has access to the class or object can access the member, be it a variable or method. \mintinline{c++}{private}, however, means only the class or object can access the member, completely hiding it from all other code. While useful for data proctection, it was quickly found that \mintinline{c++}{private} is too restrictive for many applications. Instead, \mintinline{c++}{protected} has replaced \mintinline{c++}{private}, as it allows subclasses to access the member, dicussed further in the Inheritance subsection below. Python does not have these keywords, instead opting for using underscores: no underscores delcares the member (or ``attribute'' as it is known in Python) as public, a single underscore means protected, and a double underscore, or ``dunder'', means private. Protected and private variables can then be read using the \mintinline{python}{@property} decorator and set using the \mintinline{python}{@x.setter} decorator, where \mintinline{python}{x} is the variable being set. Note the example below and the lack of dunders.
+In \Gls{python}, encapsulation is implemented very differently to other \acrshort{oop} languages. Languages like Java, C\#, and C++ have the keywords \mintinline{c++}{public}, \mintinline{c++}{protected}, and \mintinline{c++}{private} for deciding how hidden a variable or method is. \mintinline{c++}{public} simply means anything that has access to the \gls{class} or \gls{object} can access the member, be it a variable or method. \mintinline{c++}{private}, however, means only the \gls{class} or \gls{object} can access the member, completely hiding it from all other code. While useful for data protection, it was quickly found that \mintinline{c++}{private} is too restrictive for many applications. Instead, \mintinline{c++}{protected} has replaced \mintinline{c++}{private}, as it allows subclasses to access the member, dicussed further in the inheritance subsection below. \Gls{python} does not have these keywords, instead opting for using underscores: no underscores delcares the member (or ``attribute'' as it is known in \Gls{python}) as public, a single underscore means protected, and a double underscore, or ``\gls{dunder}'', means private. Protected and private variables can then be read using the \mintinline{python}{@property} decorator and set using the \mintinline{python}{@x.setter} decorator, where \mintinline{python}{x} is the variable being set. Note the example below and the lack of \glspl{dunder}.
 
 \inputminted[linenos=true]{python}{python_examples/encapsulation.py}
 
@@ -431,7 +368,7 @@ In Python, encapsulation is implemented very differently to other OOP languages.
 
 As a program become more and more complex, it becomes increasingly difficult to manage the functionality of the program. Trying to track where the functions of a program are organised and located turns inpractical. Even trying to determine if a function has been implemented becomes time consuming and infeasible. This can be partially mitigated by organising functions into thematically narrow and consistent libraries; however, even this approach leads to too many functions to keep track of what has and has not been implemented. For complex programs, especailly those requiring extensive interaction with other programs, a smarter approach is needed.
 
-Abstraction attempts to solve this issue by hiding functionality within objects. Abstraction is simply the process of hiding the implementation by only exposing what the object can do. Hence, outside code only needs to concern itself with what the object can do and not how it does it. Since objects can contain other objects, complex tasks involving several steps using numerous variables can be split accross a tree-like hierarchy of objects. Consider the OSI or TCP/IP model detailed in section 3.2: with OOP all that is needed is a single \texttt{NetworkManager} that handles how an application sends and receives data without code outside the \texttt{NetworkManager} needing to know about layers below the application layer. Therefore, outside code only needs to call a single method of one object and let it handle how the task is completed.
+Abstraction attempts to solve this issue by hiding functionality within \glspl{object}. Abstraction is simply the process of hiding the implementation by only exposing what the \gls{object} can do. Hence, outside code only needs to concern itself with what the \gls{object} can do and not how it does it. Since \glspl{object} can contain other \glspl{object}, complex tasks involving several steps using numerous variables can be split accross a tree-like hierarchy of \glspl{object}. Consider the complexity of sending and receiving \acrshort{http} \gls{request}s and \gls{response}s detailed in section \ref{sec:http}: with \acrshort{oop} all that is needed is a single \texttt{NetworkManager} that handles how an application sends and receives data without code outside the \texttt{NetworkManager} needing to know about how \acrshort{http} \gls{response}s and \gls{request} work. Therefore, outside code only needs to call a single method of one \gls{object} and let it handle how the task is completed.
 
 \subsubsection{Inheritance}
 
@@ -444,25 +381,22 @@ When similar entities need to be modelled, code repitition becomes an issue. Con
     \label{fig:inheritance-uml}
 \end{figure}
 
-OOP programming provides such a solution in the form of inheritance. Simply put, inheritance is the ability of some classes to inherit the code of other classes. For the pet tracker example, a base class called \texttt{Pet} or \texttt{Animal} can be made that contains code common to all pets. E.g., values like owner, pet ID, and date of birth. Further classes can be written that eliminate code repitition for groups of types of pets, e.g. \texttt{Mammal}, \texttt{Reptilian}, \texttt{Bird}, and \texttt{Amphibian}, each of which should inherit from the \texttt{Pet} base class. Then, more specific pet types can be written that inherit from these broad pet types, such as \texttt{Dog}, \texttt{Cat}, \texttt{Turtle}, \texttt{Snake}, \texttt{Parrot}, and \texttt{Frog}. Such inheritance is known as the \textit{is-a} relationship, as a dog \textit{is a} Mammal, which \textit{is a} animal. Designing a codebase like this completely eliminates repetitive functions, greatly speading up the process of writing the codebase and simplifying test cases.
+\acrshort{oop} programming provides such a solution in the form of inheritance. Simply put, inheritance is the ability of some classes to inherit the code of other classes. For the pet tracker example, a base \gls{class} called \texttt{Pet} or \texttt{Animal} can be made that contains code common to all pets. E.g., values like owner, pet ID, and date of birth. Further classes can be written that eliminate code repitition for groups of types of pets, e.g. \texttt{Mammal}, \texttt{Reptilian}, \texttt{Bird}, and \texttt{Amphibian}, each of which should inherit from the \texttt{Pet} base class. Then, more specific pet types can be written that inherit from these broad pet types, such as \texttt{Dog}, \texttt{Cat}, \texttt{Turtle}, \texttt{Snake}, \texttt{Parrot}, and \texttt{Frog}. Such inheritance is known as the \textit{is-a} relationship, as a dog \textit{is a} Mammal, which \textit{is a} animal. Designing a codebase like this completely eliminates repetitive functions, greatly speading up the process of writing the codebase and simplifying test cases.
 
-\noindent
-\begin{minipage}[t]{0.5\textwidth}
+Additionally, inheritance also covers one \gls{object} being contained within another. This type of relationship is known as the \textit{has-a} relationship or \gls{association}. For example, a car is \textit{not} a type of steering wheel and vice-versa. However, a car \textit{has a} steering wheel. Consider a car manufacturer that needs to design and manufacture cars. While different car models are not identical, they may share identical parts, such as a steering wheel. Hence, these identicial parts can be written, tested, and debugged once, then shared across the different car classes. This type of association is known as composition, as the car fully owns the parts it is made of. If the car \gls{object} is destroyed, the car parts are also destroyed. This is opposed to aggregation, in which the child \gls{object} can exist independently of the parent class, such as the cars and the manufacturer. As with the \textit{is-a} relationship, \gls{association} greatly reduces code repitition.
+
+\begin{wrapfigure}{r}{0.5\textwidth}
     \vspace{0pt}
-    \, Additionally, inheritance also covers one object being contained within another. This type of relationship is known as the \textit{has-a} relationship or association. For example, a car is \textit{not} a type of steering wheel and vice-versa. However, a car \textit{has a} steering wheel. Consider a car manufacturer that needs to design and manufacture cars. While different car models are not identical, they may share identical parts, such as a steering wheel. Hence, these identicial parts can be written, tested, and debugged once, then shared across the different car classes. This type of association is known as composition, as the car fully owns the parts it is made of. If the car object is destroyed, the car parts are also destroyed. This is opposed to aggregation, in which the child object can exist independently of the parent class, such as the cars and the manufacturer. As with the \textit{is-a} relationship, association greatly reduces code repitition.
-\end{minipage}
-\begin{minipage}[t]{0.5\textwidth}
-    \vspace{0pt}
-    \includegraphics[width=\textwidth]{figures/association.pdf}
+    \includegraphics[width=0.48\textwidth]{figures/association.pdf}
     \captionof{figure}{Assocation UML example.}
     \label{fig:association-uml}
-\end{minipage}
+\end{wrapfigure}
 
 \subsubsection{Polymorphism}
 
-When developing a codebase, it occansionally becomes useful to have multiple functions or methods that are named the same but perform differently. In \texttt{C}, the \texttt{math.h} library contains functions for finding the absolute value of a number. There are actually two of these functions: the \mintinline{c}{abs()} function and the \mintinline{c}{fabs()} function. The reasoning being is that \mintinline{c}{abs()} takes in an integer whereas \mintinline{c}{fabs()} takes in a double. Since \texttt{C} is a strong typed language with no polymorphism, this practice of having multiple functions perform essentailly the same task becomes inevitable. Even more complicated, consider the case of calculating the area of a shape. Since the areas of shapes are calculated differently from shape to shape, in \texttt{C} there would be one function per type of shape. E.g. \mintinline{c}{circleArea()}, \mintinline{c}{rectArea()}, \mintinline{c}{triangleArea()}, etc. As program requirements start involving extremely similar functions and datatypes, the number of near-identical functions to keep track of becomes inpractical.
+When developing a codebase, it occansionally becomes useful to have multiple functions or methods that are named the same but perform differently. In \texttt{C}, the \mintinline{c}{math.h} \gls{library} contains functions for finding the absolute value of a number. There are actually two of these functions: the \mintinline{c}{abs()} function and the \mintinline{c}{fabs()} function. The reasoning being is that \mintinline{c}{abs()} takes in an integer whereas \mintinline{c}{fabs()} takes in a double. Since \texttt{C} is a strong typed language with no polymorphism, this practice of having multiple functions perform essentially the same task becomes inevitable. Even more complicated, consider the case of calculating the area of a shape. Since the areas of shapes are calculated differently from shape to shape, in \texttt{C} there would be one function per type of shape. E.g. \mintinline{c}{circleArea()}, \mintinline{c}{rectArea()}, \mintinline{c}{triangleArea()}, etc. As program requirements start involving extremely similar functions and datatypes, the number of near-identical functions to keep track of becomes inpractical.
 
-Polymorphism solves this issue by allowing multiple functions to share the same name. One such manner of doing so is called ``method overloading'': allowing for a class or object to have multiple methods with the same name but different parameter lists in terms of their datatypes. In Python, this is actually not possible since the datatypes of variables does not have to be declared. Instead, Python achieves pseudo-overloading by allowing for a parameter to have one of multiple valid datatypes (such as \texttt{num} being either an \mintinline{python}{int} or an \mintinline{python}{float}) or by having parameters with default values. Further still, a function in Python can have an optional list of miscellaneous, unnamed parameters and another optional dictionary of named parameters. For example, the Python function
+Polymorphism solves this issue by allowing multiple functions to share the same name. One such manner of doing so is called ``method overloading'': allowing for a \gls{class} or \gls{object} to have multiple methods with the same name but different parameter lists in terms of their datatypes. In \Gls{python}, this is actually not possible since the datatypes of variables does not have to be declared. Instead, \Gls{python} achieves pseudo-overloading by allowing for a parameter to have one of multiple valid datatypes (such as \texttt{num} being either an \mintinline{python}{int} or an \mintinline{python}{float}) or by having parameters with default values. Further still, a function in \Gls{python} can have an optional list of miscellaneous, unnamed parameters and another optional dictionary of named parameters. For example, the \Gls{python} function
 
 \begin{minted}{python}
 def formatNumbers(num, *args, precision=2, **kwargs):
@@ -472,19 +406,19 @@ def formatNumbers(num, *args, precision=2, **kwargs):
 \noindent
 must be called with a number, but can allow multiple arbitrary numbers to be formated via the \mintinline{python}{*args} list, optionally specify the precision to format the numbers to (defaults to 2 decimal places), and also be called with arbitrary named parameters that are stored inside the \mintinline{python}{**kwargs} dictionary (short for ``keyword arguments'').
 
-Using the \textit{is-a} inheritance principle, it is also possible to achieve polymorphism via ``method overriding''. Going back to the area of shapes example, we can calculate the areas of different shapes without needing multiple methods with different names. Instead, a base class \texttt{Shape} can be written, that has the method \texttt{calcArea()}. This method is known as an ``abstract method'' since it has not been implemented, meaning the \texttt{Shape} class is also abstract. Abstract classes cannot be instantiated into objects, making them useless by themselves. Instead, subclasses of the \texttt{Shape} class can be written that implement this abstract method, such as \texttt{Circle}, \texttt{Rectangle}, and \texttt{Triangle}. The significane of which means that outside code does not need to concern itself with what exact type of shape a \texttt{Shape} object is, only that is has a \texttt{calcArea()} method. Hence, functions can be written once for any arbitrary shape object and more shape types can be written latter without having to change any of these functions.
+Using the \textit{is-a} inheritance principle, it is also possible to achieve polymorphism via ``method overriding''. Going back to the area of shapes example, we can calculate the areas of different shapes without needing multiple methods with different names. Instead, a base \gls{class} \mintinline{python}{Shape} can be written, that has the method \mintinline{python}{calcArea()}. This method is known as an ``abstract method'' since it has not been implemented, meaning the \mintinline{python}{Shape} \gls{class} is also abstract. Abstract classes cannot be instantiated into \glspl{object}, making them useless by themselves. Instead, subclasses of the \mintinline{python}{Shape} \gls{class} can be written that implement this abstract method, such as \mintinline{python}{Circle}, \mintinline{python}{Rectangle}, and \mintinline{python}{Triangle}. The significance of which means that outside code does not need to concern itself with what exact type of shape a \mintinline{python}{Shape} \gls{object} is, only that is has a \mintinline{python}{calcArea()} method. Hence, functions can be written once for any arbitrary shape \gls{object} and more shape types can be written latter without having to change any of these functions.
 
 \subsection{Application Programming Interface}
 
-The world of modern software development is one heavily comprised of using code and services created by third-party organisations or individuals. This is an inevitable consequence of the daunting product requirements that modern software must abide by to remain competitive. However, the pitfalls of using third party services quickly become apparent: \textit{How do we know future changes won't break our code? Will our application still work when this service changes? What security flaws or exploits are exposed allowing others to use our service? What do we do if a third party service does not allow us to access their service via code?} Consider the need for a music editing mobile app that can use music owned by the user from their Spotify, Google Music, Bandcamp, or Apple Music accounts. How does a development team even begin to integrate these services their mobile app?
+The world of modern software development is one heavily comprised of using code and services created by third-party organisations or individuals. This is an inevitable consequence of the daunting product requirements that modern software must abide by to remain competitive. However, the pitfalls of using third party services quickly become apparent: \textit{How do we know future changes won't break our code? Will our application still work when this service changes? What security flaws or exploits are exposed allowing others to use our service? What do we do if a third party service does not allow us to access their service via code?} Consider the need for a music editing mobile app that can use music owned by the \gls{user} from their Spotify, Google Music, Bandcamp, or Apple Music accounts. How does a development team even begin to integrate these services their mobile app?
 
-Solving these concerns introduces the need for Application Programming Interfaces, or APIs. An API, simply put, is a set of commands a program can use to access and upload data to another program. They can be as simple as the set of functions and constants within a library to the monolithic 2 billion line of code Google API. Well designed APIs allow external parties to develop their own applications integrating your service without needing to know how the API works, nor what the external application is or does. APIs also greatly mitigate security issues, as APIs can hide implementation or block access. External developers using an API can also be sure that future changes to the API will not break their application, as updates come with a version number, signifying if an API change has occurred. If an API change has occurred, the external developers can simply not use the newer version until they have updated their application to use the newer API. Most relevant to this project, the Mailchimp API is the only way a program can access a user's Mailchimp account without hacking the Mailchimp servers. Without this API, the project would not be possible.
+Solving these concerns introduces the need for \acrfull{api}. An \acrshort{api}, simply put, is a set of commands a program can use to access and upload data to another program. They can be as simple as the set of functions and constants within a \gls{library} to the monolithic 2 billion line of code Google \acrshort{api} \cite{google-api}. Well designed \acrshort{api}s allow external parties to develop their own applications integrating your service without needing to know how the \acrshort{api} works, nor what the external application is or does. \acrshort{api}s also greatly mitigate security issues, as \acrshort{api}s can hide implementation or block access. External developers using an \acrshort{api} can also be sure that future changes to the \acrshort{api} will not break their application, as updates come with a version number, signifying if an \acrshort{api} change has occurred. If an \acrshort{api} change has occurred, the external developers can simply not use the newer version until they have updated their application to use the newer \acrshort{api}. Most relevant to this project, the \Gls{mailchimp} \acrshort{api} is the only way a program can access a \gls{user}'s \Gls{mailchimp} account without hacking the \Gls{mailchimp} \glspl{server}. Without this \acrshort{api}, the project would not be possible.
 
-\subsection{JSON}
+\subsection{\acrshort{json}}
 
-While developers can use whatever common or obscure data format they want for their APIs, JavaScript Object Notation (JSON) has dominated API usage in recent years. Originally designed for the Javascript programming language as a way of creating objects without a class or constructor function, JSON has since evolved into a text format for storing and transporting data in a lightweight manner. While confusing for new comers, it quickly becomes evident as to why JSON is so popular: its ability to scale for various types of data easily in a humanly readable format.
+While developers can use whatever common or obscure data format they want for their \acrshort{api}s, \acrfull{json} has dominated \acrshort{api} usage in recent years. Originally designed for the JavaScript programming language as a way of creating \glspl{object} without a \gls{class} or constructor function, \acrshort{json} has since evolved into a text format for storing and transporting data in a lightweight manner \cite{json}. While confusing for new comers, it quickly becomes evident as to why \acrshort{json} is so popular: its ability to scale for various types of data easily in a humanly readable format.
 
-JSON is comprised of a few special characters and a few datatypes. Every JSON message always starts and ends with curly brackets, denoting the message as an object. The properties of the object are then writtin in key-value pairs, where the key is always a string. The value can either be a string (within quotations), a number, an array (denoted using square brackets), a boolean (either \mintinline{json}{true} or \mintinline{json}{false}), \mintinline{json}{null}, or a nested object (denoted with curly brackets). The following JSON conventions are either required or strongly recommended:
+\acrshort{json} is comprised of a few special characters and a few datatypes. Most \acrshort{json} message always starts and ends with curly brackets, denoting the message as an \gls{object} \cite{json}. The properties of the \gls{object} are then writtin in key-value pairs, where the key is always a string. The value can either be a string (within quotations), a number, an \gls{array} (denoted using square brackets), a boolean (either \mintinline{json}{true} or \mintinline{json}{false}), \mintinline{json}{null}, or a nested \gls{object} (denoted with curly brackets). The following \acrshort{json} conventions are either required or strongly recommended:
 
 \begin{enumerate}
     \item Key names must always be strings.
@@ -493,19 +427,82 @@ JSON is comprised of a few special characters and a few datatypes. Every JSON me
         \item Key names should use hypens or (preferably) underscores instead of spaces.
         \item \texttt{snake\_case} is preferred over \texttt{camelCase} for key names.
     \end{enumerate}
-    \item Whenever the elements in a collection have unique identifiers, they should be stored in a nested object.
-    \item Whenever the elements in a collection do not have unique identifiers, they should be stored in an array.
-    \item Whenever the elements in a collection need to be ordered, they should be stored in an array.
-    \item Nested objects should contain data modelling a single entity.
-    \item An array should contain elements of the same datatype.
-    \item If an array stores objects, every object should have the same keys.
+    \item Whenever the elements in a collection have unique identifiers, they should be stored in a nested \gls{object}.
+    \item Whenever the elements in a collection do not have unique identifiers, they should be stored in an \gls{array}.
+    \item Whenever the elements in a collection need to be ordered, they should be stored in an \gls{array}.
+    \item Nested \glspl{object} should contain data modelling a single entity.
+    \item An \gls{array} should contain elements of the same datatype.
+    \item If an \gls{array} stores \glspl{object}, every \gls{object} should have the same keys.
     \item Always use quotations ("") instead of quotes (`') when declaring a string.
     \item If a value is not known, assign it as \mintinline{json}{null}.
 \end{enumerate}
 
-Below is a simple example of a club's details stored in JSON format:
+Below is a simple example of a club's details stored in \acrshort{json} format:
 
 \inputminted[linenos=true]{json}{json_examples/club_details.json}
+
+\newpage
+
+\section{Project Management}
+
+\subsection{\Gls{waterfall}}
+
+Historically speaking, \gls{waterfall} project management techniques dominate project management. Comprised of stages, \gls{waterfall} is an extremely strict manner of managing a project, requiring that the project's nature is known very accurately from the start. Shown in figure \ref{fig:waterfall}, the problem identification must lead to the requirements must be established from the start, followed by designing the solution, implementing the solution, testing or verifying it works, then maintaining the solution. If previous work must be redone, then each stage inbetween must be redone. For example, if the requirements change while in the verification stage, then all testing, implementing, and designing must be redone. Typically, \gls{waterfall} based projects are managed via a Gantt chart. While strict, such a methodology is needed for projects that rely on heavy use of task dependencies.
+
+\begin{figure}[t!]
+    \centering
+    \includegraphics[width=\textwidth]{figures/waterfall_model.pdf}
+    \caption{Waterfall stages.}
+    \label{fig:waterfall}
+\end{figure}
+
+Such dependencies are often modelled with a \acrfull{pert} chart. In such a chart, each task is shown as an arrow and dependencies are shown as nodes (known as an \acrfull{aoa} chart), as per figure \ref{fig:pert-chart}. Dependencies are indexed with arbitrary numbers (usually in ascending order for convenience) with task durations shown. Hence, any task with arrows going into its node cannot start until those tasks are completed. With such a chart, all possible paths from the start to the end are visible. Given these paths, the \gls{crit-path} is the one that takes the longest. Other paths have \gls{slack-time}, meaning there is a period of time in which nothing can be done as a task has incomplete dependencies from another path.
+
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=\textwidth]{figures/pert.png}
+    \caption{Example \acrshort{pert} chart \cite{pert}.}
+    \label{fig:pert-chart}
+\end{figure}
+
+Alternatively, a \acrfull{cpm} chart uses an \acrfull{aon} style to show task dependencies. In such a chart, tasks are shown in nodes whereas arrows show task dependencies. Furthermore, \acrshort{cpm} charts also show various other facts about tasks, such as start times, finish times, and durations. Figure \ref{fig:cpm-chart} shows such an example of a \acrshort{cpm} chart. Choosing between a \acrshort{pert} or \acrshort{cpm} chart is largely a matter of personal preferance.
+
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=\textwidth]{figures/cpm.png}
+    \caption{Example \acrshort{cpm} chart \cite{cpm}.}
+    \label{fig:cpm-chart}
+\end{figure}
+
+\subsection{\Gls{spiral}}
+
+Still relatively new to project management are \gls{spiral} methodologies. In such methodologies, projects are planned in cycles, comprised of (1) determining the objectives, (2) identifying risks, (3) developing and testing, (4) planning the next cycle. This process cycles until the project is done, as per figure \ref{fig:spiral}. Spiral methodologies priotises identifying and mitigating risks, involving the client or customer throughout development and testing, and ease of going back. Such methodologies have completely dominated software engineering due to the unpredictable nature of software development, especailly with how fast technology advances in the modern age.
+
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=\textwidth]{figures/spiral_model.png}
+    \caption{Example \gls{spiral} chart \cite{waterfall-vs-spiral}.}
+    \label{fig:spiral}
+\end{figure}
+
+Often used synomously with \gls{spiral} is the word \gls{agile}. Simply put, \gls{agile} is a set of 12 principles for managing a project \cite{agile-manifesto}. In it, shorter development intervals from two weeks to two months are priotised to ensure the client or customer is engaged with the development team. Hence, the product or service can remain competitive and live up to the client's or customer's needs. To be adaptive, the team needs to be self-organising and perform reviews at the end of every cycle. With such a system, a team can remain competitive and adaptive to the market's needs.
+
+One of the more common implementations of agile is the \Gls{scrum} technique. \Gls{scrum} proposes that the scientific method of empiricism is ideal for solving projects involving unpredictability and complexity. A team in \Gls{scrum} simply comprised of a \Gls{scrum-master}, a product owner, and a small (e.g. 5) team of developers. No further hierarchy is needed nor team members are needed, as adding more roles or people would slow down a team's progress. For every cycle, known as a ``\gls{sprint}'' in \Gls{scrum}, the team focuses in on a handful of small tasks and tries to complete them as fast as possible. At the end of the cycle, the team reflects on their progress, involving the client or consumer where desired, to plan their next \gls{sprint} (see figure \ref{fig:scrum}). Such a methodology prioritises rapid prototyping of parts of a system.
+
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=\textwidth]{figures/scrum-framework.png}
+    \caption{\Gls{scrum} visualisation \cite{what-is-scrum}.}
+    \label{fig:scrum}
+\end{figure}
+
+Also commonly used as an \gls{agile} technique are \Gls{kanban} boards. Explained simply, a \Gls{kanban} board is a board with columns for the different statuses of tasks. The tasks flow from left to right, expressing the progress of the task. While there are no strict requirements for \Gls{kanban} boards, they commonly include To Do, Doing, and Done columns. Furthermore, Backlog and Blocked columns are commonly used to show unimportant or cancelled tasks in the left and right ends. Ideally, tasks should be small enough that they all flow from Backlog to Done quickly. \acrfull{wip} limits can be imposed to ensure a column is not ``backed up'' with too many tasks. While simple, \Gls{kanban} boards have proven an effective technique for evaluating the progress of a project.
+
+\subsection{\Gls{waterfall} vs. \Gls{spiral}}
+
+Both \gls{waterfall} and \gls{spiral} techniques have their pros and cons. \Gls{waterfall} excels at projects with known risks, low complexity or known strategies, and ease of project predictibility. \Gls{spiral}, however, excels at projects with unpredictable risks or high complexity. Picking one is often a choice of identifying which two of the three attributes are more important: cost, time, and quality. Of the three, it is strongly recommended project managers pick two, shown in figure \ref{fig:ctq-triangle}. Almost always, a project's cost is fixed as acquiring more funds beyond the initial amount is rare and difficult. Hence, only two remain: time and quality. If time is more important, then \gls{waterfall} methods are more desirable, whereas \gls{spiral} methods are more suited for projects where quality is more important.
+
+Given the nature of this project, it is clear that \gls{spiral} is the superior option. Hence, \Gls{kanban} and \Gls{scrum} tactics will be employed.
 
 \newpage
 
@@ -513,21 +510,21 @@ Below is a simple example of a club's details stored in JSON format:
 
 \subsection{Internal storage of attendees}
 
-Each attendee will need to be stored as an object, requiring the ability to read and write both required and optional attendee attributes. At a minimum, the attendee objects will need to store the email address, given name, and family name. Furthermore, future upgrades may require other attributes to be stored. Since these optional attributes are not known, the attendee object must have methods for adding, getting, updating, and removing any arbitrary attributes. Fortunately, the attendee objects only need to store data, meaning no methods beyond setters and getters are needed.
+Each attendee will need to be stored as an \gls{object}, requiring the ability to read and write both required and optional attendee attributes. At a minimum, the attendee \glspl{object} will need to store the email address, given name, and family name. Furthermore, future upgrades may require other attributes to be stored. Since these optional attributes are not known, the attendee \gls{object} must have methods for adding, getting, updating, and removing any arbitrary attributes. Fortunately, the attendee \glspl{object} only need to store data, meaning no methods beyond setters and getters are needed.
 
-Once the interface for an attendee class has been agreed upon, an attendee manager can be written. This attendee manager will store all attendee objects for convenience across all other modules that use the attendee records. Hence, the attendee manager will need methods for adding attendees, iterating over attendees, and removing attendees. Updating attendee records can be done via the attendee objects themselves, as they will already validate the data. Since the attendee objects already validate themselves, the attendee getters in the attendee manager should return a reference to the attendee, not a copy. This is to ensure that updating an attendee record can be done with removing and re-inserting the attendee. To keep track of each attendee within the manager, each attendee will need some unique identifier, which can be the email address.
+Once the interface for an attendee \gls{class} has been agreed upon, an attendee manager can be written. This attendee manager will store all attendee \glspl{object} for convenience across all other modules that use the attendee records. Hence, the attendee manager will need methods for adding attendees, iterating over attendees, and removing attendees. Updating attendee records can be done via the attendee \glspl{object} themselves, as they will already validate the data. Since the attendee \glspl{object} already validate themselves, the attendee getters in the attendee manager should return a reference to the attendee, not a copy. This is to ensure that updating an attendee record can be done with removing and re-inserting the attendee. To keep track of each attendee within the manager, each attendee will need some unique identifier, which can be the email address.
 
-\subsection{Attendee File IO}
+\subsection{Attendee File \acrshort{io}}
 
-Given that the attendees must be loaded and stored from a CSV file, an attendee file manager will be needed. Since the attendees are stored as tabular data, the Python Pandas library can be used to store the attendee data. It is important to note that this data is raw in nature, meaning it will not be validated beyond any file IO error checking. The purpose of the attendee file IO module is just to load the raw data in tabular form, needing further data validation from the attendee and attendee manager classes. Ergo, an iterator should be implemented to retrieve the raw attendee data one-by-one.
+Given that the attendees must be loaded and stored from a \acrshort{csv} file, an attendee file manager will be needed. Since the attendees are stored as tabular data, the \Gls{python} Pandas \gls{library} can be used to store the attendee data \cite{pandas}. It is important to note that this data is raw in nature, meaning it will not be validated beyond any file \acrshort{io} error checking. The purpose of the attendee file \acrshort{io} module is just to load the raw data in tabular form, needing further data validation from the attendee and attendee manager classes. Ergo, an iterator should be implemented to retrieve the raw attendee data one-by-one.
 
-Once the attendee records have been internally finalised, they will then need to be saved to a file. Considering that the data is already in tabulated form, it should be a simple matter of saving the data in a CSV file.
+Once the attendee records have been internally finalised, they will then need to be saved to a file. Considering that the data is already in tabulated form, it should be a simple matter of saving the data in a \acrshort{csv} file.
 
 \subsection{Further reading}
 
 \begin{itemize}
-    \item Python pandas: \url{https://pandas.pydata.org/}
-    \item Python CSV module: \url{https://docs.python.org/3/library/csv.html}
+    \item \Gls{python} pandas: \url{https://pandas.pydata.org/}
+    \item \Gls{python} \acrshort{csv} module: \url{https://docs.python.org/3/library/csv.html}
 \end{itemize}
 
 \newpage
@@ -536,125 +533,125 @@ Once the attendee records have been internally finalised, they will then need to
 
 \subsection{Approach}
 
-Once the attendees are known, the certificates can be made. Unfortunately, the certificate template on Canva is useless, as it cannot be downloaded as a editible document. Instead, the certificate template should be recreated in Word with at least one merge field or variable (denoted via double braces) for the attendee name. Word documents can then be loaded into Python with their merge fields or variables identified via the \texttt{docx-mailmerge} or \texttt{docxtpl} Python libraries. Once the attendee's details has been inserted, the certificate can be saved as a Word document then converted to a PDF via the \texttt{docx2pdf} library. With these libraries, all certificates can easily be created from a template.
+Once the attendees are known, the certificates can be made. Unfortunately, the certificate template on \Gls{canva} is useless, as it cannot be downloaded as a editible document. Instead, the certificate template should be recreated in Word with at least one merge field or variable (denoted via double braces) for the attendee name. Word documents can then be loaded into \Gls{python} with their merge fields or variables identified via the \texttt{docx-mailmerge} or \texttt{docxtpl} \Gls{python} libraries. Once the attendee's details has been inserted, the certificate can be saved as a Word document then converted to a \acrshort{pdf} via the \texttt{docx2pdf} \gls{library}. With these libraries, all certificates can easily be created from a template.
 
 \subsection{Further Reading}
 
 \begin{itemize}
-    \item \texttt{docx-mailmerge} library: \url{https://pypi.org/project/docx-mailmerge/}
-    \item \texttt{docxtpl} library: \url{https://pypi.org/project/docxtpl/}
-    \item \texttt{docx2pdf} library: \url{https://pypi.org/project/docx2pdf/}
+    \item \texttt{docx-mailmerge} \gls{library}: \url{https://pypi.org/project/docx-mailmerge/}
+    \item \texttt{docxtpl} \gls{library}: \url{https://pypi.org/project/docxtpl/}
+    \item \texttt{docx2pdf} \gls{library}: \url{https://pypi.org/project/docx2pdf/}
 \end{itemize}
 
 \newpage
 
-\section{MailChimp Authorisation}
+\section{Mailchimp Authorisation}
 
-To prevent malicious parties from accessing Mailchimp accounts, applications must provide authorisation with each HTTP request. The Mailchimp API provides developers two methods of auto-authorisation: an API key and OAuth2, both with their strengths and weaknesses.
+To prevent malicious parties from accessing \Gls{mailchimp} accounts, applications must provide authorisation with each \acrshort{http} \gls{request}. The \Gls{mailchimp} \acrshort{api} provides developers two methods of auto-authorisation: an \acrshort{api} key and OAuth2, both with their strengths and weaknesses.
 
-\subsection{Using API and Server Keys}
+\subsection{Using \acrshort{api} and Server Keys}
 
-Owners of a Mailchimp account can use their API and server keys to allow applications to access their account. The developer simply needs to log into their Mailchimp account, generate an API key, find the server key in the URL, then input both keys into their application. The power of API keys lies in their simplicity, only needing a few minutes to generate and start using the API key. Once the key has been retrieved, the key just needs to be included into the config of HTTP requests to Mailchimp, only taking a few lines of code. The example below is taken straight from the Mailchimp API:
+Owners of a \Gls{mailchimp} account can use their \acrshort{api} and \gls{server} keys to allow applications to access their account. The developer simply needs to log into their \Gls{mailchimp} account, generate an \acrshort{api} key, find the \gls{server} key in the \acrshort{url}, then input both keys into their application \cite{mailchimp-api-key}. The power of \acrshort{api} keys lies in their simplicity, only needing a few minutes to generate and start using the \acrshort{api} key. Once the key has been retrieved, the key just needs to be included into the config of \acrshort{http} \glspl{request} to \Gls{mailchimp}, only taking a few lines of code \cite{mailchimp-first-api-call}. The example below is taken straight from the \Gls{mailchimp} \acrshort{api}:
 
 \inputminted[linenos=true]{python}{mailchimp_examples/mailchimp_ping.py}
 
 \noindent
-If the request succeeds, the response body will contain
+If the \gls{request} succeeds, the \gls{response} body will contain
 
 \inputminted{json}{mailchimp_examples/ping_response.json}
 
-However, an API key is equivelant to a root admin's login details: giving full permissions to the entire account. With an API key, a developer can change user permissions, modify contacts, and send emails. For security reasons, all API keys can be disabled at any time, preventing compromised keys from being used negligently or maliciously. Regardless, it is extremely rare an app will need full access to a Mailchimp account.
+However, an \acrshort{api} key is equivelant to a root admin's login details: giving full permissions to the entire account. With an \acrshort{api} key, a developer can change \gls{user} permissions, modify contacts, and send emails. For security reasons, all \acrshort{api} keys can be disabled at any time, preventing compromised keys from being used negligently or maliciously \cite{mailchimp-api-key}. Regardless, it is extremely rare an app will need full access to a \Gls{mailchimp} account.
 
-Furthermore, asking a user to generate then input their API is a very user unfriendly task. First off, the average user will have no idea what an API even is, none-the-less an API key. Secondly, the user must ensure to never share or write down their API key outside of the app, which is extremely unlikely, causing a high security risk. Similarly, the app must be secure enough to not expose the API key, which is extremely difficult for a webapp. If an API key is exposed by a service provider, the provider must notify their users ASAP and the users must disable the API key before being hacked. Clearly, API keys present a high risk for applications, especially when accessing accounts not owned by the service provider.
+Furthermore, asking a \gls{user} to generate then input their \acrshort{api} is a very user unfriendly task. First off, the average user will have no idea what an \acrshort{api} even is, none-the-less an \acrshort{api} key. Secondly, the user must ensure to never share or write down their \acrshort{api} key outside of the app, which is extremely unlikely, causing a high security risk. Similarly, the app must be secure enough to not expose the \acrshort{api} key, which is extremely difficult for a \gls{webapp}. If an \acrshort{api} key is exposed by a service provider, the provider must notify their users ASAP and the users must disable the \acrshort{api} key before being hacked. Clearly, \acrshort{api} keys present a high risk for applications, especially when accessing accounts not owned by the service provider.
 
 \begin{warn}
-Under no circumstances should an API key ever be disclosed to anyone! This includes any written form, even in source code! Authorised individuals should log into the associated account to get the API key. The API should not be written down, instead it should be an environmental variable on a secure device, where the application can access it. It should never be saved by the application to a file or sent anywhere outside the service requiring the API key!
+Under no circumstances should an \acrshort{api} key ever be disclosed to anyone! This includes any written form, even in \gls{src-code}! Authorised individuals should log into the associated account to get the \acrshort{api} key. The \acrshort{api} should not be written down, instead it should be an environmental variable on a secure device, where the application can access it. It should never be saved by the application to a file or sent anywhere outside the service requiring the \acrshort{api} key!
 \end{warn}
 
 \subsection{Using OAuth2}
 
 \begin{figure}[b!]
     \centering
-    \includegraphics[width=0.7\textwidth]{figures/oauth_abstract_flow.png}
-    \caption{OAuth2 simplified flowchart.}
+    \includegraphics[width=\textwidth]{figures/oauth2workflow.png}
+    \caption{OAuth2 simplified flowchart \cite{oauth2-fig}.}
     \label{fig:oauth-flowchart}
 \end{figure}
 
-A far more modern method of gaining access to a user account from another service is to use the OAuth2 protocol. Short for Open Authorization 2.0, OAuth2 has quickly become the de-facto way for electronic services from different organisations to communicate with each other automatically. The protocol is comprised of several steps: first, the app must be registered on the service, which will provide a \texttt{client\_id} and \texttt{client\_secret}. Next, the app the user is running requests access from the user to another service. If the user agrees, the app makes an authorisation request to the third-party service using the \texttt{client\_id}, redirecting the user to login to the account they own. Once logged in, the service will ask the user to confirm that they consent to giving the displayed permissions to the app. If the user agrees, the user is then redirected back to the app, such that the app gets an authorisation code. The authorisation code and \texttt{client\_secret} can be exchanged for an access token (a long, computer generated hexadecimal string). With the token, the app can access the user's resources. Figure \ref{fig:oauth-flowchart} visualises this process.
+A far more modern method of gaining access to a \gls{user} account from another service is to use the OAuth2 protocol. Short for Open Authorization 2.0, OAuth2 has quickly become the de-facto way for electronic services from different organisations to communicate with each other automatically \cite{oauth2}. The protocol is comprised of several steps: first, the app must be registered on the service, which will provide a \texttt{client\_id} and \texttt{client\_secret}. Next, the app the user is running \gls{request}s access from the user to another service. If the user agrees, the app makes an authorisation \gls{request} to the third-party service using the \texttt{client\_id}, redirecting the user to login to the account they own. Once logged in, the service will ask the user to confirm that they consent to giving the displayed permissions to the app. If the user agrees, the user is then redirected back to the app, such that the app gets an authorisation code. The authorisation code and \texttt{client\_secret} can be exchanged for an access \gls{token} (a long, computer generated hexadecimal string). With the \gls{token}, the app can access the user's resources. Alternatively, an implicit grant skips a step by getting a \gls{token} instead of a code to exchange a \gls{token}. This is useful for situations where it is not possible to secure the \texttt{client\_secret} in the app (such as a Desktop or mobile app). Figure \ref{fig:oauth-flowchart} visualises this process.
 
-While more complicated to implement than using an API key, OAuth2 has multiple key advantages. Firstly, the app requesting access never observes the login details for the service, as the service takes control when this happens. Next, the app only has access to what the user authorises, not the entire account. Additionally, tokens provided by the service expire quickly, usually after an hour. Ergo, if the token gets leaked, it will either expire soon or have already expired. Furthermore, if an app becomes comprised, all services which the developers registered their app on can have their app authroisation code disabled, preventing all authorisation requests. Lastly, it is far easier for a user to enter in their login details than provide an API key. Clearly, OAuth2 is a far more powerful and secure way of exchanging data between services or apps than API keys.
+While more complicated to implement than using an \acrshort{api} key, OAuth2 has multiple key advantages. Firstly, the app \gls{request}ing access never observes the login details for the service, as the service takes control when this happens. Next, the app only has access to what the \gls{user} authorises, not the entire account. Additionally, \gls{token}s provided by the service expire quickly, usually after an hour. Ergo, if the \gls{token} gets leaked, it will either expire soon or have already expired. Furthermore, if an app becomes comprised, all services which the developers registered their app on can have their app authroisation code disabled, preventing all authorisation \gls{request}s. Lastly, it is far easier for a user to enter in their login details than provide an \acrshort{api} key. Clearly, OAuth2 is a far more powerful and secure way of exchanging data between services or apps than \acrshort{api} keys.
 
 \subsection{Further Reading}
 
 \begin{itemize}
     \item OAuth2 official documentation: \url{https://www.oauth.com/}
     \item OAuth2 and OpenID Connect explained: \url{https://www.youtube.com/watch?v=996OiexHze0&t=3326s}
-    \item \texttt{python-oauth2} library: \url{https://pypi.org/project/python-oauth2/}
+    \item \texttt{python-oauth2} \gls{library}: \url{https://pypi.org/project/python-oauth2/}
 \end{itemize}
 
 \newpage
 
 \section{Certificate Uploading}
 
-\subsection{Doing single POST requests}
+\subsection{Doing single P\acrshort{os}T \gls{request}s}
 
-After gaining Mailchimp authorisation, the certificates can be uploaded to Mailchimp. First of, a folder should be created to store the files within. According to the Mailchimp API, this is possible by making the POST request below:
+After gaining \Gls{mailchimp} authorisation, the certificates can be uploaded to Mailchimp. First of, a folder should be created to store the files within. According to the \Gls{mailchimp} \acrshort{api}, this is possible by making the P\acrshort{os}T \gls{request} below \cite{mailchimp-add-folder}:
 
 \inputminted[linenos=true]{python}{mailchimp_examples/create_folder.py}
 
 \noindent
-The response of which will contain the folder ID, an integer that uniquely identifies that folder. Given the folder ID, the certificates can then be uploaded via a the POST request
+The \gls{response} of which will contain the folder ID, an integer that uniquely identifies that folder. Given the folder ID, the certificates can then be uploaded via a the P\acrshort{os}T \gls{request} \cite{mailchimp-add-file}
 
 \inputminted[linenos=true]{python}{mailchimp_examples/upload_file.py}
 
 \noindent
-The responses of uploading the files will contain a \texttt{full\_size\_url} field, which is needed for the next section. Hence, a functional Mailchimp manager module will need a function to take in the certificates, the certificate filenames, and the folder name. Given these parameters, the folder must be created first, have its folder ID recorded, then upload the certificates into the folder. As the responses from uploading the certificates are received, the \texttt{full\_size\_url} must be recorded and returned to the caller.
+The \gls{response}s of uploading the files will contain a \texttt{full\_size\_url} field, which is needed for the next section. Hence, a functional \Gls{mailchimp} manager module will need a function to take in the certificates, the certificate filenames, and the folder name. Given these parameters, the folder must be created first, have its folder ID recorded, then upload the certificates into the folder. As the \gls{response}s from uploading the certificates are received, the \texttt{full\_size\_url} must be recorded and returned to the caller.
 
-\subsection{Doing multiple async requests with batches}
+\subsection{Doing multiple async \gls{request}s with \gls{batch}es}
 
-However, the exact manner in which the requests are made can cause the program to lock up for prolonged periods of time. This is due to the \mintinline{python}{client.fileManager.create_folder()} and \mintinline{python}{client.fileManager.upload()} functions being ``blocking functions''. Such functions halt the program's progress for a long period of time. In this case, it is caused by waiting for a response from the Mailchimp server. Furthermore, to prevent server overloading, the Mailchimp API will only allow 10 concurrent requests per API key. Considering that it takes 120 seconds for the for a request to time out, the worst case scenario is that it will take an hour and 40 minutes to process 50 attendees in a sequential manner. With concurrent requests, this worst case reduces to 10 minutes, still far too long for a user to wait.
+However, the exact manner in which the \gls{request}s are made can cause the program to lock up for prolonged periods of time. This is due to the \mintinline{python}{client.fileManager.create_folder()} and \mintinline{python}{client.fileManager.upload()} functions being ``\glspl{blocking-func}''. Such functions halt the program's progress for a long period of time. In this case, it is caused by waiting for a \gls{response} from the \Gls{mailchimp} \gls{server}. Furthermore, to prevent \gls{server} overloading, the \Gls{mailchimp} \acrshort{api} will only allow 10 concurrent \gls{request}s per \acrshort{api} key \cite{mailchimp-batch}. Considering that it takes 120 seconds for the for a \gls{request} to time out, the worst case scenario is that it will take an hour and 40 minutes to process 50 attendees in a sequential manner. With concurrent \gls{request}s, this worst case reduces to 10 minutes, still far too long for a \gls{user} to wait.
 
-The solution is to use Mailchimp's batch feature. Instead of making one POST request per certificate, all the POST requests can be bundled into a batch. Making the batch request given the individual requests is trivial, as the body of the request is simply a JSON object containing one field, \texttt{payload}, whose value is a Python list (or Javascript array) of the individual requests. The code below is Mailchimp's example of adding 1000 contacts at once.
+The solution is to use Mailchimp's \gls{batch} feature. Instead of making one P\acrshort{os}T \gls{request} per certificate, all the P\acrshort{os}T \gls{request}s can be bundled into a \gls{batch} \cite{mailchimp-batch}. Making the \gls{batch} \gls{request} given the individual \gls{request}s is trivial, as the body of the \gls{request} is simply a \acrshort{json} \gls{object} containing one field, \texttt{payload}, whose value is a \Gls{python} list (or JavaScript \gls{array}) of the individual \gls{request}s. The code below is Mailchimp's example of adding 1000 contacts at once \cite{mailchimp-batch}.
 
 \inputminted[linenos=true]{python}{mailchimp_examples/batch_request.py}
 
-Furthermore, the \mintinline{python}{response = mailchimp.batches.start(payload)} is not a blocking function. Instead, it returns a response that Mailchimp generates and sends as soon as possible, even though the individual requests have not been processed. The body of the initial request includes a batch ID, which can be used to do another request to see the status of the batch via
+Furthermore, the \mintinline{python}{response = mailchimp.batches.start(payload)} is not a blocking function. Instead, it returns a \gls{response} that \Gls{mailchimp} generates and sends as soon as possible, even though the individual \gls{request}s have not been processed \cite{mailchimp-batch}. The body of the initial \gls{request} includes a \gls{batch} ID, which can be used to do another \gls{request} to see the status of the \gls{batch} via
 
 \mint[linenos=false, frame=none]{python}|response = mailchimp.batches.status(batch_id)|
 
 \noindent
-Once all requests have been processed, a gzipped archive of the responses can be downloaded through the \texttt{response\_body\_url} available in the batch response. 
+Once all \gls{request}s have been processed, a gzipped archive of the \gls{response}s can be downloaded through the \texttt{response\_body\_url} available in the \gls{batch} \gls{response}.
 
-Since downloading, extracting, and processing the responses would be slow, it is strongly recommended the method that makes the batch request simply return the final batch response. If the responses are desired, then another method should be written to use the \texttt{response\_body\_url} to download the responses. From there, the file can be unzipped, which reveals one JSON file per request. It should be noted that Mailchimp will only store the responses for seven days. Furthermore, the \texttt{response\_body\_url} will only last for 10 minutes for security purposes. If the \texttt{response\_body\_url} expires, another can be retrieved via a batch status request using the batch ID.
+Since downloading, extracting, and processing the \gls{response}s would be slow, it is strongly recommended the method that makes the \gls{batch} \gls{request} simply return the final \gls{batch} \gls{response}. If the \gls{response}s are desired, then another method should be written to use the \texttt{response\_body\_url} to download the \gls{response}s. From there, the file can be unzipped, which reveals one \acrshort{json} file per \gls{request}. It should be noted that \Gls{mailchimp} will only store the \gls{response}s for seven days \cite{mailchimp-batch}. Furthermore, the \texttt{\gls{response}\_body\_url} will only last for 10 minutes for security purposes. If the \texttt{response\_body\_url} expires, another can be retrieved via a \gls{batch} status \gls{request} using the \gls{batch} ID.
 
 \subsection{Using callbacks to retrieve the status}
 
-Since it will take a noticable amount of time to process the requests, the user should be informed of how the request is going. However, when calling the method that does the batch request, control of the program is handed over to this method until the batch is complete. Hence, a callback will be needed to inform the user of the batch's progress. This callback should be called whenever the batch progress changes. Combined with multithreading, this will allow for a program that can simultaneously handle user inputs, output the current status of a batch request, and perform the batch request.
+Since it will take a noticable amount of time to process the \gls{request}s, the \gls{user} should be informed of how the \gls{request} is going. However, when calling the method that does the \gls{batch} \gls{request}, control of the program is handed over to this method until the \gls{batch} is complete. Hence, a callback will be needed to inform the user of the \gls{batch}'s progress. This callback should be called whenever the \gls{batch} progress changes. Combined with multithreading, this will allow for a program that can simultaneously handle user inputs, output the current status of a \gls{batch} \gls{request}, and perform the \gls{batch} \gls{request}.
 
 \subsection{Further reading}
 
 \begin{itemize}
-    \item Mailchimp API: \url{https://mailchimp.com/developer/marketing/}
-    \item Mailchimp batch requests: \url{https://mailchimp.com/developer/marketing/guides/run-async-requests-batch-endpoint/}
-    \item Mailchimp API limits: \url{https://mailchimp.com/developer/marketing/docs/fundamentals/#api-limits}
-    \item Mailchimp file manager API: \url{https://mailchimp.com/developer/marketing/api/file-manager/}
+    \item \Gls{mailchimp} \acrshort{api}: \url{https://mailchimp.com/developer/marketing/}
+    \item \Gls{mailchimp} \gls{batch} \gls{request}s: \url{https://mailchimp.com/developer/marketing/guides/run-async-\gls{request}s-\gls{batch}-endpoint/}
+    \item \Gls{mailchimp} \acrshort{api} limits: \url{https://mailchimp.com/developer/marketing/docs/fundamentals/#api-limits}
+    \item \Gls{mailchimp} file manager \acrshort{api}: \url{https://mailchimp.com/developer/marketing/api/file-manager/}
 \end{itemize}
 
 \newpage
 
 \section{Contact Updating}
 
-Once the certificates have been uploaded with the file URIs recorded, the attendee list can finally be updated. This can be accomplished via a method in the attendee manager taking in a mapping between the attendees and their certificate URIs, then updating the attendee objects. Once updated, the attendee objects can be saved as a CSV file, overwriting the original attendee record. Lastly, the attendee CSV file can then be uploaded to Mailchimp via a batch request. However, care must be taken as some attendees may not be contacts on our Mailchimp account or existing contacts using a new email address.\footnote{Mailchimp uses the email address as the unique identifier, so existing members can be added multiple times through different email addresses. This has been an ongoing issue with our members for years.} The Mailchimp API provides a PUT request for adding or (if already exists) updating a contact, shown below. Once all contacts have been updated, the program can finish.
+Once the certificates have been uploaded with the file \acrshort{uri}s recorded, the attendee list can finally be updated. This can be accomplished via a method in the attendee manager taking in a mapping between the attendees and their certificate \acrshort{uri}s, then updating the attendee \glspl{object}. Once updated, the attendee \glspl{object} can be saved as a \acrshort{csv} file, overwriting the original attendee record. Lastly, the attendee \acrshort{csv} file can then be uploaded to \Gls{mailchimp} via a \gls{batch} \gls{request}. However, care must be taken as some attendees may not be contacts on our \Gls{mailchimp} account or existing contacts using a new email address.\footnote{\Gls{mailchimp} uses the email address as the unique identifier, so existing members can be added multiple times through different email addresses. This has been an ongoing issue with our members for years.} The \Gls{mailchimp} \acrshort{api} provides a PUT \gls{request} for adding or (if already exists) updating a contact, shown below \cite{mailchimp-update-member}. Once all contacts have been updated, the program can finish.
 
 \inputminted[linenos=true]{python}{mailchimp_examples/add_or_update_member.py}
 
 \subsection{Further reading}
 
 \begin{itemize}
-    \item Mailchimp members API: \url{https://mailchimp.com/developer/marketing/api/list-members/}
-    \item Mailchimp API: \url{https://mailchimp.com/developer/marketing/}
-    \item Mailchimp batch requests: \url{https://mailchimp.com/developer/marketing/guides/run-async-requests-batch-endpoint/}
-    \item Mailchimp API limits: \url{https://mailchimp.com/developer/marketing/docs/fundamentals/#api-limits}
+    \item \Gls{mailchimp} members \acrshort{api}: \url{https://mailchimp.com/developer/marketing/api/list-members/}
+    \item \Gls{mailchimp} \acrshort{api}: \url{https://mailchimp.com/developer/marketing/}
+    \item \Gls{mailchimp} \gls{batch} \gls{request}s: \url{https://mailchimp.com/developer/marketing/guides/run-async-\gls{request}s-\gls{batch}-endpoint/}
+    \item \Gls{mailchimp} \acrshort{api} limits: \url{https://mailchimp.com/developer/marketing/docs/fundamentals/#api-limits}
 \end{itemize}
 
 \newpage
@@ -663,50 +660,52 @@ Once the certificates have been uploaded with the file URIs recorded, the attend
 
 \subsection{Command Line Interface}
 
-For the sake of a prototype, a command line interface (CLI) can be implemented. In Python, the simplest and fastest way of implementing a CLI is through \mintinline{python}{print()} function calls. While simple, the \mintinline{python}{print()} function is extremely limited. Most notably, the \mintinline{python}{print()} function does not allow for the text cursor to be moved backwards, meaning the entire screen must be cleared or enough lines must be written to remove old text. Additionally, the lack of colour coding heavily reduces readability, as successes, warnings, and errors are not immediately obvious. Additionally, displaying boxes and other structured displays is extremely tedious and inpractical with \mintinline{python}{print()}. While it is possible to achieve such feats in a terminal, different terminals use different codes for colour and special formatting, all of which are complex and highly difficult to read and understand. This leads to numerous compatibility issues between terminals.
+For the sake of a prototype, a \acrfull{cli} can be implemented. In \Gls{python}, the simplest and fastest way of implementing a \acrshort{cli} is through \mintinline{python}{print()} function calls. While simple, the \mintinline{python}{print()} function is extremely limited. Most notably, the \mintinline{python}{print()} function does not allow for the text cursor to be moved backwards, meaning the entire screen must be cleared or enough lines must be written to remove old text. Additionally, the lack of colour coding heavily reduces readability, as successes, warnings, and errors are not immediately obvious. Additionally, displaying boxes and other structured displays is extremely tedious and inpractical with \mintinline{python}{print()}. While it is possible to achieve such feats in a terminal, different terminals use different codes for colour and special formatting, all of which are complex and highly difficult to read and understand. This leads to numerous compatibility issues between terminals.
 
-Going back decades, the \texttt{curses} library attempts to partially mitigate the limitations of the humble \mintinline{python}{print()} function. Implemented in C, Python's \texttt{curses} library is simply a set of wrappers calling the C \mintinline{C}{ncurses.h} functions.\footnote{The ``n'' is short for new.} This alone has two advantages: (1) this makes it extremely easy to transition between C and Python when using \texttt{curses}, and (2) the functions are highly optimised. This is on top of the ability to easily colour text, move the cursor around, and draw boxes. While simple in concept, figure \ref{fig:ncurses-example} below is an example of advanced usage of the \texttt{curses} library. Using \texttt{curses}, it is possible to easily create GUI-like user interfaces without the complexity of GUI frameworks.
+Going back decades, the \texttt{curses} \gls{library} attempts to partially mitigate the limitations of the humble \mintinline{python}{print()} function. Implemented in C, \Gls{python}'s \texttt{curses} \gls{library} is simply a set of wrappers calling the C \mintinline{C}{ncurses.h} functions \cite{curses-python} \cite{ncurses}.\footnote{The ``n'' is short for new.} This alone has two advantages: (1) this makes it extremely easy to transition between C and \Gls{python} when using \texttt{curses}, and (2) the functions are highly optimised. This is on top of the ability to easily colour text, move the cursor around, and draw boxes. While simple in concept, figure \ref{fig:ncurses-example} below is an example of advanced usage of the \texttt{curses} \gls{library}. Using \texttt{curses}, it is possible to easily create \acrshort{gui}-like \gls{user} interfaces without the complexity of \acrshort{gui} \glspl{framework}.
 
-\vspace{\baselineskip}
-
-\begin{figure}[h!]
+\begin{figure}[b!]
     \centering
     \includegraphics[width=\textwidth]{figures/ncurses_example.png}
-    \caption{Advanced example of \texttt{curses}.}
+    \caption{Advanced example of \texttt{curses} \cite{curses-api}.}
     \label{fig:ncurses-example}
 \end{figure}
 
-\subsection{Desktop GUI}
+At a minimum, a \acrshort{cli} must meet certain criteria. For each stage the program is in (see figure \ref{fig:new-solution}), at least one line of text must be printed. For stages that involve processing a collection of items, the program should \textbf{not} print one line per item processed; it should update the line with a progress bar\footnote{See the \href{https://pypi.org/project/tqdm/}{tqdm} \gls{library}} or a fraction \textit{without} clearing the screen. For any error that occur, the error should either be printed at the end of the program's life or printed immediately then force to the to confirm before continuing. Any inputs required from the \gls{user} can either be done as command line arguments or the \mintinline{python}{input()} function. A example of such a \acrshort{cli} is shown below.
 
-While useful for prototyping and developers, CLI have not been suitable for the average computer user for decades. Instead, graphical user interfaces (GUI) are the norm. Whereas CLIs are sequential, always following some order of IO actions in a linear of tree structure, GUIs are event driven. In GUIs, the structure of the interface remains constant until an event occurs, such as the user selecting a button, saying ``Hi, Siri'', or a message being received over the internet. GUIs achieve their event driven nature via heavy usage of callbacks and OOP: an object is given the callback, then sits and waits until an event or ``trigger'' occurs. Once the trigger activates, the object uses the callback to determine what to do.  Separating the when (the object) from the what (the callback) allows for reusable and small code.
+\inputminted[]{shell}{cli_examples/simple_cli.txt}
 
-In Python, creating a GUI for a desktop application requires one of several GUI frameworks. These differ from Python wrappers around older frameworks, such as Qt5 and wxWdigets, to pure python, like TKinter and PySimpleGUI, and hybrid framworks, like Kivy. Most frameworks still in use have maintained relevance by finding a niche. The older frameworks implemented in C++ are well-established with online support and documentation going back decades, as well as being highly efficient, running extremely fast with minimal overhead. Newer GUI frameworks made for Python benefit from simpler APIs, encouraging faster development. Choosing a framework is a matter of the product requirements, both for current builds in development and future versions.
+\subsection{Desktop \acrshort{gui}}
 
-By far the most popular, so much so that the option for installing the framework is included when installing Python, is Tkinter. Well known for its simplicity and user friendly GUI builder, Tkinter tends to be a Python programmer's first GUI framework. While excellent for simple Python projects, Tkinter is restricted to Python, meaning the code and assets cannot be reused for other programming languages. This represents a fatal flaw when attempting to redo a codebase in a different language, as the GUI must be completely redone. Additionally, Tkinter being a Pythonic framework suffers from performance issues relative to older frameworks. Hence, Tkinter and similar Pythonic GUI frameworks are inappropriate for this project.
+While useful for prototyping and developers, \acrshort{cli} have not been suitable for the average computer \gls{user} for decades. Instead, \acrfull{gui} are the norm. Whereas \acrshort{cli}s are sequential, always following some order of \acrshort{io} actions in a linear of tree structure, \acrshort{gui}s are event driven. In \acrshort{gui}s, the structure of the interface remains constant until an event occurs, such as the user selecting a button, saying ``Hi, Siri'', or a message being received over the internet. \acrshort{gui}s achieve their event driven nature via heavy usage of callbacks and \acrshort{oop}: an \gls{object} is given the callback, then sits and waits until an event or ``trigger'' occurs. Once the trigger activates, the \gls{object} uses the callback to determine what to do. Separating the when (the \gls{object}) from the what (the callback) allows for reusable and small code.
 
-Kevi is a more interesting GUI framework based on its specialty. Kevi is written Cython, making it a Pythonic framework, implying it is incompatible with other languages. Where Kevi excels is mobile app development, as its widgets are designed with touchscreens in mind and the native assets of desktop applications are ignored. This makes rapid development of mobile apps feasible once the small learning curve has been overcome. Hence, for purely Python projects with mobile development in mind, Kivy is a good choice.
+In \Gls{python}, creating a \acrshort{gui} for a desktop application requires one of several \acrshort{gui} \glspl{framework}. These differ from \Gls{python} wrappers around older \glspl{framework}, such as Qt5 and wxWidgets \cite{qt} \cite{wxwidgets}, to pure python, like TKinter and PySimple\acrshort{gui} \cite{tkinter} \cite{pysimplegui}, and hybrid framworks, like Kivy \cite{kivy}. Most \glspl{framework} still in use have maintained relevance by finding a niche. The older \glspl{framework} implemented in C++ are well-established with online support and documentation going back decades, as well as being highly efficient, running extremely fast with minimal overhead. Newer \acrshort{gui} \glspl{framework} made for \Gls{python} benefit from simpler \acrshort{api}s, encouraging faster development. Choosing a \gls{framework} is a matter of the product requirements, both for current builds in development and future versions.
 
-Out of the older GUI frameworks, only Qt and wxWdigets have remained competitive. Fortunately, both Qt and wxWdigets have Python wrappers, called PyQt and wxPython. Both are fast and efficient frameworks with multithreading and multiprocessing built-in, with wxWidgets being slightly faster due to its simpler design. Additionally, wxWidgets has a lower learning curve with only just above 20 widgets available. The con, however, means that wxWidgets is not as powerful as Qt. Despite Qt's far higher learning curve, Qt Designer allows developers to quickly design a GUI without writing a single line of code. Even better, Qt Designer exports GUIs to \texttt{.ui} files, compatible with Qt across all languages without modification. Hence, Qt is favourable over wxWidgets for the more complex product requirements.
+By far the most popular, so much so that the option for installing the \gls{framework} is included when installing \Gls{python}, is Tkinter. Well known for its simplicity and \gls{user} friendly \acrshort{gui} builder, Tkinter tends to be a \Gls{python} programmer's first \acrshort{gui} \gls{framework}. While excellent for simple \Gls{python} projects, Tkinter is restricted to \Gls{python}, meaning the code and assets cannot be reused for other programming languages. This represents a fatal flaw when attempting to redo a codebase in a different language, as the \acrshort{gui} must be completely redone. Additionally, Tkinter being a \Gls{python}ic \gls{framework} suffers from performance issues relative to older \glspl{framework}. Hence, Tkinter and similar \Gls{python}ic \acrshort{gui} \glspl{framework} are inappropriate for this project.
 
-Clearly, all these GUI frameworks have their pros and cons. Choosing one should be primarily a matter of which one fits the program requirements the best.
+Kevi is a more interesting \acrshort{gui} \gls{framework} based on its specialty. Kevi is written \Gls{cython}, making it a \Gls{python}ic \gls{framework}, implying it is incompatible with other languages. Where Kevi excels is mobile app development, as its widgets are designed with touchscreens in mind and the native assets of desktop applications are ignored. This makes rapid development of mobile apps feasible once the small learning curve has been overcome. Hence, for purely \Gls{python} projects with mobile development in mind, Kivy is a good choice.
+
+Out of the older \acrshort{gui} \glspl{framework}, only Qt and wxWidgets have remained competitive. Fortunately, both Qt and wxWidgets have \Gls{python} wrappers, called PyQt and wx\Gls{python} \cite{pyqt} \cite{wxpython}. Both are fast and efficient \glspl{framework} with multithreading and multiprocessing built-in, with wxWidgets being slightly faster due to its simpler design. Additionally, wxWidgets has a lower learning curve with only just above 20 widgets available. The con, however, means that wxWidgets is not as powerful as Qt. Despite Qt's far higher learning curve, Qt Designer allows developers to quickly design a \acrshort{gui} without writing a single line of code. Even better, Qt Designer exports \acrshort{gui}s to \texttt{.ui} files, compatible with Qt across all languages without modification. Hence, Qt is favourable over wxWidgets for the more complex product requirements.
+
+Clearly, all these \acrshort{gui} \glspl{framework} have their pros and cons. Choosing one should be primarily a matter of which one fits the program requirements the best.
 
 \subsection{Webapp}
 
-With the rise of high-speed internet, most developers have moved away from installable desktop applications and embraced web apps in their place. The benefits of which are immediately obvious: the app can be used without installation of any software, the user's OS is abtracted through the browser, and most of the code and assets used to create the app can be hidden on servers. From a user's perspective, it is simply far more convenient to use an app immediately instead of waiting for a download to finish, installing the software (taking potentailly valuable storage space), then have to worry about compatibility issues with their device. A constant internet connection also guarantees updates and announcements can be made immediately, instead of annoying the end-user with ``Update available'' notifications. Furthermore, advancements in public clouds, such as Microsoft Azure, Amazon Web Services, and Google Cloud, have made it far more seemless for developers to build webapps without needing to build nor maintain private servers. Lastly, the internet connection allows for mass data collection of user behaviours and activities, vital to further app improvements and marketing. From these advantages, it is clear as to why modern developers have made the switch to webapps.
+With the rise of high-speed internet, most developers have moved away from installable desktop applications and embraced web apps in their place. The benefits of which are immediately obvious: the app can be used without installation of any software, the \gls{user}'s \acrshort{os} is abtracted through the \gls{browser}, and most of the code and assets used to create the app can be hidden on \gls{server}s. From a \gls{user}'s perspective, it is simply far more convenient to use an app immediately instead of waiting for a download to finish, installing the software (taking potentailly valuable storage space), then have to worry about compatibility issues with their device. A constant internet connection also guarantees updates and announcements can be made immediately, instead of annoying the end-user with ``Update available'' notifications. Furthermore, advancements in public clouds, such as Microsoft Azure, Amazon Web Services, and Google Cloud, have made it far more seemless for developers to build \gls{webapp}s without needing to build nor maintain private \gls{server}s. Lastly, the internet connection allows for mass data collection of user behaviours and activities, vital to further app improvements and marketing. From these advantages, it is clear as to why modern developers have made the switch to \gls{webapp}s.
 
-This flexibility, ease of use, and scalability comes at a cost: the constant maintenance required, cybersecurity concerns, and server costs. This is in addition to the setup required, needing a front-end UI, backend databases, an administrator control view, an auditing system, interfaces for third-party services, among numerous other systems. Typically, these systems are built using various programming languages, requiring expert knowledge in numerous protocols. While a for-profit business may be able to afford such costs with full time staff, a student club would struggle to find the finances and people to build and maintain such a system.
+This flexibility, ease of use, and scalability comes at a cost: the constant maintenance required, cybersecurity concerns, and \gls{server} costs. This is in addition to the setup required, needing a front-end UI, backend databases, an administrator control view, an auditing system, interfaces for third-party services, among numerous other systems. Typically, these systems are built using various programming languages, requiring expert knowledge in numerous protocols. While a for-profit business may be able to afford such costs with full time staff, a student club would struggle to find the finances and people to build and maintain such a system.
 
 \subsection{Further reading}
 
 \begin{itemize}
-    \item Python \texttt{curses} library: \url{https://docs.python.org/3/howto/curses.html}
+    \item \Gls{python} \texttt{curses} \gls{library}: \url{https://docs.python.org/3/howto/curses.html}
     \item Tkinter documentation: \url{https://docs.python.org/3/library/tkinter.html}
     \item PySimpleGUI: \url{https://pysimplegui.readthedocs.io/en/latest/}
     \item Kivy website: \url{https://kivy.org/#home}
     \item Qt website: \url{https://www.qt.io/}
     \item Qt designer download: \url{https://build-system.fman.io/qt-designer-download}
     \item \texttt{PyQt} documetation: \url{https://wiki.python.org/moin/PyQt}
-    \item wxWdigets website: \url{https://www.wxwidgets.org/}
+    \item wxWidgets website: \url{https://www.wxwidgets.org/}
     \item wxPython website: \url{https://wxpython.org/}
 \end{itemize}
 
@@ -716,18 +715,18 @@ This flexibility, ease of use, and scalability comes at a cost: the constant mai
 
 \subsection{Context}
 
-Pre-2002, the Linux OS was extremely difficult to maintain due to its open-source nature. Changes were passed around as patches and archived files, all of which assumed specific versions of the Linux OS were already installed. As Linux grew into numerous distributions, all of which had their own developers with their own patches, it became extremely difficult to keep track of what patches needed to be installed. Even worse, the complexity of the patches grow exponentially as distributions split off into multiple distributions. Sometimes, a user should install a patch as it affected the Linux Kernel or the exact distribution installed, whereas other times installing a patch could break the user's system. This is assuming the user can even find the patches to begin with, a task that can prove frustrating and time consuming in of itself.
+Pre-2002, the Linux \acrshort{os} was extremely difficult to maintain due to its open-source nature. Changes were passed around as patches and archived files, all of which assumed specific versions of the Linux \acrshort{os} were already installed \cite{git-short-history}. As Linux grew into numerous distributions, all of which had their own developers with their own patches, it became extremely difficult to keep track of what patches needed to be installed. Even worse, the complexity of the patches grow exponentially as distributions split off into multiple distributions. Sometimes, a \gls{user} should install a patch as it affected the Linux Kernel or the exact distribution installed, whereas other times installing a patch could break the user's system. This is assuming the user can even find the patches to begin with, a task that can prove frustrating and time consuming in of itself.
 
-To better manage the various Linux distributions and their respective patches, BitMover, a for-profit business, allowed the Linux team to use their version control software (VCS) BitKeeper for free. The condition being that Linux developers were not allowed to develop software that competes with BitMover's products. The relationship was uneasy, as many of the pro-open software Linux developers were not happy with using a commercial service by a for-profit business. In 2005, the relationship between the Linux team and BitMover broke down when a developer added commercial features for free. With no VCS to use, the Linux team needed a replacement.
+To better manage the various Linux distributions and their respective patches, BitMover, a for-profit business, allowed the Linux team to use their \acrfull{vcs} BitKeeper for free \cite{git-short-history}. The condition being that Linux developers were not allowed to develop software that competes with BitMover's products. The relationship was uneasy, as many of the pro-open software Linux developers were not happy with using a commercial service by a for-profit business. In 2005, the relationship between the Linux team and BitMover broke down when a developer added commercial features for free. With no \acrshort{vcs} to use, the Linux team needed a replacement.
 
 \subsection{What is Git?}
 
-The replacement came in the form of the open-source software Git. Designed to be lightweight, fast, and simple to use, Git has become the dominant VCS software worldwide. In short, Git allows a team of developers to collaboratively work on a project without the hassles of conflicting code changes, file reserving, nor untracked changes. This is achieved through a tree based version control structure, where each new feature, bug fix, or documentation update is tracked in its own branch of the tree. Within each branch are ``commits'': snapshots of the tracked files with a short description of what changed and why. Once the update is complete, the branch can be ``merged'' back into the master (or main) branch. Figure \ref{fig:git-basic-usage} visualises such a workflow.
+The replacement came in the form of the open-source software Git. Designed to be lightweight, fast, and simple to use, Git has become the dominant \acrshort{vcs} software worldwide. In short, Git allows a team of developers to collaboratively work on a project without the hassles of conflicting code changes, file reserving, nor untracked changes. This is achieved through a tree based version control structure, where each new feature, bug fix, or documentation update is tracked in its own branch of the tree. Within each branch are ``commits'': snapshots of the tracked files with a short description of what changed and why. Once the update is complete, the branch can be ``merged'' back into the master (or main) branch. Figure \ref{fig:git-basic-usage} visualises such a workflow.
 
 \begin{figure}[t!]
     \centering
     \includegraphics[width=1.0\textwidth]{figures/git_tree.png}
-    \caption{Simple example of Git workflow.}
+    \caption{Simple example of Git workflow \cite{git-flow}.}
     \label{fig:git-basic-usage}
 \end{figure}
 
@@ -740,7 +739,7 @@ Git itself can take years to master as their are now hundreds of commands to mem
     \item \mintinline{shell}{git add <files>}, command Git to start tracking the files \texttt{<files>}
     \begin{enumerate}
         \item Once files have been added, they are referred to as ``staged''
-        \item Wildcards are accepted for \texttt{<files>}, e.g. \mintinline{shell}{git add src/*.py} means add all Python source files in the \texttt{src/} directory
+        \item Wildcards are accepted for \texttt{<files>}, e.g. \mintinline{shell}{git add src/*.py} means add all \Gls{python} source files in the \texttt{src/} directory
     \end{enumerate}
     \item \mintinline{shell}{git commit}, creates a snapshot of the staged files
     \begin{enumerate}
@@ -780,9 +779,9 @@ It is \textbf{strongly} that readers research Git cheat sheets online, pick one,
 
 \subsection{Using Github}
 
-With the rapid increase in internet speeds, working off-site, and the willingness for companies to let their developers to work from home, hosting Git repositories locally has largely become a thing of the past. Instead, dedicated online Git repositories take the burden of server management off organisations so they can focus on development. The three most popluar such services are Github, Bitbucket, and Gitlab. Of these three, Github, owned and maintained by Microsoft, is the most popular, especially for small organisations and personal projects. Regardless, all three use Git as their VCS. The main differences between the three is their business models. Fortunately for CIET, the premium services offered by these three are merely nice to have. Hence, Github shall be used for this project as an abritrary choice.
+With the rapid increase in internet speeds, working off-site, and the willingness for companies to let their developers to work from home, hosting Git repositories locally has largely become a thing of the past. Instead, dedicated online Git repositories take the burden of \gls{server} management off organisations so they can focus on development. The three most popluar such services are Github, Bitbucket, and Gitlab. Of these three, Github, owned and maintained by Microsoft, is the most popular, especially for small organisations and personal projects. Regardless, all three use Git as their \acrshort{vcs}. The main differences between the three is their business models. Fortunately for \acrshort{ciet}, the premium services offered by these three are merely nice to have. Hence, Github shall be used for this project as an abritrary choice.
 
-With an online repository setup, the best practice manner of contributing to a project is a somewhat convoluted process. To prevent the project Git repository from becoming populated with unnecessary commits and branches, contributors never actually commit directly into the project. Instead, contributers must ``fork'' the project, creating a copy of the project on their account. With this fork, the contributor can make their commits without affecting the main project repository. Once the desired changes have been made, a ``pull request'' can be made. These pull requests are requests to merge the modified codebase to the set location, typically the main repository the forked one originates from. When the pull request is made, this notifies the moderators or admins of the main repository. The moderator will then review the pull request by inspecting what has changed. If approved, the pull request becomes a merge so that everyone now benefits from the contributor's changes. Usually, a pull request will result in changes being requested, as it is extremely unlikely that the changes in the pull request will satisfy the moderator's or the repository's pull request standards. Sometimes, the pull request is deleted, as the work required to salvage what good exists is more than redoing the pull request. While convoluted, this process ensures all code is reviewed and held to a necessary standard before being made official.
+With an online repository setup, the best practice manner of contributing to a project is a somewhat convoluted process. To prevent the project Git repository from becoming populated with unnecessary commits and branches, contributors never actually commit directly into the project. Instead, contributers must ``fork'' the project, creating a copy of the project on their account. With this fork, the contributor can make their commits without affecting the main project repository. Once the desired changes have been made, a ``pull \gls{request}'' can be made. These pull \gls{request}s are \gls{request}s to merge the modified codebase to the set location, typically the main repository the forked one originates from. When the pull \gls{request} is made, this notifies the moderators or admins of the main repository. The moderator will then review the pull \gls{request} by inspecting what has changed. If approved, the pull \gls{request} becomes a merge so that everyone now benefits from the contributor's changes. Usually, a pull \gls{request} will result in changes being \gls{request}ed, as it is extremely unlikely that the changes in the pull \gls{request} will satisfy the moderator's or the repository's pull \gls{request} standards. Sometimes, the pull \gls{request} is deleted, as the work required to salvage what good exists is more than redoing the pull \gls{request}. While convoluted, this process ensures all code is reviewed and held to a necessary standard before being made official.
 
 \begin{figure}[t!]
     \centering
@@ -793,24 +792,24 @@ With an online repository setup, the best practice manner of contributing to a p
 
 \subsection{Recording Library Requirements}
 
-As a matter of practicality, modern software is built using code already written. This can range from using libraries built-in to the language of choice, all the way to using complex frameworks built on so many other layers of libraries, it becomes impossible to fully grasp just how deep and expansive the code reliances are. Regardless of the quantity of external code used, all libraries and frameworks used must be declared.
+As a matter of practicality, modern software is built using code already written. This can range from using libraries built-in to the language of choice, all the way to using complex \glspl{framework} built on so many other layers of libraries, it becomes impossible to fully grasp just how deep and expansive the code reliances are. Regardless of the quantity of external code used, all libraries and \glspl{framework} used must be declared.
 
-Python provides a simple manner to explicitly declare what libraries and frameworks are being used. This is achieved through a \texttt{requirements.txt} file: a simple text file where each line represents a library or framework, potentially with the accepted versions. Since multiple versions may be compatible with the codebase, there are multiple ways for declaring which versions are acceptable. A double equals (\texttt{==}) means only that specific version is accepted, whereas a greater-than-or-equal-to symbol (\texttt{>=}) means any version at least as new as the version specified. If a range of versions is accepted, then a comma (\texttt{,}) can be used to specify a range. A not equal to symbol (\texttt{!=}) means any version except for the one specified (useful if that version has a known bug). Most confusingly, the tilde-equals (\url{~=}) means a compatible version: so any version matching the same numbers excluding the last number, where the version number must be at least as high as specified. This version is useful for specifying a range without two version numbers. Furthermore, the wildcard \texttt{*} is useful for specifying any version mathcing the start of the specified version. The text below is an example that uses all the version numbering conventions.
+\Gls{python} provides a simple manner to explicitly declare what libraries and \glspl{framework} are being used. This is achieved through a \mintinline{shell}{requirements.txt} file: a simple text file where each line represents a \gls{library} or \gls{framework}, potentially with the accepted versions. Since multiple versions may be compatible with the codebase, there are multiple ways for declaring which versions are acceptable. A double equals (\mintinline{shell}{==}) means only that specific version is accepted, whereas a greater-than-or-equal-to symbol (\mintinline{shell}{>=}) means any version at least as new as the version specified. If a range of versions is accepted, then a comma (\mintinline{shell}{,}) can be used to specify a range. A not equal to symbol (\mintinline{shell}{!=}) means any version except for the one specified (useful if that version has a known bug). Most confusingly, the tilde-equals (\mintinline{shell}{~=}) means a compatible version: so any version matching the same numbers excluding the last number, where the version number must be at least as high as specified. This version is useful for specifying a range without two version numbers. Furthermore, the wildcard \mintinline{shell}{*} is useful for specifying any version matching the start of the specified version. The text below is an example that uses all the version numbering conventions.
 
 \inputminted[linenos=true]{python}{python_examples/requirements_example.txt}
 
 \subsection{Virtual Environments}
 
-While installing libraries and frameworks is a necessity for modern software, it quickly leads to bloat and conflicts. Whenever a library or application is installed, the requirements are also installed. Ergo, even with only a few libraries installed, developers will quickly find their language containing dozens of libraries of various versions. This issue becomes especially problematic when different projects require different versions of the same libraries.
+While installing libraries and \glspl{framework} is a necessity for modern software, it quickly leads to bloat and conflicts. Whenever a \gls{library} or application is installed, the requirements are also installed. Ergo, even with only a few libraries installed, developers will quickly find their language containing dozens of libraries of various versions. This issue becomes especially problematic when different projects require different versions of the same libraries.
 
-The solution is simple to use but odd to consider. Instead of installing the requirements directly into the installed language, a virtual environment can be made. A virtual environment can be thought of as an isolated instance of the entire programming language for one project. With this isolated instance, libraries and frameworks can be installed without affecting other projects on the same device.
+The solution is simple to use but odd to consider. Instead of installing the requirements directly into the installed language, a \gls{venv} can be made. A \gls{venv} can be thought of as an isolated instance of the entire programming language for one project. With this isolated instance, libraries and \glspl{framework} can be installed without affecting other projects on the same device.
 
-In Python, using virtual environments is handled via the \texttt{virtualenv} package. Once installed with \texttt{pip} or \texttt{conda}, the virtual environment can be created in the current working directory via
+In \Gls{python}, using \glspl{venv} is handled via the \texttt{virtualenv} package. Once installed with \mintinline{shell}{pip} or \mintinline{shell}{conda}, the virtual environment can be created in the current working directory via
 
 \mint[linenos=false, frame=none]{shell}|python -m venv <name>|
 
 \noindent
-where \texttt{<name>} is the name of the virtual environment, typically \texttt{venv}. A file system will be created with an activiate file. To start the virtual environment, simply type
+where \mintinline{shell}{<name>} is the name of the \gls{venv}, typically \mintinline{shell}{venv}. A file system will be created with an activiate file. To start the virtual environment, simply type
 
 \mint[linenos=false, frame=none]{shell}|.\<name>\Scripts\activate.bat|
 
@@ -820,7 +819,7 @@ on Windows, or
 \mint[linenos=false, frame=none]{shell}|source ./<name>/bin/activate|
 
 \noindent
-on Unix of MacOS systems. From this point onwards, the virtual environment's Python interpreter will be used, as confirmable by running \mintinline{shell}{which python} in the terminal. Since the virtual environment is made for a specific project, the \texttt{requirements.txt} file can be use to install all the required libraries via the command
+on Unix of Mac\acrshort{os} systems. From this point onwards, the \gls{venv}'s \Gls{python} interpreter will be used, as confirmable by running \mintinline{shell}{which python} in the terminal. Since the virtual environment is made for a specific project, the \mintinline{shell}{requirements.txt} file can be use to install all the required libraries via the command
 
 \mint[linenos=false, frame=none]{shell}|pip install -r requirements.txt|
 
@@ -833,8 +832,8 @@ After running the command above, the virtual environment is now ready to run the
     \item Git official website: \url{https://git-scm.com/}
     \item Forking a Github repo: \url{https://docs.github.com/en/get-started/quickstart/fork-a-repo}
     \item Github cheatsheet: \url{https://docs.github.com/en/get-started/quickstart/git-cheatsheet}
-    \item Python \texttt{requirements.txt} tutorial: \url{https://martin-thoma.com/python-requirements/}
-    \item Python virtual environments: \url{https://docs.python.org/3/tutorial/venv.html}
+    \item \Gls{python} \texttt{requirements.txt} tutorial: \url{https://martin-thoma.com/python-requirements/}
+    \item \Gls{python} virtual environments: \url{https://docs.python.org/3/tutorial/venv.html}
 \end{itemize}
 
 \newpage
@@ -847,10 +846,10 @@ Any software engineering project will fail before it even starts if coding style
 
 \begin{enumerate}
     \item Identifiers should be short and descriptive.
-    \item Class names should be in \texttt{PascalCase}.
-    \item Constant names should be in \texttt{UPPERCASE} with underscores.
-    \item Function and variable names should be in \texttt{camelCase} or \texttt{snake\_case}.
-    \item Abbreviations and acrynonyms should only be used when a common convention (e.g. using \texttt{num} for \texttt{number}), or if obvious based on context.
+    \item Class names should be in \mintinline{shell}{PascalCase}.
+    \item Constant names should be in \mintinline{shell}{UPPERCASE} with underscores.
+    \item Function and variable names should be in \mintinline{shell}{camelCase} or \mintinline{shell}{snake_case}.
+    \item Abbreviations and acrynonyms should only be used when a common convention (e.g. using \mintinline{shell}{num} for \mintinline{shell}{number}), or if obvious based on context.
     \item The naming conventions should be consistent across the entire codebase and documentation.
     \item Short functions are preferred over long functions, even if they lead to more functions.
     \item Global variables must be avoided at all costs.
@@ -865,19 +864,20 @@ Any software engineering project will fail before it even starts if coding style
     \item \mintinline{python}{import} statements should be at the top of a file, before any other code.
     \begin{enumerate}
         \item From top-to-bottom, the built-in libraries come first, then the third-party ones, then the project libraries.
+        \item There should be an empty line inbetween the three different types of libraries.
     \end{enumerate}
-    \item Public methods of a class should come before protected ones, then followed by the private ones.
+    \item Public methods of a \gls{class} should come before protected ones, then followed by the private ones.
 \end{enumerate}
 
 \noindent
-Furthermore, Python specific style guide principles can also be established:
+Furthermore, \Gls{python} specific style guide principles can also be established \cite{python-style}:
 
 \begin{itemize}
     \item The datatypes of parameters and return types should be written.
     \item When using the assignment operator (\texttt{=}) to assign a default value, no spaces should be used.
     \item Use four spaces per layer of indentation.
-    \item The first parameter of an object method should be \mintinline{python}{self}
-    \item The first parameter of a class method should be \mintinline{python}{cls}
+    \item The first parameter of an \gls{object} method should be \mintinline{python}{self}
+    \item The first parameter of a \gls{class} method should be \mintinline{python}{cls}
     \item \mintinline{python}{... is not ...} is preferred over \mintinline{python}{not ... is ...}
 \end{itemize}
 
@@ -885,15 +885,35 @@ Furthermore, Python specific style guide principles can also be established:
 
 Commenting code is a surprisingly controversial subject. On one hand, a lack of comments can lead to vague code that is extremely difficult to understand and maintain. On the other hand, too many comments can lead to code that is annoying to read and maintain, as more text must be read to understand the code and comments may not be updated when the code is changed, leading to misleading documentation. Hence, a balance must be achieved between readability and simplicity.
 
-In Python, docstrings attempt to solve this issue via simple triple quote comments at the start of a class, function, method, or module. A docstring, at a minimum, is comprised of a single line summarises what is being documented. Additionally, all docstrings may also contain a more detailed description, with a blank line inbetween the summary and description. Functions and methods can also have one line per parameter and return value, detailing their names, datatypes, and purpose. Class docstrings should also have the attributes (i.e. the publicly accessible object variables) and public methods detailed. The example below shows a simple example of an incomplete \mintinline{python}{ComplexNumber} class. Once complete, the \mintinline{python}{__doc__} property or the \mintinline{python}{help()} function can be used to display the docstring without finding and reading the source code.
+In \Gls{python}, \glspl{docstring} attempt to solve this issue via simple triple quote comments at the start of a class, function, method, or module. A docstring, at a minimum, is comprised of a single line summarises what is being documented \cite{python-docstring}. Additionally, all \glspl{docstring} may also contain a more detailed description, with a blank line inbetween the summary and description. Functions and methods can also have one line per parameter and return value, detailing their names, datatypes, and purpose. \Gls{class} \glspl{docstring} should also have the attributes (i.e. the publicly accessible \gls{object} variables) and public methods detailed. The example below shows a simple example of an incomplete \mintinline{python}{ComplexNumber} \gls{class}. Once complete, the \mintinline{python}{__doc__} property or the \mintinline{python}{help()} function can be used to display the docstring without finding and reading the \gls{src-code}.
 
 \inputminted[linenos=true]{python}{python_examples/docstring.py}
+
+\subsection{\Gls{sphinx} documentation}
+
+Even given detailed and appropriate internal documentation, navigating a \gls{src-code} file system is a time consuming and frustrating process. Often, developers will go around in circles reading the same files over and over again to try and reverse engineer source code. This is an inevitable consequence of complex programs, as code must be organised in a file system to remain organised. However, this organisation will only make inituitive sense to those who made it.
+
+Software engineers have long since known this problem, inventing various documentation generators. Easily the most popular for \Gls{python} is the \Gls{sphinx} generator \cite{sphinx}. \Gls{sphinx} uses the \glspl{docstring} within \gls{src-code} to automatically generate reStructedText files \cite{rst}, identifiable with the \texttt{.rst} file extension. These reStructedText files can then be used to generate \acrshort{html} files, allowing for ease of navigating internal documentation with tables of contents, a search engine, and hyperlinks. Furthermore, \Gls{sphinx} has various \acrshort{html} themes, both first and third-party, for various aesthetic preferances.
+
+To use \Gls{sphinx}, a few simple steps must be followed. First, the \glspl{docstring} must be written for all public constants, classes, methods, and functions. These \glspl{docstring} must either be writtin in the \Gls{sphinx}, Google, or NumPy format (the latter two require the \mintinline{python}{napoleon} extension) \cite{sphinx-napolean}. Next, \Gls{sphinx} must be installed via \mintinline{shell}{pip install sphinx}. After, the command \mintinline{shell}{sphinx-quickstart} can be run to automate most of the \texttt{conf.py} file, which is the settings file for \Gls{sphinx} when generating documentation.\footnote{It is strongly recommend to run this command in a \texttt{docs/} folder} Then, the reStructedText files can be generated via
+
+\mint[linenos=false, frame=none]{shell}|sphinx-apidoc -o . ../src|
+
+\noindent
+Note that the \mintinline{shell}{-o .} tells \Gls{sphinx} to create the files in the current working directory (e.g. \mintinline{shell}{docs/}), and \mintinline{shell}{../src} tells \Gls{sphinx} where to look for \gls{src-code} files. Finally, running \mintinline{shell}{make html} tells \Gls{sphinx} to use the reStructedText files to generate \acrshort{html} files.
+
+If the \glspl{docstring} are updated, then the command \mintinline{shell}{make html} can be rerun to update the \acrshort{html} files. Fortunately, the reStructedText files refer to the \glspl{docstring} instead of copying them, meaning they do not need to be recreated. For Mac and Linux \gls{user}s, the \Gls{make} program should already be installed \cite{makefile}. For Windows users, \Gls{make} can be installed via installing Chocolatey first, then running \mintinline{shell}{choco install make} \cite{chocolatey}.
 
 \subsection{Further reading}
 
 \begin{itemize}
-    \item Official Python code style guide: \url{https://www.python.org/dev/peps/pep-0008/}
+    \item Official \Gls{python} code style guide: \url{https://www.python.org/dev/peps/pep-0008/}
     \item Google docstring example: \url{https://sphinxcontrib-napoleon.readthedocs.io/en/latest/example_google.html}
+    \item \Gls{sphinx} official website: \url{https://www.sphinx-doc.org/en/master/}
+    \item Idiot's guide to \Gls{sphinx}: \url{https://samnicholls.net/2016/06/15/how-to-sphinx-readthedocs/}
+    \item Official \Gls{sphinx} \acrshort{html} themes: \url{https://www.sphinx-doc.org/en/master/usage/theming.html}
+    \item Unofficial \Gls{sphinx} \acrshort{html} themes: \url{https://sphinx-themes.org/}
+    \item Installing Chocolatey: \url{https://chocolatey.org/install}
 \end{itemize}
 
 \newpage
@@ -908,7 +928,7 @@ To mitigate the issues with exploratory testing, several testing tactics have be
 
 \subsection{Historical automated testing using asserts}
 
-Even with the minimisation of test cases, manually testing the code every time it changes is extremely time consuming. Hence, programmers created the \texttt{assert} statement, allowing for code to be checked automatically. The \texttt{assert} statement is a simple function that takes in a Boolean value and checks if it is true or false. If true, nothing happens. If false, the \texttt{assert} function attempts to crash the program with an error messaging stating the assert failed, with a line number and the Boolean expression. In older languages like C, the \mintinline{c}{assert()} function will always crash the program, completely stopping all other subsequent \mintinline{c}{assert()} statements from being checked. Additionally, inserting the \mintinline{c}{assert()} into the source code means they will always be executed every time the program runs, slowing the program down. Python has a slightly more advanced usage form of the \mintinline{python}{assert} statement, allowing for a default error message and, more importantly, throws a catchable \mintinline{python}{AssertionError}, meaning the error can be processed without crashing the entire program, as shown below:
+Even with the minimisation of test cases, manually testing the code every time it changes is extremely time consuming. Hence, programmers created the \mintinline{python}{assert} statement, allowing for code to be checked automatically. The \mintinline{python}{assert} statement is a simple function that takes in a Boolean value and checks if it is true or false. If true, nothing happens. If false, the \mintinline{python}{assert} function attempts to crash the program with an error messaging stating the assert failed, with a line number and the Boolean expression. In older languages like C, the \mintinline{c}{assert()} function will always crash the program, completely stopping all other subsequent \mintinline{c}{assert()} statements from being checked. Additionally, inserting the \mintinline{c}{assert()} into the \gls{src-code} means they will always be executed every time the program runs, slowing the program down. \Gls{python} has a slightly more advanced usage form of the \mintinline{python}{assert} statement, allowing for a default error message and, more importantly, throws a catchable \mintinline{python}{AssertionError}, meaning the error can be processed without crashing the entire program, as shown below \cite{python-assert}:
 
 \inputminted[linenos=true]{python}{python_examples/assert_example.py}
 
@@ -916,7 +936,7 @@ While simple, \mintinline{python}{assert} statements are very tedious to work wi
 
 \subsection{Modern automated testing using \texttt{pytest}}
 
-Multiple frameworks exist for Python to make test scripts smarter, thorough, and easy to use. Of these frameworks, \mintinline{python}{pytest} has proven the simplest and easiest to use without sacrificing test thoroughness. By simply overriding Python's \mintinline{python}{assert} statement, \mintinline{python}{pytest} allows developers to write simple code in the form of functions, at least one per test case. Below is a simple script writtin using \mintinline{python}{pytest} framework:
+Multiple \glspl{framework} exist for \Gls{python} to make test scripts smarter, thorough, and easy to use. Of these \glspl{framework}, \mintinline{python}{pytest} has proven the simplest and easiest to use without sacrificing test thoroughness \cite{pytest}. By simply overriding \Gls{python}'s \mintinline{python}{assert} statement, \mintinline{python}{pytest} allows developers to write simple code in the form of functions, at least one per test case. Below is a simple script writtin using \mintinline{python}{pytest} \gls{framework}:
 
 \inputminted{python}{python_examples/pytest_simple.py}
 
@@ -942,16 +962,40 @@ Lastly, \mintinline{python}{pytest} can run test cases in parallel by installing
 \noindent
 will run \texttt{test\_script.py}, splitting the test cases across six processes. \texttt{pytest} also supports third-party plugins that add numerous useful features, the ability to skip failed test cases, and categorising test cases so that only one category of test cases gets executed. Hence, this project should use \texttt{pytest} where ever possible.
 
+\subsection{Mocking functions and classes}
+
+When testing code as independent modules, a problem arises: the modules often rely on each other. Hence, testing one module often requires that other modules are bug free and fully implemented. Obviously, these assumptions are not always valid, needing a manner of testing modules in isolation of each other. Such testing is known as ``unit testing'' or ``component testing'' as code is tested in ``units''.
+
+Fortunately, \Gls{python} already has a mocking \gls{library} for this exact purpose \cite{python-mock}. Mocking allows test cases to create mock versions of functions and classes. Furthermore, the \mintinline{python}{pytest-mock} extension for \mintinline{python}{pytest} provides simple wrappers for the mocking \gls{library} \cite{pytest-mock}. Most importantly, functions are mocked by simply using \mintinline{python}{mocker.patch(target, return_value=val)}
+
+\vspace{\baselineskip}
+
+\noindent
+In it, the \textit{target} function must be specified as a string of the form \mintinline{python}{package.module.function}. Additionally, the return value of the mock can be specified as \mintinline{python}{return_value=val}, in case the code being tested relies on the function returning a specific value. Similarly, \glspl{object} can be mocked using
+
+\vspace{\baselineskip}
+\noindent
+\mintinline{python}{mocker.object(target, attribute, return_value=val)}
+\vspace{\baselineskip}
+
+\noindent
+where \textit{attribute} is the method being mocked. More mock methods can be added by simply using the \mintinline{python}{mocker.object()} multiple times. Extra rigorous test scripts can also use the \mintinline{python}{assert_called()} functions to ensure the mock functions were called the correct number of times with the correct arguments. Lastly, if the code being mocked should raise an exception, the \mintinline{python}{side_effect} attribute can be used. The code below demonstrates the \mintinline{python}{pytest-mock} extension.
+
+\inputminted[]{python}{python_examples/pytest-mock_example.py}
+
 \subsection{Further reading}
 
 \begin{itemize}
     \item Boundary value analysis and equivalence partioning: \url{https://www.guru99.com/equivalence-partitioning-boundary-value-analysis.html}
-    \item Python \mintinline{python}{assert} documentation: \url{https://docs.python.org/3/reference/simple_stmts.html#the-assert-statement}
+    \item \Gls{python} \mintinline{python}{assert} documentation: \url{https://docs.python.org/3/reference/simple_stmts.html#the-assert-statement}
     \item \texttt{pytest} official website: \url{https://docs.pytest.org/en/6.2.x/}
+    \item Mocking official docs: \url{https://docs.python.org/3/library/unittest.mock.html#the-patchers}
+    \item \texttt{pytest-mock} PyPI page: \url{https://pypi.org/project/pytest-mock/}
+    \item Excellent \texttt{pytest-mock} tutorial: \url{https://changhsinlee.com/pytest-mock/}
 \end{itemize}
 
-%\newpage
-%
-%\printbibliography
+\newpage
+
+\printbibliography[heading=bibintoc]
 
 \end{document}

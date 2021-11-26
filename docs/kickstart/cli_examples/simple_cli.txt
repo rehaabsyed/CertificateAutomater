@@ -1,0 +1,18 @@
+$ python3 certificate_automater.py --attendees attendees.csv --server-key au14 --api-key a1b2c33d4e5f6g --template ./cert_template.docx --event lifeskills_workshop_2019
+Starting...
+Loading attendees... 43 attendees loaded
+Loading certificate template... Done
+Creating certificates... 43/43
+Uploading certificates... 43/43
+Updating contacts... 40/40
+
+==========================
+======== RESULTS =========
+==========================
+- Found 43 attendees
+- Created 43 certificates
+- Uploaded 43 certificates
+  - 40 passed
+  - 3 failed, see log file
+- Updated 40 contacts
+==========================

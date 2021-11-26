@@ -443,6 +443,47 @@ Below is a simple example of a club's details stored in \acrshort{json} format:
 
 \newpage
 
+\section{Project Management}
+
+\subsection{\Gls{waterfall}}
+
+Historically speaking, \gls{waterfall} project management techniques dominate project management. Comprised of stages, \gls{waterfall} is an extremely strict manner of managing a project, requiring that the project's nature is known very accurately from the start. Shown in figure \ref{fig:waterfall}, the problem identification must lead to the requirements must be established from the start, followed by designing the solution, implementing the solution, testing or verifying it works, then maintaining the solution. If previous work must be redone, then each stage inbetween must be redone. For example, if the requirements change while in the verification stage, then all testing, implementing, and designing must be redone. Typically, \gls{waterfall} based projects are managed via a Gantt chart. While strict, such a methodology is needed for projects that rely on heavy use of task dependencies.
+
+\begin{figure}[t!]
+    \centering
+    \includegraphics[width=\textwidth]{figures/waterfall_model.pdf}
+    \caption{Waterfall stages.}
+    \label{fig:waterfall}
+\end{figure}
+
+Such dependencies are often modelled with a \acrfull{pert} chart. In such a chart, each task is shown as an arrow and dependencies are shown as nodes (known as an \acrfull{aoa) chart}), as per figure \ref{fig:pert-chart}. Dependencies are indexed with arbitrary numbers (usually in ascending order for convenience) with task durations shown. Hence, any task with arrows going into its node cannot start until those tasks are completed. With such a chart, all possible paths from the start to the end are visible. Given these paths, the \gls{crit-path} is the one that takes the longest. Other paths have \gls{slack-time}, meaning there is a period of time in which nothing can be done as a task has incomplete dependencies from another path.
+
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=\textwidth]{figures/pert.png}
+    \caption{Example \acrshort{pert} chart \cite{pert}.}
+    \label{fig:pert-chart}
+\end{figure}
+
+Alternatively, a \acrfull{cpm} chart uses an \acrfull{aon} style to show task dependencies. In such a chart, tasks are shown in nodes whereas arrows show task dependencies. Furthermore, \acrshort{cpm} charts also show various other facts about tasks, such as start times, finish times, and durations. Figure \ref{fig:cpm-chart} shows such an example of a \acrshort{cpm} chart. Choosing between a \acrshort{pert} or \acrshort{cpm} chart is largely a matter of personal preferance.
+
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=\textwidth]{figures/cpm.png}
+    \caption{Example \acrshort{cpm} chart \cite{cpm}.}
+    \label{fig:cpm-chart}
+\end{figure}
+
+\subsection{\Gls{spiral}}
+
+
+
+\subsection{\Gls{waterfall} vs \Gls{spiral}}
+
+
+
+\newpage
+
 \section{Attendee Management}
 
 \subsection{Internal storage of attendees}
@@ -482,7 +523,7 @@ Once the attendees are known, the certificates can be made. Unfortunately, the c
 
 \newpage
 
-\section{mailchimp Authorisation}
+\section{\Gls{mailchimp} Authorisation}
 
 To prevent malicious parties from accessing \Gls{mailchimp} accounts, applications must provide authorisation with each \acrshort{http} \gls{request}. The \Gls{mailchimp} \acrshort{api} provides developers two methods of auto-authorisation: an \acrshort{api} key and OAuth2, both with their strengths and weaknesses.
 
